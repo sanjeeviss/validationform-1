@@ -32,7 +32,7 @@ const PaymcarryForwardTable = ()=> {
     )
     },[]);
     function handleonclick(){
-        navigate('/paymCarryForward')
+        navigate('/PaymCarrForwardForm')
     }
   return (
 

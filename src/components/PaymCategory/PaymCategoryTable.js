@@ -35,7 +35,7 @@ const PaymCategoryTable = () => {
     },[]);
 
     function handleonclick() {
-        navigate('/paymcategory')
+        navigate('/Paymcategoryform')
     }
   return (
     <div>
