@@ -124,15 +124,23 @@ import SalaryStructureTable from './components/SalaryStructure/salarystructureTa
 import ShiftBalanceTable from './components/ShiftBalance/shiftbalanceTable';
 import Sample15 from './components/ShiftBalance/shiftbalanceform';
 import ShiftDetailsTable from './components/ShiftDetails/shiftdetailsTables';
-import Sample14 from './components/ShiftDetails/shiftdetailform';
+import DetailsForm from './components/ShiftDetails/shiftdetailform';
 import ShiftMonthTable from './components/ShiftMonth/shiftmonthTable';
 import Sample13 from './components/ShiftMonth/shiftmonthform';
 import ShiftPatternTable from './components/ShiftPattern/shiftpatternTable';
 import Sample12 from './components/ShiftPattern/shiftpatternform';
 import TempshiftdetailsTables from './components/TempShiftDetails/tempshiftdetailsTable';
-import ShiftDetailsForm from './components/TempShiftDetails/tempshiftdetailsForm';
 import YearEndTable from './components/Yearend/yearendTable';
 import Sample1 from './components/Yearend/yearendform';
+import TempShiftDetailsForm from './components/TempShiftDetails/tempshiftdetailsForm';
+import PaymEmployeeEarningsTable from './components/PaymEmpEarning/PaymEmpEarningTable';
+import PaymEmployeeLeaveForm from './components/PaymEmployeeLeave/paymEmployeeLeaveForm';
+import PaymEmpLeaveTable from './components/PaymEmployeeLeave/PaymEmployeeLeaveTable';
+import PaymEmpLeaveForm from './components/PaymEmployeeLeave/paymEmployeeLeaveForm';
+import PaymEmpEarningsTable from './components/PaymEmpEarning/PaymEmpEarningTable';
+import PaymEmpEarningsForm from './components/PaymEmpEarning/paymEmpEarningsForm';
+import PaymEarnTable from './components/PaymEarnings/PaymEarningTable';
+import PaymEarnForm from './components/PaymEarnings/paymEarningsForm';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
@@ -142,131 +150,196 @@ root.render(
      <Route path='/home' element={<ServiceCard/>}></Route> 
      <Route path='/AssetsTable' element={<AssetsTable/>}></Route>
      <Route path='/SampleForm' element={<SampleForm/>}></Route>
+
+
       <Route path="/dailytimecardtable" element={<DailyTimeCardTables/>}></Route>
      <Route path="/dailytimecardform" element={<DailyTimeCardForm/>}></Route> 
+
      <Route path='/AttendenceTable' element={<AttendenceTable/>}></Route>
      <Route path='/AttendenceForm' element={<AttendenceForm/>}></Route>
+
      <Route path='/EarnDeductTable' element={<EarnDeductTable/>}></Route>
      <Route path='/EarnDeductForm' element={<EarnDeductForm/>}></Route>
+
      <Route path='/Form7table' element={<Form7table/>}></Route>
      <Route path='/SampleForm7' element={<SampleForm7/>}></Route>
 
      <Route path='/HrAuthenticationTable' element={<HrAuthenticationTable/>}></Route>
      <Route path='/HrAuthForm' element={<HrAuthForm/>}></Route>
+
       <Route path='/Hrmcoursetable' element={<Hrmcoursetable/>}></Route>
      <Route path='/CourseForm' element={<CourseForm/>}></Route>
+
      <Route path='/Hrmskillmastertable' element={<Hrmskillmastertable/>}></Route>
      <Route path='/SkillsMasterForm' element={<SkillsMasterForm/>}></Route>
+
      <Route path='/HrmmSpecializationtable' element={<HrmmSpecializationtable/>}></Route>
      <Route path='/SpecializationForm' element={<SpecializationForm/>}></Route>
+
     <Route path='/PaymJobStatusTable' element={<PaymJobStatusTable/>}></Route>
      <Route path='/JobStatusForm' element={<JobStatusForm/>}></Route>
+
      <Route path='/LeaveAllocationMasterTable' element={<LeaveAllocationMasterTable/>}></Route>
      <Route path='/LeaveAllocationForm' element={<LeaveAllocationForm/>}></Route> 
+
      <Route path='/LeaveApplyTable' element={<LeaveApplyTable/>}></Route>
      <Route path='/LeaveAppForm' element={<LeaveAppForm/>}></Route> 
+
      <Route path='/LeaveApproveHrTable' element={<LeaveApproveHrTable/>}></Route>
      <Route path='/ApprovehrForm' element={<ApprovehrForm/>}></Route> 
+
      <Route path='/LeaveApproveManagerTable' element={<LeaveApproveManagerTable/>}></Route>
      <Route path='/ApproveManagerForm' element={<ApproveManagerForm/>}></Route> 
+
      <Route path='/LeaveSettlementTable' element={<LeaveSettlementTable/>}></Route>
      <Route path='/LeaveSettleForm' element={<LeaveSettleForm/>}></Route> 
+
      <Route path='/LoanEntryTable' element={<LoanEntryTable/>}></Route>
      <Route path='/LoanEntForm' element={<LoanEntForm/>}></Route> 
+
      <Route path='/LoanPostTable' element={<LoanPostTable/>}></Route>
      <Route path='/LoanPostForm' element={<LoanPostForm/>}></Route> 
+
      <Route path='/LoanPreCloserTable' element={<LoanPreCloserTable/>}></Route>
-     <Route path='/LoanPreclosForm' element={<LoanPreclosForm/>}></Route> 
+     <Route path='/LoanPreclosForm' element={<LoanPreclosForm/>}></Route>
+
      <Route path='/OnDutyTable' element={<OnDutyTable/>}></Route>
      <Route path='/OndutyForm' element={<OndutyForm/>}></Route> 
+
      <Route path='/OtsLabTable' element={<OtsLabTable/>}></Route>
      <Route path='/OTSlabForm' element={<OTSlabForm/>}></Route> 
+
      <Route path='/PayInputTable' element={<PayInputTable/>}></Route>
      <Route path='/PayinputForm' element={<PayinputForm/>}></Route> 
+
      <Route path='/PaymAttBonusTable' element={<PaymAttBonusTable/>}></Route>
      <Route path='/PaymattbonusForm' element={<PaymattbonusForm/>}></Route> 
+
      <Route path='/PaymBankTable' element={<PaymBankTable/>}></Route>
      <Route path='/PaybankForm' element={<PaybankForm/>}></Route> 
+
      <Route path='/PaymBranchtablenew' element={<PaymBranchtablenew/>}></Route>
      <Route path='/PayBranchForm' element={<PayBranchForm/>}></Route> 
+
      <Route path='/PaymcarryForwardTable' element={<PaymcarryForwardTable/>}></Route>
      <Route path='/PaymCarrForwardForm' element={<PaymCarrForwardForm/>}></Route> 
+
      <Route path='/PaymCategoryTable' element={<PaymCategoryTable/>}></Route>
      <Route path='/Paymcategoryform' element={<Paymcategoryform/>}></Route> 
+
      <Route path='/PaycompanyTable' element={<PaycompanyTable/>}></Route>
      <Route path='/CompanyForm' element={<CompanyForm/>}></Route> 
+
      <Route path='/PaymComputationtables' element={<PaymComputationtables/>}></Route>
      <Route path='/ComputationForm' element={<ComputationForm/>}></Route> 
+
+     <Route path='/PaymEarnTable' element={<PaymEarnTable/>}></Route>
+     <Route path='/PaymEarnForm' element={<PaymEarnForm/>}></Route> 
+
+     
+
      <Route path='/PaymDeductionTable' element={<PaymDeductionTable/>}></Route>
      <Route path='/DeductionForm' element={<DeductionForm/>}></Route> 
+
      <Route path='/PaymDesignationTable' element={<PaymDesignationTable/>}></Route>
      <Route path='/DesignationForm' element={<DesignationForm/>}></Route> 
+
      <Route path='/PaymDIvisionTable' element={<PaymDIvisionTable/>}></Route>
      <Route path='/DivisionForm' element={<DivisionForm/>}></Route> 
-     <Route path='/PaymEarningsTable' element={<PaymEarningsTable/>}></Route>
-     <Route path='/EarningsForm' element={<EarningsForm/>}></Route> 
+
+     <Route path='/PaymEmpEarningsTable' element={<PaymEmpEarningsTable/>}></Route>
+     <Route path='/PaymEmpEarningsForm' element={<PaymEmpEarningsForm/>}></Route> 
+
      <Route path='/PaymEmpDeductionTable' element={<PaymEmpDeductionTable/>}></Route>
      <Route path='/EmpDeductionForm' element={<EmpDeductionForm/>}></Route> 
-     <Route path='/PaymEmployeeLeaveTable' element={<PaymEmployeeLeaveTable/>}></Route>
-     <Route path='/EmpEarningsForm' element={<EmpEarningsForm/>}></Route> 
+
+    
      <Route path='/PaymEmpTable' element={<PaymEmpTable/>}></Route>
-     <Route path='/PaymEmployeeForm' element={<PaymEmployeeForm/>}></Route> 
-     <Route path='/PaymEmployeeLeaveTable' element={<PaymEmployeeLeaveTable/>}></Route>
-     <Route path='/EmployeeLeaveForm' element={<EmployeeLeaveForm/>}></Route> 
+     <Route path='/PaymEmployeeForm' element={<PaymEmployeeForm/>}></Route>
+
+     <Route path='/PaymEmpLeaveTable' element={<PaymEmpLeaveTable/>}></Route>
+     <Route path='/PaymEmpLeaveForm' element={<PaymEmpLeaveForm/>}></Route> 
+
      <Route path='/PaymEmployeeProfile1Tables' element={<PaymEmployeeProfile1Tables/>}></Route>
      <Route path='/EmployeeProfile1Form' element={<EmployeeProfile1Form/>}></Route> 
+
      <Route path='/PaymEmployeeWorkDetailTables' element={<PaymEmployeeWorkDetailTables/>}></Route>
      <Route path='/EmployeeWorkDetailsForm' element={<EmployeeWorkDetailsForm/>}></Route> 
+
      <Route path='/PaymEncashmentDetailsTables' element={<PaymEncashmentDetailsTables/>}></Route>
      <Route path='/EncashmentDetailsForm' element={<EncashmentDetailsForm/>}></Route> 
+
      <Route path='/PaymgradeTables' element={<PaymgradeTables/>}></Route>
      <Route path='/GradeForm' element={<GradeForm/>}></Route> 
+
      <Route path='/PaymHolidayTables' element={<PaymHolidayTables/>}></Route>
      <Route path='/HolidayForm' element={<HolidayForm/>}></Route> 
+
      <Route path='/PaymleaveTables' element={<PaymleaveTables/>}></Route>
      <Route path='/LeaveForm' element={<LeaveForm/>}></Route> 
+
      <Route path='/Paymleaveallocation1Tables' element={<Paymleaveallocation1Tables/>}></Route>
      <Route path='/LeaveAllocation1Form' element={<LeaveAllocation1Form/>}></Route> 
+
      <Route path='/PaymlevelTables' element={<PaymlevelTables/>}></Route>
      <Route path='/LevelForm' element={<LevelForm/>}></Route> 
+
      <Route path='/PaymLoanTable' element={<PaymLoanTable/>}></Route>
      <Route path='/PayLoanForm' element={<PayLoanForm/>}></Route> 
+
      <Route path='/PaymLoanDiminishingTable' element={<PaymLoanDiminishingTable/>}></Route>
      <Route path='/Sample27' element={<Sample27/>}></Route> 
+
      <Route path='/PaymOverHeadingcostTable' element={<PaymOverHeadingcostTable/>}></Route>
      <Route path='/Sample26' element={<Sample26/>}></Route> 
+
      <Route path='/PaympfTable' element={<PaympfTable/>}></Route>
      <Route path='/Sample25' element={<Sample25/>}></Route> 
+
      <Route path='/PaymPaybillTable' element={<PaymPaybillTable/>}></Route>
      <Route path='/Sample24' element={<Sample24/>}></Route> 
+
      <Route path='/PaymshiftTable' element={<PaymshiftTable/>}></Route>
      <Route path='/Sample23' element={<Sample23/>}></Route> 
+
      <Route path='/PaympayoutputloanTable' element={<PaympayoutputloanTable/>}></Route>
-     <Route path='/Sample22' element={<Sample22/>}></Route> 
+     <Route path='/Sample22' element={<Sample22/>}></Route>
+
      <Route path='/PayrollFinalSettlemetTable' element={<PayrollFinalSettlemetTable/>}></Route>
      <Route path='/Sample21' element={<Sample21/>}></Route> 
+
      <Route path='/PfepTable' element={<PfepTable/>}></Route>
      <Route path='/Sample20' element={<Sample20/>}></Route> 
+
      <Route path='/PfepfTable' element={<PfepfTable/>}></Route>
      <Route path='/Sample19' element={<Sample19/>}></Route> 
+
      <Route path='/PunchdetailsTable' element={<PunchdetailsTable/>}></Route>
      <Route path='/Sample18' element={<Sample18/>}></Route> 
+
      <Route path='/SalaryPeriodTable' element={<SalaryPeriodTable/>}></Route>
      <Route path='/Sample17' element={<Sample17/>}></Route> 
+
      <Route path='/SalaryStructureTable' element={<SalaryStructureTable/>}></Route>
      <Route path='/Sample16' element={<Sample16/>}></Route> 
+
      <Route path='/ShiftBalanceTable' element={<ShiftBalanceTable/>}></Route>
      <Route path='/Sample15' element={<Sample15/>}></Route> 
+
      <Route path='/ShiftDetailsTable' element={<ShiftDetailsTable/>}></Route>
-     <Route path='/Sample14' element={<Sample14/>}></Route> 
+     <Route path='/DetailsForm' element={<DetailsForm/>}></Route> 
+
      <Route path='/ShiftMonthTable' element={<ShiftMonthTable/>}></Route>
      <Route path='/Sample13' element={<Sample13/>}></Route> 
+
      <Route path='/ShiftPatternTable' element={<ShiftPatternTable/>}></Route>
      <Route path='/Sample12' element={<Sample12/>}></Route> 
-     <Route path='/TempshiftdetailsTables' element={<TempshiftdetailsTables/>}></Route>
-     <Route path='/ShiftDetailsForm' element={<ShiftDetailsForm/>}></Route> 
+    
      <Route path='/YearEndTable' element={<YearEndTable/>}></Route>
      <Route path='/Sample1' element={<Sample1/>}></Route> 
+
+     <Route path='/TempshiftdetailsTables' element={<TempshiftdetailsTables/>}></Route>
+     <Route path='/TempShiftDetailsForm' element={<TempShiftDetailsForm/>}></Route> 
   </Route>
    </Routes> 
     </BrowserRouter>

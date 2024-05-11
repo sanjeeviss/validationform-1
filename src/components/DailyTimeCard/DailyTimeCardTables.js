@@ -5,7 +5,7 @@ import { ServerConfig } from '../../serverconfiguration/serverconfig'
 import { getRequest } from '../../serverconfiguration/requestcomp'
 import { createSvgIcon } from '@mui/material'
 import {Button, Grid} from '@mui/material'
-import { EARNDEDUCT} from '../../serverconfiguration/controllers'
+import { DAILYTIMECARD, EARNDEDUCT} from '../../serverconfiguration/controllers'
 import { useNavigate} from 'react-router-dom'
 
 const PlusIcon = createSvgIcon(
@@ -26,7 +26,7 @@ const DailyTimeCardTables = () => {
     const navigate = useNavigate();
     const [data,setData] = useState([])
     useEffect(()=>{
-        getRequest(ServerConfig.url, EARNDEDUCT).then((e)=> {
+        getRequest(ServerConfig.url, DAILYTIMECARD).then((e)=> {
             setData(e.data)
         })
     },[]);

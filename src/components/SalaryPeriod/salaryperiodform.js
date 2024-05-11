@@ -1,81 +1,63 @@
 import React, { useState, useEffect } from 'react';
-import { postRequest, getRequest } from '../../serverconfiguration/requestcomp'; // Assuming you have getRequest for fetching data
+import { getRequest, postRequest } from '../../serverconfiguration/requestcomp';
 import { ServerConfig } from '../../serverconfiguration/serverconfig';
 import { useNavigate } from 'react-router-dom';
-import { TextField, Button, Card, Typography, Grid, CardContent, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
+import { Button, Card, Typography, Grid, CardContent, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
+import { DatePicker } from '@mui/lab'; 
 import { inputFormElements17 } from './salaryperiod';
+import { PAYMEMPLOYEE } from '../../serverconfiguration/controllers';
 import { SALARYPERIOD } from '../../serverconfiguration/controllers';
+import { TextField } from '@mui/material';
 
 const SalaryPeriodForm = () => {
+  const [employee, setEmployee] = useState([]);
+  const [company, setCompany] = useState('');
+  const [branch, setBranch] = useState('');
   const navigate = useNavigate();
   const margin = { margin: "0 5px" };
 
-  const [formData, setFormData] = useState({
-    pn_companyid: '',
-    pn_branchid: '',
-    period_code: '',
-    selection: '',
-    p_year: '',
-    p_month: '',
-    fromdate: '',
-    todate: '',
-    total_days: '',
-    pay_date: '',
-    ot_include: false,
-  });
-
-  const [companies, setCompanies] = useState([]);
-  const [branches, setBranches] = useState([]);
-
   useEffect(() => {
-    // Fetch companies data from the backend and populate the dropdown
-    async function fetchCompanies() {
-      try {
-        const response = await getRequest(ServerConfig.url, '/api/companies'); // Assuming this endpoint fetches companies data
-        setCompanies(response.data);
-      } catch (error) {
-        console.error('Error fetching companies:', error);
-      }
+    async function getData() {
+      const data = await getRequest(ServerConfig.url, PAYMEMPLOYEE);
+      setEmployee(data.data);
     }
-
-    fetchCompanies();
+    getData();
   }, []);
 
+  const [formData, setFormData] = useState({
+    pnCompanyId: '',
+    pnBranchId: '',
+    periodCode: '',
+    selection: '',
+    pYear: '',
+    pMonth: '',
+    fromDate: '',
+    toDate: '',
+    totalDays: '',
+    payDate: '',
+    otInclude: '',
+  });
+
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === 'checkbox' ? checked : value,
-    });
-  };
-
-  const handleCompanyChange = (e) => {
-    const companyId = e.target.value;
-    setFormData({
-      ...formData,
-      pn_companyid: companyId,
-    });
-
-    // Fetch branches data based on the selected company and populate the dropdown
-    async function fetchBranches() {
-      try {
-        const response = await getRequest(ServerConfig.url, `/api/companies/${companyId}/branches`); // Assuming this endpoint fetches branches data based on companyId
-        setBranches(response.data);
-      } catch (error) {
-        console.error('Error fetching branches:', error);
-      }
-    }
-
-    fetchBranches();
+    const { name, value } = e.target;
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Post form data to the server
-      await postRequest(ServerConfig.url, SALARYPERIOD, formData);
-      // Navigate back to the table page
-      navigate('/SalaryPeriodTable');
+      console.log('Form data:', formData);
+      const response = await postRequest(ServerConfig.url, SALARYPERIOD, formData);
+      if (response.status === 200 || response.status === 201) {
+        console.log('Data saved successfully!');
+        navigate('/SalaryPeriodTable');
+      } else {
+        console.error('Error saving data:', response.statusText);
+        console.error('Server validation errors:', response);
+      }
     } catch (error) {
       console.error('Error saving data:', error);
     }
@@ -91,52 +73,74 @@ const SalaryPeriodForm = () => {
             </Typography>
             <form onSubmit={handleSubmit}>
               <Grid container spacing={2}>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                   <FormControl fullWidth>
-                    <InputLabel>Company</InputLabel>
+                    <InputLabel shrink>Company</InputLabel>
                     <Select
-                      value={formData.pn_companyid}
-                      onChange={handleCompanyChange}
-                      label="Company"
+                      value={company}
+                      onChange={(e) => {
+                        setCompany(e.target.value);
+                        setFormData(prevFormData => ({
+                          ...prevFormData,
+                          pnCompanyId: e.target.value,
+                        }));
+                      }}
                     >
-                      {companies.map(company => (
-                        <MenuItem key={company.id} value={company.id}>
-                          {company.name}
+                      {employee.map(e => (
+                        <MenuItem key={e.pnCompanyId} value={e.pnCompanyId}>
+                          {e.pnCompanyId}
                         </MenuItem>
                       ))}
                     </Select>
                   </FormControl>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                   <FormControl fullWidth>
-                    <InputLabel>Branch</InputLabel>
+                    <InputLabel shrink>BranchId</InputLabel>
                     <Select
-                      value={formData.pn_branchid}
-                      onChange={handleChange}
-                      label="Branch"
+                      value={branch}
+                      onChange={(e) => {
+                        setBranch(e.target.value);
+                        setFormData(prevFormData => ({
+                          ...prevFormData,
+                          pnBranchId: e.target.value,
+                        }));
+                      }}
                     >
-                      {branches.map(branch => (
-                        <MenuItem key={branch.id} value={branch.id}>
-                          {branch.name}
-                        </MenuItem>
-                      ))}
+                      {employee
+                        .filter(e => e.pnCompanyId === company)
+                        .map(e => (
+                          <MenuItem key={e.pnBranchId} value={e.pnBranchId}>
+                            {e.pnBranchId}
+                          </MenuItem>
+                        ))}
                     </Select>
                   </FormControl>
                 </Grid>
-                {inputFormElements17.map(input =>
+                {inputFormElements17 && inputFormElements17.map(input => (
                   <Grid item xs={12} key={input.name}>
-                    <TextField
-                      fullWidth
-                      {...input}
-                      value={formData[input.name]}
-                      onChange={handleChange}
-                      InputLabelProps={{ shrink: true }}
-                    />
+                    {input.name === 'fromdate' || input.name === 'todate' || input.name === 'pay_date' ? (
+                      <DatePicker
+                        label={input.label}
+                        value={formData[input.name]}
+                        onChange={(newValue) => handleChange({ target: { name: input.name, value: newValue } })}
+                        renderInput={(params) => <TextField {...params} fullWidth />}
+                        format="yyyy-MM-ddTh:m:s.000"
+                      />
+                    ) : (
+                      <TextField
+                        fullWidth
+                        {...input}
+                        value={formData[input.name]}
+                        onChange={handleChange}
+                        InputLabelProps={{ shrink: true }}
+                      />
+                    )}
                   </Grid>
-                )}
+                ))}
               </Grid>
               <Grid container justifyContent="flex-end" style={{ marginTop: 20 }}>
-                <Button style={margin} type="reset" variant='outlined' color='primary' >RESET</Button>
+                <Button style={margin} type="reset" variant='outlined' color='primary'>RESET</Button>
                 <Button type="submit" variant='contained' color='primary'>Save</Button>
               </Grid>
             </form>

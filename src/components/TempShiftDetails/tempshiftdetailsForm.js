@@ -10,7 +10,7 @@ import { Grid,Card,
 
   
 
-  export default function ShiftDetailsForm() {
+  export default function TempShiftDetailsForm() {
 
     const margin={margin:"0 5px"}
     return (

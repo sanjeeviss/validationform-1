@@ -10,7 +10,7 @@ import { Grid,Card,
 
   
 
-  export default function EmpEarningsForm() {
+  export default function PaymEmpEarningsForm() {
 
     const margin={margin:"0 5px"}
     return (

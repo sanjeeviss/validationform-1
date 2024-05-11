@@ -22,7 +22,7 @@ const PlusIcon = createSvgIcon(
     'Plus',
   );
 
-  const PaymEarningsTable = ()=> {
+  const PaymEarnTable = ()=> {
     const navigate = useNavigate();
     const [data,setData] = useState([])
     useEffect(()=>{
@@ -32,7 +32,7 @@ const PlusIcon = createSvgIcon(
     )
     },[]);
     function handleonclick(){
-        navigate('/EarningsForm')
+        navigate('/PaymEarnForm')
     }
   return (
     <div> 
@@ -42,4 +42,4 @@ const PlusIcon = createSvgIcon(
   )
 }
 
-export default PaymEarningsTable
+export default PaymEarnTable

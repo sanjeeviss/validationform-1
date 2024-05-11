@@ -1,25 +1,7 @@
 export const inputFormElements17 = [
-    {
-        name: "CompanyId",
-        label: "CompanyId",
-        variant: "outlined",
-        fullWidth: true,
-        required: true,
-        xs: 12,
-        sm: 6,
-        
-    },
+
 {
-    name: "BranchId",
-    label: "BranchId", 
-    variant: "outlined", 
-    fullWidth: true,
-    required: true,
-    xs:12, 
-    sm: 6,
-},
-{
-    name: "PeriodCode",
+    name: "periodCode",
     label: "PeriodCode", 
     variant: "outlined", 
     fullWidth: true,
@@ -29,7 +11,7 @@ export const inputFormElements17 = [
 },
 
 {
-    name: "Selection",
+    name: "selection",
     label: "Selection", 
     variant: "outlined", 
     fullWidth: true,
@@ -39,7 +21,7 @@ export const inputFormElements17 = [
 },
 
 {
-    name: "PYear",
+    name: "pYear",
     label: "PYear", 
     variant: "outlined", 
     fullWidth: true,
@@ -49,7 +31,7 @@ export const inputFormElements17 = [
 },
 
 {
-    name: "PMonth",
+    name: "pMonth",
     label: "PMonth", 
     variant: "outlined", 
     fullWidth: true,
@@ -58,7 +40,7 @@ export const inputFormElements17 = [
     sm: 6,
 },
 {
-    name: "FromDate",
+    name: "fromDate",
     label: "FromDate", 
     variant: "outlined", 
     fullWidth: true,
@@ -68,7 +50,7 @@ export const inputFormElements17 = [
     type:"datetime-local"
 },
 {
-    name: "ToDate",
+    name: "toDate",
     label: "ToDate", 
     variant: "outlined", 
     fullWidth: true,
@@ -78,7 +60,7 @@ export const inputFormElements17 = [
     type:"datetime-local"
 },
 {
-    name: "TotalDays",
+    name: "totalDays",
     label: "TotalDays", 
     variant: "outlined", 
     fullWidth: true,
@@ -87,7 +69,7 @@ export const inputFormElements17 = [
     sm: 6,
 },
 {
-    name: "PayDate",
+    name: "payDate",
     label: "PayDate", 
     variant: "outlined", 
     fullWidth: true,
@@ -97,7 +79,7 @@ export const inputFormElements17 = [
     type:"datetime-local"
 },
 {
-    name: "OtInclude",
+    name: "otInclude",
     label: "OtInclude", 
     variant: "outlined", 
     fullWidth: true,

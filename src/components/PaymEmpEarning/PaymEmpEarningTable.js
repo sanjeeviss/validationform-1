@@ -22,7 +22,7 @@ const PlusIcon = createSvgIcon(
     'Plus',
   );
 
-  const PaymEmployeeLeaveTable = ()=> {
+  const PaymEmpEarningsTable = ()=> {
     const navigate = useNavigate();
     const [data,setData] = useState([])
     useEffect(()=>{
@@ -32,7 +32,7 @@ const PlusIcon = createSvgIcon(
     )
     },[]);
     function handleonclick(){
-        navigate('/EmpEarningsForm')
+        navigate('/PaymEmpEarningsForm')
     }
   return (
     <div> 
@@ -42,4 +42,4 @@ const PlusIcon = createSvgIcon(
   )
 }
 
-export default PaymEmployeeLeaveTable
+export default PaymEmpEarningsTable

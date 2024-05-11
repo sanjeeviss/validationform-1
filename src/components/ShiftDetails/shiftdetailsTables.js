@@ -35,7 +35,7 @@ const ShiftDetailsTable = () => {
     },[]);
 
     function handleonclick() {
-        navigate('/Sample14')
+        navigate('/DetailsForm')
     }
   return (
     <div>
