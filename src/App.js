@@ -140,143 +140,26 @@ import YearEndTable from './components/Yearend/yearendTable';
 import MainPage from './components/nav';
 // import ServiceCard from './components/servicecard';
 import Layoutcomp from './components/layoutcomp';
-
+import LoginForm from './components/Authentication/Login';
+import { Login } from './components/Authentication/Login';
+import { useState } from 'react';
+import { UserContext } from './components/Authentication/UserContext';
 function App() { 
-  return (
-    <div className="App">
-
-  
-      <MainPage />
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-   
-      <Outlet></Outlet> 
-       
-      {/* <ServiceCard/> 
-       <Layoutcomp/>  */}
-          {/*<PaymEmployeeForm/> 
-          <CustomizedTables/> */}
-         {/* <Router>
-          <Routes> */}
-         {/*}  <Route path="/" element={<PaymBranchTable />} />
-          <Route path='/paymbranchform' element={<PaymBranchForm/>}/> */}
-          {/* <Route path="/" element={<OtsLabTable/>}/>
-          <Route path='/otslab' element={<OTSlabForm/>}/>
-          <Route path="/" element={<DailyTimeCardTables/>}/>
-        <Route path='/dailytimecard' element={<DailyTimeCardForm/>}/> */}
-          {/* <Route path="/" element={<PaymAttBonusTable/>}/> 
-          <Route path='/paymattbonus' element={<PaymattbonusForm/>}/> */}
-          {/* <Route path="/" element={<PaymBankTable/>}/> 
-          <Route path='/paymbank' element={<PaybankForm/>}/> */}
-          {/* <Route path="/" element={<PaymcarryForwardTable/>}/> 
-          <Route path='/paymCarryForward' element={<PaymCarrForwardForm/>}/> */}
-          {/* <Route path="/" element={<PaymCategoryTable/>}/> 
-          <Route path='/paymCategory' element={<Paymcategoryform/>}/> */}
-          {/* <Route path="/" element={<PaymComputationtables/>}/> 
-          <Route path='/paymcomputation' element={<ComputationForm/>}/> */}
-          {/* <Route path="/" element={<PaymDeductionTable/>}/> 
-          <Route path='/paymdeduction' element={<DeductionForm/>}/>  */}
-            {/* <Route path="/" element={<PaymDepartmentTable/>}/> 
-          <Route path='/paymdepart' element={<DepartmentForm/>}/>  */}
-           {/* <Route path="/" element={<PaymDesignationTable/>}/> 
-          <Route path='/designation' element={<DesignationForm/>}/>  */}
-           {/* <Route path="/" element={<PaymDIvisionTable/>}/> 
-          <Route path='/division' element={<DivisionForm/>}/>  */}
-            {/* <Route path="/" element={<PaymEarningsTable/>}/> 
-          <Route path='/earning' element={<EarningsForm/>}/>  */}
-           {/* <Route path="/" element={<PaymEmpDeductionTable/>}/> 
-          <Route path='/empdeduction' element={<EmpDeductionForm/>}/>  */}
-           {/* <Route path="/" element={<PaymEmpEarningsTable/>}/> 
-          <Route path='/empearning' element={<EmpEarningsForm/>}/>  */}
-           {/* <Route path="/" element={<PaymEmployeeLeaveTable/>}/> 
-          <Route path='/empleave' element={<EmployeeLeaveForm/>}/>  */}
-          {/* <Route path="/" element={<PaymEmployeeProfile1Tables/>}/> 
-          <Route path='/paymempprofile' element={<EmployeeProfile1Form/>}/>  */}
-          {/* <Route path="/" element={<PaymEmployeeWorkDetailTables/>}/> 
-          <Route path='/paymemployeeworkdetails' element={<EmployeeWorkDetailsForm/>}/>  */}
-          {/* <Route path="/" element={<PaymEncashmentDetailsTables/>}/> 
-          <Route path='/paymencashmentdetails' element={<EncashmentDetailsForm/>}/> 
-           */}
-          {/* <Route path="/" element={<PaymgradeTables/>}/> 
-          <Route path='/paymgrade' element={<GradeForm/>}/> 
-           */}
-          {/* <Route path="/" element={<PaymHolidayTables/>}/> 
-          <Route path='/paymholidays' element={<HolidayForm/>}/>  */}
-          {/* <Route path="/" element={<PaymJobStatusTable/>}/> 
-          <Route path='/JOBSTATUS' element={<JobStatusForm/>}/>  */}
-          {/* <Route path="/" element={<PaymleaveTables/>}/> 
-          <Route path='/paymleave' element={<LeaveForm/>}/>  */}
-          {/* <Route path="/" element={<Paymleaveallocation1Tables/>}/> 
-          <Route path='/paymleaveallocation1' element={<LeaveAllocation1Form/>}/>  */}
-          {/* <Route path="/" element={<PaymlevelTables/>}/> 
-          <Route path='/paymlevel' element={<LevelForm/>}/>  */}
-          
-          {/* <Route path="/" element={<TempshiftdetailsTables/>}/> 
-          <Route path='/tempshiftdetails' element={<ShiftDetailsForm/>}/> 
-           */}
-          {/* <Route path="/" element={<PaymLoanDiminishingTable/>}/> 
-          <Route path='/paymloandiminishing' element={<Sample27/>}/>  */}
-          {/* <Route path="/" element={<PaymOverHeadingcostTable/>}/> 
-          <Route path='/paymoverheadingcost' element={<Sample26/>}/>  */}
-          
-          {/* <Route path="/" element={<PaymPaybillTable/>}/> 
-          <Route path='/paympaybill' element={<Sample25/>}/>  */}
-
-          {/* <Route path="/" element={<PaympfTable/>}/> 
-          <Route path='/paympf' element={<Sample24/>}/>  */}
-
-          {/* <Route path="/" element={<PaymshiftTable/>}/> 
-          <Route path='/paymshift' element={<Sample23/>}/> 
-           */}
-          {/* <Route path="/" element={<PaympayoutputloanTable/>}/> 
-          <Route path='/paympayoutputloan' element={<Sample22/>}/>  */}
-
-          {/* <Route path="/" element={<PayrollFinalSettlemetTable/>}/> 
-          <Route path='/payrollfinalsettlement' element={<Sample21/>}/>  */}
-
-          {/* <Route path="/" element={<PfepTable/>}/> 
-          <Route path='/pfep' element={<Sample20/>}/>  */}
-
-          {/* <Route path="/" element={<PfepfTable/>}/> 
-          <Route path='/pfepf' element={<Sample19/>}/>  */}
-
-          
-          {/* <Route path="/" element={<PunchdetailsTable/>}/> 
-          <Route path='/punchdetails' element={<Sample18/>}/>
-           */}
-          {/* <Route path="/" element={<SalaryPeriodTable/>}/> 
-          <Route path='/salaryperiod' element={<Sample17/>}/>  */}
-
-          {/* <Route path="/" element={<SalaryStructureTable/>}/> 
-          <Route path='/salarystructure' element={<Sample16/>}/>  */}
-
-          {/* <Route path="/" element={<ShiftBalanceTable/>}/> 
-          <Route path='/shiftbalance' element={<Sample15/>}/> 
-           */}
-          {/* <Route path="/" element={<ShiftDetailsTable/>}/> 
-          <Route path='/shiftdetails' element={<Sample14/>}/>  */}
-
-
-          {/* <Route path="/" element={<ShiftMonthTable/>}/> 
-          <Route path='/shiftmonth' element={<Sample13/>}/>  */}
-
-          {/* <Route path="/" element={<ShiftPatternTable/>}/> 
-          <Route path='/shiftpattern' element={<Sample12/>}/>  */}
-                
-          {/* <Route path="/" element={<YearEndTable/>}/> 
-          <Route path='/yearend' element={<Sample1/>}/>  */}
-          {/* <Route path='/' element={<ServiceCard/>}></Route>
-          
-          
-
-
-          </Routes>
-         </Router>  */}
-         
+   const [logged,isLoggedIn]=useState(false)
+   const [user,setUser]=useState("")
+   const [login,setLogin]=useState(false)
+   function changeState(state)
+    {
+      setLogin(state)
+    }
+   return (
+    <div className="App"  >
+    <MainPage/>
+    {login?<div>Welcome {sessionStorage.getItem("user")}</div>:<LoginForm isLoggedIn={changeState}/>}
+    <Outlet></Outlet>
+    
     </div>
+    
   );
 }
 

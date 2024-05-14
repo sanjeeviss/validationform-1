@@ -63,4 +63,6 @@ export const SHIFTDETAILS="ShiftDetails"
 export const SHIFTMONTH="ShiftMonths"
 export const SHIFTPATTERN="ShiftPatterns"
 export const YEAREND="Yearends"
-
+export const PAYMJOBSTATUS="PaymJobStatus"
+export const LOGIN="Login"
+export const BRANCHLOGIN="BranchLogin"

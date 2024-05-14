@@ -154,6 +154,7 @@ function Layoutcomp() {
     {title: 'Shift Pattern', icon: <img src={ShiftPattern}  width={40} height={40}/>, onClick: () => navigate("/ShiftPatternTable")},
     {title: 'Temp shift Details', icon: <img src={TempShiftDetails}  width={40} height={40}/>, onClick: () => navigate("/TempshiftdetailsTables")},
     {title: 'Year End', icon: <img src={YearEnd}  width={40} height={40}/>, onClick: () => navigate("/YearEndTable")},
+    {title: 'Year Paym job status', icon: <img src={YearEnd}  width={40} height={40}/>, onClick: () => navigate("/YearEndTable")},
 
   ];
 

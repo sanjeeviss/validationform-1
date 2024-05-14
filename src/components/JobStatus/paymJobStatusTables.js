@@ -8,8 +8,6 @@ import {Button, Grid} from '@mui/material'
 import { JOBSTATUS} from '../../serverconfiguration/controllers'
 import { useNavigate} from 'react-router-dom'
 
-
-
 const PlusIcon = createSvgIcon(
   
     <svg

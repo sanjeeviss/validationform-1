@@ -32,6 +32,12 @@ const [date,setDate]=useState("")
      
   }
     getData()
+    let branch=sessionStorage.getItem("branch")
+    let company=sessionStorage.getItem("company")
+    console.log(branch)
+    console.log(company)
+      setBranch(branch)
+      setCompany(company)
   
   },[])
   
@@ -74,9 +80,9 @@ const [date,setDate]=useState("")
               <InputLabel shrink>Company</InputLabel>
                  <select name = "pnCompanyId" 
                  onChange={(e)=>{
-                  setCompany(e.target.value)
+                 // setCompany(e.target.value)
                   
-
+                  
                   
                  }}
                  style={{ height: '50px' }}
@@ -97,8 +103,8 @@ const [date,setDate]=useState("")
                  <select 
                  name="pnBranchId"
                  onChange={(e)=>{
-                  setBranch(e.target.value)
-                 setShiftDetails(shiftdetails.filter((e)=>(e.pnBranchid==1 && e.pnCompanyid==1)))
+                  //setBranch(e.target.value)
+                 setShiftDetails(shiftdetails.filter((e)=>(e.pnBranchid==branch && e.pnCompanyid==company)))
                  console.log(shiftdetails)
                
                 
@@ -135,7 +141,7 @@ const [date,setDate]=useState("")
                         <option value="">Select</option>
                  
                      {
-                        
+                
                         employee.filter((e)=>(e.pnCompanyId==company && e.pnBranchId==branch)).map((e)=><option>{e.employeeCode}</option>)
                       
                      }

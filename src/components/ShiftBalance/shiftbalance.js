@@ -1,15 +1,15 @@
 export const inputFormElements15 = [
    
 
-{
-    name: "monthyear",
-    label: "Monthyear", 
-    variant: "outlined", 
-    fullWidth: true,
-    required: true,
-    xs:12, 
-    sm:12,
-},
+// {
+//     name: "monthyear",
+//     label: "Monthyear", 
+//     variant: "outlined", 
+//     fullWidth: true,
+//     required: true,
+//     xs:12, 
+//     sm:12,
+// },
 {
     name: "slot",
     label: "Slot", 
@@ -19,15 +19,7 @@ export const inputFormElements15 = [
     xs:12, 
     sm:12,
 },
-{
-    name: "employeeFullName",
-    label: "employeeFullName  ", 
-    variant: "outlined", 
-    fullWidth: true,
-    required: true,
-    xs:12, 
-    sm:12,
-},
+
 
 {
     name: "balanceDays",

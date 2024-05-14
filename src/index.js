@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter,Route,Routes } from 'react-router-dom';
+import { BrowserRouter,Outlet,Route,Routes } from 'react-router-dom';
 import ServiceCard from './components/servicecard';
 import Layoutcomp from './components/layoutcomp'
 import DailyTimeCardForm from './components/DailyTimeCard/DailyTimeCardForm';
@@ -141,9 +141,17 @@ import PaymEmpEarningsTable from './components/PaymEmpEarning/PaymEmpEarningTabl
 import PaymEmpEarningsForm from './components/PaymEmpEarning/paymEmpEarningsForm';
 import PaymEarnTable from './components/PaymEarnings/PaymEarningTable';
 import PaymEarnForm from './components/PaymEarnings/paymEarningsForm';
+import LoginForm from './components/Authentication/Login';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  
   <BrowserRouter>
+  <br></br>
+  <br></br>
+  <br></br>
+  <br></br>
+  <br></br>
+ 
    <Routes>
      <Route path="/" element={<App/>}>
      <Route path="/layout" element={<Layoutcomp/>}/>
