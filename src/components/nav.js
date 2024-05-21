@@ -31,6 +31,7 @@ export default function MainPage() {
     setPopoverAnchorEl(null);
     setIsOverlayVisible(false);
   };
+  
 
   const handleLogout = () => {
     // Clear sessionStorage

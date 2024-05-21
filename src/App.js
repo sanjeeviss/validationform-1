@@ -48,9 +48,9 @@ import OnDutyTable from './components/OnDuty/OnDutyTable';
 import OndutyForm from './components/OnDuty/ondutyForm';
 import OtsLabTable from './components/OtsLabs/OtsLabTable';
 import OTSlabForm from './components/OtsLabs/OTSLabForm';
-import Payslip from './components/Payslip';
-import Hello from './components/Payslip';
-import Paycalc from './components/Payslip';
+import Payslip from './components/payslips/Payslips';
+import Hello from './components/payslips/Payslips';
+import Paycalc from './components/payslips/Payslips';
 import { Grid, Button } from '@mui/material';
 import generatePDF from 'react-to-pdf';
 import { useRef } from 'react';
@@ -144,6 +144,7 @@ import LoginForm from './components/Authentication/Login';
 import { Login } from './components/Authentication/Login';
 import { useState } from 'react';
 import { UserContext } from './components/Authentication/UserContext';
+
 function App() { 
    const [logged,isLoggedIn]=useState(false)
    const [user,setUser]=useState("")
@@ -154,6 +155,8 @@ function App() {
     }
    return (
     <div className="App"  >
+
+  
     <MainPage/>
     {login?<div>Welcome {sessionStorage.getItem("user")}</div>:<LoginForm isLoggedIn={changeState}/>}
     <Outlet></Outlet>

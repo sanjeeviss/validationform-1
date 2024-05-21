@@ -1,37 +1,34 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { Typography, Table, TableBody, TableCell, TableContainer, TableRow, Paper, Grid, Button } from '@mui/material';
-import { PAYSLIP } from '../serverconfiguration/controllers';
-import { getRequest } from '../serverconfiguration/requestcomp';
-import { ServerConfig } from '../serverconfiguration/serverconfig';
+import {  MONTHLYSALARY, PAYSLIP } from '../../serverconfiguration/controllers';
+import { getRequest } from '../../serverconfiguration/requestcomp';
+import { ServerConfig } from '../../serverconfiguration/serverconfig';
+
+import { useRef } from 'react';
 import  html2pdf  from 'html2pdf.js/dist/html2pdf.min';
 import ReactDOMServer from 'react-dom/server';
-import { useRef } from 'react';
 import generatePDF from 'react-to-pdf';
-
 
 
 const Paycalc = () => {
   const targetRef = useRef();
-
-  // const [loader, setLoader] = useState(false);
-  // const downloadPDF = () =>{
-
-  // }
-/*const Payslip = () => {
-
-  const printHandler = () => {
-    const printElement = ReactDOMServer.renderToString(Payslip());
-    html2pdf().from(printElement).save();
+  const[data, setdata] = useState(0);
+  const[data1, setdata1] = useState(0);
+ 
   
-  }*/
-  const[data, setdata] = useState([]);
   useEffect (() => {
-    getRequest(ServerConfig.url, PAYSLIP).then((e) => {
-      console.log(e.data)
-      setdata(e.data)
+    getRequest(ServerConfig.url, PAYSLIP + "/EMP001").then((e) => {
+      console.log(e.data[0])
+    
     })
+    getRequest(ServerConfig.url, MONTHLYSALARY+"/2017,5,EMP001").then((e) => {
+      console.log(e.data[0]);
+    
+})
   },[]);
+
+
 
 
  
@@ -49,16 +46,16 @@ const Paycalc = () => {
                   <TableCell style={{ backgroundColor: 'blue', color: 'white', padding: '10px', width: '200px' }}>Employee Details</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell style={{  padding: '9px', width: '200px'}}>Name: {data.map((e) => {return e.employeeFirstName  } )}</TableCell>
+                  <TableCell style={{  padding: '9px', width: '200px'}}>Name: {data.employeeFirstName}</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell style={{  padding: '9px', width: '200px'}}>Address: {data.map((e) =>{return e.addressLine1 } )}</TableCell>
+                  <TableCell style={{  padding: '9px', width: '200px'}}>Address: { data.addressLine1 }</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell style={{  padding: '9px', width: '200px'}}  >Desigination:{data.map((e) =>{return e.designationName} )}</TableCell>
+                  <TableCell style={{  padding: '9px', width: '200px'}}  >Desigination:{ data.designationName }</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell style={{  padding: '9px', width: '200px'}}>Department:{data.map((e) =>{return e.departmentName} )}</TableCell>
+                  <TableCell style={{  padding: '9px', width: '200px'}}>Department:{ data.departmentName }</TableCell>
                 </TableRow>
               </TableBody>
             </Table>
@@ -78,18 +75,18 @@ const Paycalc = () => {
                   <TableCell >5678</TableCell>
   <TableCell >9012</TableCell>*/}
                   {
-                    data.map((e)=>{
-                      return<TableRow> <TableCell>
-                         {e.dDate}
+                    
+                      <TableRow> <TableCell>
+                         {data.dDate}
                         </TableCell>
                           <TableCell>
-                            {e.gradeName}
+                            {data.gradeName}
                           </TableCell>
                           <TableCell>
-                            {e.paidDays}
+                            {data.paidDays}
                           </TableCell>
                         </TableRow>
-                    })
+                    
                   }
                 
                 <TableRow>
@@ -103,18 +100,18 @@ const Paycalc = () => {
                   <TableCell >fff</TableCell>
                 </TableRow> */}
                 {
-                  data.map((e)=>{
-                    return<TableRow> <TableCell>
-                       {e.holidays}
+                  
+                    <TableRow> <TableCell>
+                       {data.holidays}
                       </TableCell>
                         <TableCell>
-                          {e.presentDays}
+                          {data.presentDays}
                         </TableCell>
                         <TableCell>
-                          {e.absentDays}
+                          {data.absentDays}
                         </TableCell>
                       </TableRow>
-                  }) 
+                  
                 }
               </TableBody>
             </Table>
@@ -132,48 +129,48 @@ const Paycalc = () => {
                   <TableCell style={{ backgroundColor: 'blue', color: 'white', padding: '10px', width: '100px' }}>Amount</TableCell>
               </TableRow>
               {
-                data.map((e)=> {
-                 return <TableRow>
+                
+                  <TableRow>
                   <TableCell >Earn Amount</TableCell> 
                   <TableCell ></TableCell>   
                   <TableCell ></TableCell>
                   <TableCell ></TableCell>   
-                  <TableCell >{e.earnAmount}</TableCell>
+                  <TableCell >{data.earnAmount}</TableCell>
                   </TableRow>
-                   })
+                   
                }
                 {
-                data.map((e)=> {
-                 return <TableRow>
+                
+                  <TableRow>
                   <TableCell >Net pay</TableCell> 
                   <TableCell ></TableCell>   
                   <TableCell ></TableCell>
                   <TableCell ></TableCell>   
-                  <TableCell >{e.netPay}</TableCell>
+                  <TableCell >{data.netPay}</TableCell>
                   </TableRow>
-                  })
+                  
                 }
                   {
-                data.map((e)=> {
-                 return <TableRow>
+                
+                  <TableRow>
                   <TableCell >Gross Salary</TableCell> 
                   <TableCell ></TableCell>   
                   <TableCell ></TableCell>
                   <TableCell ></TableCell>   
-                  <TableCell >{e.grossSalary}</TableCell>
+                  <TableCell >{data.grossSalary}</TableCell>
                   </TableRow>
-                  })
+                  
                 }
                  {
-                data.map((e)=> {
-                 return <TableRow>
+                
+                  <TableRow>
                   <TableCell >Net Salary</TableCell> 
                   <TableCell ></TableCell>   
                   <TableCell ></TableCell>
                   <TableCell ></TableCell>   
-                  <TableCell >{e.netSalary}</TableCell>
+                  <TableCell >{data.netSalary}</TableCell>
                   </TableRow>
-                  })
+                  
                 }
                   <TableRow>
                   <TableCell style={{ backgroundColor: 'blue', color: 'white', padding: '10px', width: '200px' }} ></TableCell> 
@@ -193,121 +190,121 @@ const Paycalc = () => {
               <TableRow>
                   <TableCell style={{ backgroundColor: 'blue', color: 'white', padding: '10px', width: '200px' }}>Allowance</TableCell>
                   <TableCell style={{ backgroundColor: 'blue', color: 'white', padding: '10px', width: '200px' }}></TableCell>
-                  <TableCell style={{ backgroundColor: 'blue', color: 'white', padding: '10px', width: '200px', textAlign: 'right' }}>Name</TableCell>
+                  <TableCell style={{ backgroundColor: 'blue', color: 'white', padding: '10px', width: '200px', textAlign: 'left' }}>Name</TableCell>
                   <TableCell style={{ backgroundColor: 'blue', color: 'white', padding: '10px', width: '200px' }}></TableCell>
                   <TableCell style={{ backgroundColor: 'blue', color: 'white', padding: '10px', width: '200px' }}>Value</TableCell>
               </TableRow>
               {
-              data.map((e)=>{
-                      return <TableRow> <TableCell>
+              
+                       <TableRow> <TableCell>
                          Allowance 1
                         </TableCell>
                           <TableCell></TableCell>
-                          <TableCell>{e.allowance1}</TableCell>
+                          <TableCell>{data.allowance1}</TableCell>
                           <TableCell></TableCell>
-                          <TableCell>{e.value1}</TableCell>
+                          <TableCell>{data.value1}</TableCell>
                         </TableRow>
-                    })
+                    
                     }
                     {
-                    data.map((e)=> {
-                  return <TableRow>
+                    
+                   <TableRow>
                   <TableCell >Allowance 2</TableCell> 
                   <TableCell ></TableCell>   
-                  <TableCell >{e.allowance2}</TableCell>
+                  <TableCell >{data.allowance2}</TableCell>
                   <TableCell ></TableCell>   
-                  <TableCell >{e.value2}</TableCell>
+                  <TableCell >{data.value2}</TableCell>
                   </TableRow>
-                  })
+                  
                    }
                    {
-                    data.map((e)=> {
-                  return <TableRow>
+                    
+                   <TableRow>
                   <TableCell >Allowance 3</TableCell> 
                   <TableCell ></TableCell>   
-                  <TableCell >{e.allowance3}</TableCell>
+                  <TableCell >{data.allowance3}</TableCell>
                   <TableCell ></TableCell>   
-                  <TableCell >{e.value3}</TableCell>
+                  <TableCell >{data.value3}</TableCell>
                   </TableRow>
-                  })
+                  
                   }
 
                   {
-                    data.map((e)=> {
-                  return <TableRow>
+                    
+                   <TableRow>
                   <TableCell >Allowance 4</TableCell> 
                   <TableCell ></TableCell>   
-                  <TableCell >{e.allowance4}</TableCell>
+                  <TableCell >{data.allowance4}</TableCell>
                   <TableCell ></TableCell>   
-                  <TableCell >{e.value4}</TableCell>
+                  <TableCell >{data.value4}</TableCell>
                   </TableRow>
-                  })
+                  
                 }
                 {
-                    data.map((e)=> {
-                  return <TableRow>
+                    
+                   <TableRow>
                   <TableCell >Allowance 5</TableCell> 
                   <TableCell ></TableCell>   
-                  <TableCell >{e.allowance5}</TableCell>
+                  <TableCell >{data.allowance5}</TableCell>
                   <TableCell ></TableCell>   
-                  <TableCell >{e.value5}</TableCell>
+                  <TableCell >{data.value5}</TableCell>
                   </TableRow>
-                  })
+                  
                 }
                 {
-                    data.map((e)=> {
-                  return <TableRow>
+                    
+                   <TableRow>
                   <TableCell >Allowance 6</TableCell> 
                   <TableCell ></TableCell>   
-                  <TableCell >{e.allowance6}</TableCell>
+                  <TableCell >{data.allowance6}</TableCell>
                   <TableCell ></TableCell>   
-                  <TableCell >{e.value6}</TableCell>
+                  <TableCell >{data.value6}</TableCell>
                   </TableRow>
-                  })
+                  
                 }
                 {
-                    data.map((e)=> {
-                  return <TableRow>
+                    
+                   <TableRow>
                   <TableCell >Allowance 7</TableCell> 
                   <TableCell ></TableCell>   
-                  <TableCell >{e.allowance7}</TableCell>
+                  <TableCell >{data.allowance7}</TableCell>
                   <TableCell ></TableCell>   
-                  <TableCell >{e.value7}</TableCell>
+                  <TableCell >{data.value7}</TableCell>
                   </TableRow>
-                  })
+                  
                 }
                 {
-                    data.map((e)=> {
-                  return <TableRow>
+                    
+                   <TableRow>
                   <TableCell >Allowance 8</TableCell> 
                   <TableCell ></TableCell>   
-                  <TableCell >{e.allowance8}</TableCell>
+                  <TableCell >{data.allowance8}</TableCell>
                   <TableCell ></TableCell>   
-                  <TableCell >{e.value8}</TableCell>
+                  <TableCell >{data.value8}</TableCell>
                   </TableRow>
-                  })
+                  
                 }
                 {
-                    data.map((e)=> {
-                  return <TableRow>
+                    
+                   <TableRow>
                   <TableCell >Allowance 9</TableCell> 
                   <TableCell ></TableCell>   
-                  <TableCell >{e.allowance9}</TableCell>
+                  <TableCell >{data.allowance9}</TableCell>
                   <TableCell ></TableCell>   
-                  <TableCell >{e.value9}</TableCell>
+                  <TableCell >{data.value9}</TableCell>
                   </TableRow>
-                  })
+                  
                 }
                 {
-                    data.map((e)=> {
-                  return <TableRow>
+                    
+                   <TableRow>
                   <TableCell >Allowance 10</TableCell> 
                   <TableCell ></TableCell>   
-                  <TableCell >{e.allowance10}</TableCell>
+                  <TableCell >{data.allowance10}</TableCell>
                   <TableCell ></TableCell>   
-                  <TableCell >{e.value10}</TableCell>
+                  <TableCell >{data.value10}</TableCell>
                   </TableRow>
-                  })
+                  
                 }
                
                   <TableRow>
@@ -315,7 +312,7 @@ const Paycalc = () => {
                   <TableCell style={{ backgroundColor: 'blue', color: 'white', padding: '10px', width: '200px' }}></TableCell>
                   <TableCell style={{ backgroundColor: 'blue', color: 'white', padding: '10px', width: '200px' }}></TableCell>
                   <TableCell style={{ backgroundColor: 'blue', color: 'white', padding: '10px', width: '200px', textAlign: 'right' }}>Total Allowance :</TableCell>
-                  <TableCell style={{ backgroundColor: 'blue', color: 'white', padding: '10px', width: '100px' }}>INR {data.map((e) => {return   e.value1 + e.value2 + e.value3 + e.value4 + e.value5 + e.value6 + e.value7 + e.value8 + e.value9 + e.value10} )}</TableCell>
+                  <TableCell style={{ backgroundColor: 'blue', color: 'white', padding: '10px', width: '100px' }}>INR {    data.value1 + data.value2 + data.value3 + data.value4 + data.value5 + data.value6 + data.value7 + data.value8 + data.value9 + data.value10 }</TableCell>
               </TableRow> 
             </Table>
           </TableContainer>
@@ -331,116 +328,116 @@ const Paycalc = () => {
                   <TableCell style={{ backgroundColor: 'blue', color: 'white', padding: '10px', width: '100px' }}>Value</TableCell>
               </TableRow>
               {
-              data.map((e)=>{
-                      return <TableRow> <TableCell>
+              
+                       <TableRow> <TableCell>
                          Deduction 1
                         </TableCell>
                           <TableCell></TableCell>
-                          <TableCell>{e.deduction1}</TableCell>
+                          <TableCell>{data.deduction1}</TableCell>
                           <TableCell></TableCell>
-                          <TableCell>{e.valueA1}</TableCell>
+                          <TableCell>{data.valueA1}</TableCell>
                         </TableRow>
-                    })
+                    
                     }
                     {
-                    data.map((e)=> {
-                  return <TableRow>
+                    
+                   <TableRow>
                   <TableCell >Deduction 2</TableCell> 
                   <TableCell ></TableCell>   
-                  <TableCell >{e.deduction2}</TableCell>
+                  <TableCell >{data.deduction2}</TableCell>
                   <TableCell ></TableCell>   
-                  <TableCell >{e.valueA2}</TableCell>
+                  <TableCell >{data.valueA2}</TableCell>
                   </TableRow>
-                  })
+                  
                    }
                    {
-                    data.map((e)=> {
-                  return <TableRow>
+                    
+                   <TableRow>
                   <TableCell >Deduction 3</TableCell> 
                   <TableCell ></TableCell>   
-                  <TableCell >{e.deduction3}</TableCell>
+                  <TableCell >{data.deduction3}</TableCell>
                   <TableCell ></TableCell>   
-                  <TableCell >{e.valueA3}</TableCell>
+                  <TableCell >{data.valueA3}</TableCell>
                   </TableRow>
-                  })
+                  
                   }
 
                   {
-                    data.map((e)=> {
-                  return <TableRow>
+                    
+                   <TableRow>
                   <TableCell >Deduction 4</TableCell> 
                   <TableCell ></TableCell>   
-                  <TableCell >{e.deduction4}</TableCell>
+                  <TableCell >{data.deduction4}</TableCell>
                   <TableCell ></TableCell>   
-                  <TableCell >{e.valueA4}</TableCell>
+                  <TableCell >{data.valueA4}</TableCell>
                   </TableRow>
-                  })
+                  
                 }
                 {
-                    data.map((e)=> {
-                  return <TableRow>
+                    
+                   <TableRow>
                   <TableCell >Deduction 5</TableCell> 
                   <TableCell ></TableCell>   
-                  <TableCell >{e.deduction5}</TableCell>
+                  <TableCell >{data.deduction5}</TableCell>
                   <TableCell ></TableCell>   
-                  <TableCell >{e.valueA5}</TableCell>
+                  <TableCell >{data.valueA5}</TableCell>
                   </TableRow>
-                  })
+                  
                 }
                 {
-                    data.map((e)=> {
-                  return <TableRow>
+                    
+                   <TableRow>
                   <TableCell >Deduction 6</TableCell> 
                   <TableCell ></TableCell>   
-                  <TableCell >{e.deduction6}</TableCell>
+                  <TableCell >{data.deduction6}</TableCell>
                   <TableCell ></TableCell>   
-                  <TableCell >{e.valueA6}</TableCell>
+                  <TableCell >{data.valueA6}</TableCell>
                   </TableRow>
-                  })
+                  
                 }
                 {
-                    data.map((e)=> {
-                  return <TableRow>
+                    
+                   <TableRow>
                   <TableCell >Deduction 7</TableCell> 
                   <TableCell ></TableCell>   
-                  <TableCell >{e.deduction7}</TableCell>
+                  <TableCell >{data.deduction7}</TableCell>
                   <TableCell ></TableCell>   
-                  <TableCell >{e.valueA7}</TableCell>
+                  <TableCell >{data.valueA7}</TableCell>
                   </TableRow>
-                  })
+                  
                 }
                 {
-                    data.map((e)=> {
-                  return <TableRow>
+                    
+                   <TableRow>
                   <TableCell >Deduction 8</TableCell> 
                   <TableCell ></TableCell>   
-                  <TableCell >{e.deduction8}</TableCell>
+                  <TableCell >{data.deduction8}</TableCell>
                   <TableCell ></TableCell>   
-                  <TableCell >{e.valueA8}</TableCell>
+                  <TableCell >{data.valueA8}</TableCell>
                   </TableRow>
-                  })
+                  
                 }
                 {
-                    data.map((e)=> {
-                  return <TableRow>
+                     
+                   <TableRow>
                   <TableCell >Deduction 9</TableCell> 
                   <TableCell ></TableCell>   
-                  <TableCell >{e.deduction9}</TableCell>
+                  <TableCell >{data.deduction9}</TableCell>
                   <TableCell ></TableCell>   
-                  <TableCell >{e.valueA9}</TableCell>
+                  <TableCell >{data.valueA9}</TableCell>
                   </TableRow>
-                  })
+                  
                 }
                 {
-                    data.map((e)=> {
-                  return <TableRow>
+                    
+                   <TableRow>
                   <TableCell >Deduction 10</TableCell> 
                   <TableCell ></TableCell>   
-                  <TableCell >{e.deduction10}</TableCell>
+                  <TableCell >{data.deduction10}</TableCell>
                   <TableCell ></TableCell>   
-                  <TableCell >{e.valueA10}</TableCell>
+                  <TableCell >{data.valueA10}</TableCell>
                   </TableRow>
-                  })
+                  
                 }
                
                   <TableRow>
@@ -448,7 +445,7 @@ const Paycalc = () => {
                   <TableCell style={{ backgroundColor: 'blue', color: 'white', padding: '10px', width: '200px' }}></TableCell>
                   <TableCell style={{ backgroundColor: 'blue', color: 'white', padding: '10px', width: '200px' }}></TableCell>
                   <TableCell style={{ backgroundColor: 'blue', color: 'white', padding: '10px', width: '200px', textAlign: "right" }}>Total Deductions :</TableCell>
-                  <TableCell style={{ backgroundColor: 'blue', color: 'white', padding: '10px', width: '100px' }}>INR {data.map((e) => {return   e.valueA1 + e.valueA2 + e.valueA3 + e.valueA4 + e.valueA5 + e.valueA6 + e.valueA7 + e.valueA8 + e.valueA9 + e.valueA10} )}</TableCell>
+                  <TableCell style={{ backgroundColor: 'blue', color: 'white', padding: '10px', width: '100px' }}>INR {   data.valueA1 + data.valueA2 + data.valueA3 + data.valueA4 + data.valueA5 + data.valueA6 + data.valueA7 + data.valueA8 + data.valueA9 + data.valueA10 }</TableCell>
               </TableRow> 
             </Table>
           </TableContainer>
@@ -458,7 +455,7 @@ const Paycalc = () => {
             <Table>
               <TableRow>
                   <TableCell style={{ backgroundColor: 'blue', color: 'white', padding: '10px', width: '200px', textAlign: 'right' }}>Total Salary :</TableCell>
-                  <TableCell style={{ backgroundColor: 'blue', color: 'white', padding: '10px', width: '200px', textAlign: 'left' }}>INR </TableCell>
+                  <TableCell style={{ backgroundColor: 'blue', color: 'white', padding: '10px', width: '200px', textAlign: 'left' }}>INR {data1} </TableCell>
               </TableRow>
               </Table>
           </TableContainer>

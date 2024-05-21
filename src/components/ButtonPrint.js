@@ -1,5 +1,5 @@
 import React from 'react'
-import Paycalc from './Payslip';
+import Paycalc from './payslips/Payslips';
 import { Grid, Button } from '@mui/material';
 import generatePDF from 'react-to-pdf';
 import { useRef } from 'react';

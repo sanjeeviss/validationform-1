@@ -155,6 +155,8 @@ function Layoutcomp() {
     {title: 'Temp shift Details', icon: <img src={TempShiftDetails}  width={40} height={40}/>, onClick: () => navigate("/TempshiftdetailsTables")},
     {title: 'Year End', icon: <img src={YearEnd}  width={40} height={40}/>, onClick: () => navigate("/YearEndTable")},
     {title: 'Year Paym job status', icon: <img src={YearEnd}  width={40} height={40}/>, onClick: () => navigate("/YearEndTable")},
+    {title: 'payslip', icon: <img src={SalaryPeriod}  width={40} height={40}/>, onClick: () => navigate("/Paycalc")},
+    {title: 'timesheet', icon: <img src={daily}  width={40} height={40}/>, onClick: () => navigate("/TimesheetManager")},
 
   ];
 

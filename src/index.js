@@ -142,6 +142,9 @@ import PaymEmpEarningsForm from './components/PaymEmpEarning/paymEmpEarningsForm
 import PaymEarnTable from './components/PaymEarnings/PaymEarningTable';
 import PaymEarnForm from './components/PaymEarnings/paymEarningsForm';
 import LoginForm from './components/Authentication/Login';
+import Paycalc from './components/payslips/Payslips';
+import TimesheetManage from './components/Timesheet/TimeSheetManger';
+import TimesheetManager from './components/Timesheet/TimeSheetManger';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   
@@ -348,6 +351,10 @@ root.render(
 
      <Route path='/TempshiftdetailsTables' element={<TempshiftdetailsTables/>}></Route>
      <Route path='/TempShiftDetailsForm' element={<TempShiftDetailsForm/>}></Route> 
+
+     <Route path='/Paycalc' element={<Paycalc/>}></Route>
+
+  <Route path='/TimesheetManager' element={<TimesheetManager/>}></Route>
   </Route>
    </Routes> 
     </BrowserRouter>
