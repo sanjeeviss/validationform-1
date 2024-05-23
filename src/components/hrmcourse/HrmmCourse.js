@@ -51,4 +51,5 @@ export const inputFormHrmmCourse= [
             xs:12,sm:12,
            
             }
+            
         ]

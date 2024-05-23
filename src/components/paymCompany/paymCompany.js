@@ -1,15 +1,5 @@
 export const inputpaymCompanyForm= [
-    {
-        name:"PnCompanyId",
-        placeholder:"Enter Company Id ",
-        label:"Company Id",
-        variant:"outlined",
-        fullWidth:true,
-        required:true,
-        
-        xs:12,sm:12,
-       
-        },
+ 
     
     {
         name:"CompanyCode",
@@ -143,16 +133,7 @@ export const inputpaymCompanyForm= [
                                         xs:12,sm:12
                                         },
 
-                                        {
-                                            name:"Branch_User_Id",
-                                            placeholder:"Enter Branch User Id ",
-                                            label:"Branch User Id",
-                                            variant:"outlined",
-                                            fullWidth:true,
-                                            required:true,
-                                            
-                                            xs:12,sm:12
-                                            },
+                                        
                                            
                                                     {
                                                         name:"PFno",

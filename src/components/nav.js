@@ -15,7 +15,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SettingsApplicationsSharpIcon from '@mui/icons-material/SettingsApplicationsSharp';
 import Avatar from '@mui/material/Avatar';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 export default function MainPage() {
   const navigate = useNavigate();
@@ -39,6 +39,13 @@ export default function MainPage() {
     // Navigate to login page or any other page you desire
     window.location.href="http://localhost:3000/"
   };
+
+  const isLoggedIn = sessionStorage.getItem("user") !== null;
+
+  if (!isLoggedIn) {
+    // If not logged in, redirect to login page
+    return <Navigate to="/" />;
+  }
 
   return (
     <div>

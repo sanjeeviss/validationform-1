@@ -144,27 +144,33 @@ import LoginForm from './components/Authentication/Login';
 import { Login } from './components/Authentication/Login';
 import { useState } from 'react';
 import { UserContext } from './components/Authentication/UserContext';
-
-function App() { 
-   const [logged,isLoggedIn]=useState(false)
-   const [user,setUser]=useState("")
-   const [login,setLogin]=useState(false)
-   function changeState(state)
-    {
-      setLogin(state)
-    }
-   return (
-    <div className="App"  >
-
+import { useEffect } from 'react';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
+export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [login, setLogin] = useState(false);
+  const [user, setUser] = useState("");
   
-    <MainPage/>
-    {login?<div>Welcome {sessionStorage.getItem("user")}</div>:<LoginForm isLoggedIn={changeState}/>}
-    <Outlet></Outlet>
-    
+  useEffect(() => {
+    // Check if the user is already logged in
+    const loggedIn = sessionStorage.getItem("user") !== null;
+    setIsLoggedIn(loggedIn);
+    setLogin(loggedIn);
+  }, []);
+
+  function changeState(state) {
+    setLogin(state);
+  }
+
+  return (
+    <div className="App">
+      <MainPage />
+      <ErrorBoundary/>
+      {login ? <div>Welcome {sessionStorage.getItem("user")}</div> : <LoginForm isLoggedIn={changeState} />}
+      <Outlet />
     </div>
     
   );
 }
 
 
- export default App;

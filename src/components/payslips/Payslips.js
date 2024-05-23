@@ -20,11 +20,11 @@ const Paycalc = () => {
   useEffect (() => {
     getRequest(ServerConfig.url, PAYSLIP + "/EMP001").then((e) => {
       console.log(e.data[0])
-    
+      setdata(e.data)
     })
     getRequest(ServerConfig.url, MONTHLYSALARY+"/2017,5,EMP001").then((e) => {
       console.log(e.data[0]);
-    
+     setdata1(e.data)
 })
   },[]);
 

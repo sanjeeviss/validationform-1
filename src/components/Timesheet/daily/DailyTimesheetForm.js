@@ -5,7 +5,59 @@ import { PAYMEMPLOYEE, TIMECARD } from '../../../serverconfiguration/controllers
 import { useNavigate } from 'react-router-dom';
 import { getRequest } from '../../../serverconfiguration/requestcomp';
 import { ServerConfig } from '../../../serverconfiguration/serverconfig';
+function getYear(date)
+ { 
+    let datearr=date.split("-")
+    return datearr[0];
+ }
+ function getMonth(date)
+ {
+  return date.split("-")[1]
+ }
+ function getDate(date)
+  { 
+   return date.split("-")[2].split("T")[0]
+  }
+  function getJYear(date)
+ { 
+    let datearr=date.split("/")
+    return datearr[2];
+ }
+ function getJMonth(date)
+ {
+  return date.split("/")[0]
+ }
+ function getJDate(date)
+  { 
+   return date.split("/")[1]
+  }
 
+function compareDatesIgnoringTime(date1, date2) {
+  console.log(date2)
+  console.log(getYear(date1))
+  console.log(getMonth(date1))
+  console.log(getDate(date1))
+  console.log(getJYear(date2))
+  console.log(getJMonth(date2))
+  console.log(getJDate(date2))
+  // Extract year, month, and day components from both dates
+  const year1 = getYear(date1)
+  const month1 = getMonth(date1)
+  const day1 = getDate(date1);
+
+  const year2 = getJYear(date2)
+  const month2 = getJMonth(date2)
+  const day2 = getJDate(date2);
+
+  // Compare year, month, and day components
+  if (year1 == year2 && month1 == month2 && day1 == day2) {
+    return 0; // Dates are equal
+  } else if (year1 > year2 || (year1 == year2 && month1 > month2) || (year1 == year2 && month1 == month2 && day1 > day2)) {
+    return 1; // date1 is later than date2
+  } else {
+    return -1; // date1 is earlier than date2
+  }
+}
 function filterUniqueObjects(array, propertyName) {
   return array.filter((obj, index, self) =>
     index === self.findIndex((t) => (
@@ -62,7 +114,7 @@ const DailyTimesheetForm = () => {
   };
 
 
-  const currentDateEntries = timeCard.filter(entry => entry.dates === currentDate);
+  const currentDateEntries = timeCard.filter(entry => entry.dates === currentDate && entry.employeeCode === empCode);
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
       <Paper elevation={3} style={{ padding: 20, maxWidth: 1100 }}>
@@ -154,8 +206,18 @@ const DailyTimesheetForm = () => {
             </TableRow>
           </TableHead>
            <TableBody>
-           {currentDateEntries.map((entry) => (
-              <TableRow key={entry.sno}>
+            {
+              console.log(currentDate)
+            }
+           {
+           
+           timeCard
+          .filter(entry => compareDatesIgnoringTime(entry.dates ,currentDate)==0 && entry.empCode==empCode )
+          
+           .map((entry) => (
+           
+      <TableRow key={entry.sno}>
+      
                 <TableCell>{dateToDay(entry.dates)}</TableCell>
                 <TableCell>{entry.dates}</TableCell>
                 <TableCell>{entry.intime}</TableCell>
@@ -167,6 +229,7 @@ const DailyTimesheetForm = () => {
                 <TableCell>{entry.otHrs}</TableCell>
                 <TableCell>{entry.status}</TableCell>
               </TableRow>
+      //console.log(entry)
             ))}
           </TableBody>
         </Table>

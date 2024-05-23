@@ -31,7 +31,7 @@ const [timeCard,setTimeCard]=useState([])
   const [lateOut,setLateout]=useState("")
   const [otHrs,setOthrs]=useState("")
   const [status,setStatus]=useState("")
-
+  const [weekStartDate, setWeekStartDate] = useState("");
 
 
   const companyOptions = ['Company A', 'Company B', 'Company C'];
@@ -39,18 +39,63 @@ const [timeCard,setTimeCard]=useState([])
  
 
   
-useEffect(()=>{
-  async function getData()
-  {
-    const data=await getRequest(ServerConfig.url,PAYMEMPLOYEE)
-    setEmployee(data.data)
-    const datas=await getRequest(ServerConfig.url,TIMECARD)
-    setTimeCard(datas.data)
- 
-}
-  getData()
+  useEffect(() => {
+    async function getData() {
+      const employeeData = await getRequest(ServerConfig.url, PAYMEMPLOYEE);
+      console.log("Employee Data:", employeeData); // Check the fetched employee data
+      setEmployee(employeeData.data);
+      
+      const timeCardData = await getRequest(ServerConfig.url, TIMECARD);
+      console.log("Time Card Data:", timeCardData); // Check the fetched time card data
+      setTimeCard(timeCardData.data);
+    }
+    getData();
+  }, []);
 
-},[])
+  // Get today's date
+var today = new Date();
+
+// Get the day of the week (0 for Sunday, 1 for Monday, ..., 6 for Saturday)
+var dayOfWeek = today.getDay();
+
+// Calculate the difference between today's date and the start of the week (considering Monday as the start of the week)
+var diff = today.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1);
+
+// Create a new Date object for the starting date of the week
+var startDateOfWeek = new Date(today.setDate(diff));
+
+// Iterate through each date starting from the first day of the week (Monday) to the current date
+for (var d = new Date(startDateOfWeek); d <= today; d.setDate(d.getDate() + 1)) {
+    console.log(d);
+}
+
+
+// function compareDatesIgnoringTime(date1, date2) {
+//   console.log(date2)
+//   console.log(getYear(date1))
+//   console.log(getMonth(date1))
+//   console.log(getDate(date1))
+//   console.log(getJYear(date2))
+//   console.log(getJMonth(date2))
+//   console.log(getJDate(date2))
+//   // Extract year, month, and day components from both dates
+//   const year1 = getYear(date1)
+//   const month1 = getMonth(date1)
+//   const day1 = getDate(date1);
+
+//   const year2 = getJYear(date2)
+//   const month2 = getJMonth(date2)
+//   const day2 = getJDate(date2);
+
+//   // Compare year, month, and day components
+//   if (year1 == year2 && month1 == month2 && day1 == day2) {
+//     return 0; // Dates are equal
+//   } else if (year1 > year2 || (year1 == year2 && month1 > month2) || (year1 == year2 && month1 == month2 && day1 > day2)) {
+//     return 1; // date1 is later than date2
+//   } else {
+//     return -1; // date1 is earlier than date2
+//   }
+// }
   const [formData] = useState({
     pnCompanyid: pnCompanyid,
     pnBranchid: pnBranchid,
@@ -89,6 +134,19 @@ useEffect(()=>{
     console.log(event.target.value);
   };
 
+  const filterTimeSheetByWeek = (entries) => {
+    if (!Array.isArray(entries)) return [];
+  
+    const startDate = new Date(weekStartDate);
+    const endDate = new Date(startDate);
+    endDate.setDate(startDate.getDate() + 6);
+  
+    return entries.filter(entry => {
+      const entryDate = new Date(entry.dates);
+      // Check if entry date falls within the selected week
+      return entryDate >= startDate && entryDate <= endDate;
+    });
+  };
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
       <Paper elevation={3} style={{ padding: 20, maxWidth: 1100 }}>
@@ -163,6 +221,22 @@ useEffect(()=>{
               />
             </FormControl>
           </Grid>
+          <Grid item xs={6} sm={6}>
+            <FormControl fullWidth>
+              <TextField
+                type="date"
+                label="Week Start Date"
+                value={weekStartDate}
+                onChange={(e) => setWeekStartDate(e.target.value)
+                   
+                }
+               
+                variant="outlined"
+                fullWidth
+                required
+              />
+            </FormControl>
+          </Grid>
 </Grid>
 
         
@@ -184,87 +258,27 @@ useEffect(()=>{
             </TableRow>
           </TableHead>
           <TableBody>
-            {formData.entries.map((entry, index) => (
-              <TableRow key={index}>
-                <TableCell>{entry.day}</TableCell>
-                <TableCell>
-                  {
-                    console.log
-                  }
-                  {
-                  
-                    console.log(timeCard.filter((e)=>e.employeeCode==empCode))
-                  
-                  }
-                  {timeCard.filter((e)=>e.empCode==empCode).map((e)=>{
-              return <span>{e.dates}</span>
-              console.log(e)
-            })}
-                  </TableCell> 
-                <TableCell> {timeCard.filter((e)=>e.empCode==empCode).map((e)=>{
-              return <span>{e.intime}</span>
-              console.log(e)
-            })}</TableCell>
-
-               <TableCell>
-               {timeCard.filter((e)=>e.empCode==empCode).map((e)=>{
-                return <span>{e.outtime}</span>
-              console.log(e)
-            })}</TableCell>
-
-          <TableCell>
-          {timeCard.filter((e)=>e.empCode==empCode).map((e)=>{
-              return <span>{e.lateIn}</span>
-              console.log(e)
-            })}</TableCell>
-
-          <TableCell> 
-          {timeCard.filter((e)=>e.empCode==empCode).map((e)=>{
-              return <span>{e.lateOut}</span>
-              console.log(e)
-            })}</TableCell>
-
-           <TableCell> 
-           {timeCard.filter((e)=>e.empCode==empCode).map((e)=>{
-              return <span>{e.breakIn}</span>
-              console.log(e)
-            })}</TableCell>
-
-          <TableCell> 
-          {timeCard.filter((e)=>e.empCode==empCode).map((e)=>{
-              return <span>{e.breakOut}</span>
-              console.log(e)
-            })}</TableCell>
-
-<TableCell> 
-{timeCard.filter((e)=>e.empCode==empCode).map((e)=>{
-              return <span>{e.otHrs}</span>
-              console.log(e)
-            })}</TableCell>
-
-
-<TableCell> 
-{timeCard.filter((e)=>e.empCode==empCode).map((e)=>{
-              return <span>{e.status}</span>
-              console.log(e)
-            })}</TableCell>
-
-
-
-
-
-
-                <TableCell></TableCell>
-                <TableCell>{entry.intime}</TableCell>
-                <TableCell>{entry.outtime}</TableCell>
-                <TableCell>{entry.latein}</TableCell>
-                <TableCell>{entry.lateout}</TableCell>
-                <TableCell>{entry.breakin}</TableCell>
-                <TableCell>{entry.breakout}</TableCell>
-                <TableCell>{entry.othrs}</TableCell>
-                <TableCell>{entry.status}</TableCell>
-              </TableRow>
-            ))}
+            
+          {timeCard
+      .filter((entry) => entry.empCode === empCode)
+      .map((entry, index) => {
+        console.log("Filtered Entries for Employee and Week:", entry);
+        const weekEntries = filterTimeSheetByWeek(entry); // Pass the whole entry
+        console.log("Week Entries:", weekEntries);
+        return weekEntries.map((weekEntry, innerIndex) => (
+          <TableRow key={index + "-" + innerIndex}>
+            <TableCell>{weekEntry.days}</TableCell>
+          <TableCell>{new Date(weekEntry.intime).toLocaleTimeString()}</TableCell>
+          <TableCell>{new Date(weekEntry.outtime).toLocaleTimeString()}</TableCell>
+                    <TableCell>{new Date(weekEntry.latein).toLocaleDateString()}</TableCell>
+                    <TableCell>{new Date(weekEntry.lateout).toLocaleDateString()}</TableCell>
+                    <TableCell>{new Date(weekEntry.breakin).toLocaleDateString()}</TableCell>
+                    <TableCell>{new Date(weekEntry.breakout).toLocaleDateString()}</TableCell>
+                    <TableCell>{new Date(weekEntry.othrs).toLocaleDateString()}</TableCell>
+                    <TableCell>{new Date(weekEntry.status).toLocaleDateString()}</TableCell>
+                  </TableRow>
+                ));
+              })}
           </TableBody>
         </Table>
       </Paper>

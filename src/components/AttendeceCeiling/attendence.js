@@ -1,34 +1,34 @@
 export const inputFormAttendence = [
-    {
-        name:"PnCompanyId",
-        placeholder:"Enter Company Id ",
-        label:"Company Id",
-        variant:"outlined",
-        fullWidth:true,
-        required:true,
+    // {
+    //     name:"PnCompanyId",
+    //     placeholder:"Enter Company Id ",
+    //     label:"Company Id",
+    //     variant:"outlined",
+    //     fullWidth:true,
+    //     required:true,
         
-        xs:12,sm:12,
-        select:true, 
-        options: [
-            {value:"1", lable:"Company 1"},
-            {value:"2", lable:"Company 2"}
-        ]
-        },
-        {
-            name:"PnBranchId",
-            placeholder:"Enter Branch Id ",
-            label:"Branch Id",
-            variant:"outlined",
-            fullWidth:true,
-            required:true,
+    //     xs:12,sm:12,
+    //     select:true, 
+    //     options: [
+    //         {value:"1", lable:"Company 1"},
+    //         {value:"2", lable:"Company 2"}
+    //     ]
+    //     },
+    //     {
+    //         name:"PnBranchId",
+    //         placeholder:"Enter Branch Id ",
+    //         label:"Branch Id",
+    //         variant:"outlined",
+    //         fullWidth:true,
+    //         required:true,
             
-            xs:12,sm:12,
-            select:true, 
-            options: [
-                {value:"1", lable:"Company 1"},
-                {value:"2", lable:"Company 2"}
-            ]
-            },
+    //         xs:12,sm:12,
+    //         select:true, 
+    //         options: [
+    //             {value:"1", lable:"Company 1"},
+    //             {value:"2", lable:"Company 2"}
+    //         ]
+    //         },
             {
                 name:"intime",
                 placeholder:"Enter InTime ",
@@ -36,81 +36,73 @@ export const inputFormAttendence = [
                 variant:"outlined",
                 fullWidth:true,
                 required:true,
-                
+                type: "time",
                 xs:12,sm:12
             },
             {
-                name:"early_intime",
+                name:"earlyIntime",
                 placeholder:"Enter Early InTime ",
                 label:"Early InTime",
                 variant:"outlined",
                 fullWidth:true,
                 required:true,
+                type:"time",
                 
                 xs:12,sm:12
             },
             {
-                name:"shift_lin",
+                name:"shiftLin",
                 placeholder:"Enter Shift Late Intime",
                 label:"Shift Late Intime",
                 variant:"outlined",
                 fullWidth:true,
                 required:true,
-                
+                type:"time",
                 xs:12,sm:12
             },
+           
             {
-                name:"shift_ein",
-                placeholder:"Enter Shift Early Intime",
-                label:"Shift Early Intime",
-                variant:"outlined",
-                fullWidth:true,
-                required:true,
-                
-                xs:12,sm:12
-            },
-            {
-                name:"lunch_ein",
+                name:"lunchEin",
                 placeholder:"Enter Lunch Early Intime",
                 label:"Shift Lunch Intime",
                 variant:"outlined",
                 fullWidth:true,
                 required:true,
-                
+                type:"time",
                 xs:12,sm:12
             },
             {
-                name:"halfday",
+                name:" halfday",
                 placeholder:"Enter HalfDay",
                 label:"HalfDay",
                 variant:"outlined",
                 fullWidth:true,
                 required:true,
-                
+                type:"time",
                 xs:12,sm:12
             },
             {
-                name:"ot_limit",
+                name:"otLimit",
                 placeholder:"Enter ot Limit",
                 label:"ot Limit",
                 variant:"outlined",
                 fullWidth:true,
                 required:true,
-                
+                type:"time",
                 xs:12,sm:12
             },
             {
-                name:"permission_limit",
+                name:" permissionLimit",
                 placeholder:"Enter Permission Limit",
                 label:"Permission Limit",
                 variant:"outlined",
                 fullWidth:true,
                 required:true,
-                
+                type:"time",
                 xs:12,sm:12
             },
             {
-                name:"Leave_days",
+                name:"leaveDays",
                 placeholder:"Enter Leave Days",
                 label:"Leave Days",
                 variant:"outlined",
@@ -120,7 +112,7 @@ export const inputFormAttendence = [
                 xs:12,sm:12
             },
             {
-                name:"morning_ot",
+                name:"morningOt",
                 placeholder:"Enter Morning ot",
                 label:"Morning ot",
                 variant:"outlined",
@@ -130,7 +122,7 @@ export const inputFormAttendence = [
                 xs:12,sm:12
             },
             {
-                name:"month_type",
+                name:"monthType",
                 placeholder:"Enter Month Type",
                 label:"Month Type",
                 variant:"outlined",
@@ -139,7 +131,7 @@ export const inputFormAttendence = [
                 xs:12,sm:12
             },
             {
-                name:"weak_off1",
+                name:"weekOff1",
                 placeholder:"Enter Weak Off1",
                 label:"Weak Off1",
                 variant:"outlined",
@@ -149,7 +141,7 @@ export const inputFormAttendence = [
                 xs:12,sm:12
             },
             {
-                name:"weak_off2",
+                name:" weekOff2",
                 placeholder:"Enter Weak Off2",
                 label:"Weak Off2",
                 variant:"outlined",
@@ -160,7 +152,7 @@ export const inputFormAttendence = [
             },
 
             {
-                name:"manual_days",
+                name:"manualDays",
                 placeholder:"Enter Manual Days",
                 label:"Manual Days",
                 variant:"outlined",
@@ -170,7 +162,7 @@ export const inputFormAttendence = [
                 xs:12,sm:12
             },
             {
-                name:"ot_days",
+                name:"otDays",
                 placeholder:"Enter ot Days",
                 label:"ot Days",
                 variant:"outlined",
@@ -181,7 +173,7 @@ export const inputFormAttendence = [
             },
 
             {
-                name:"ot_hrs",
+                name:"otHrs",
                 placeholder:"Enter ot Hours",
                 label:"ot Hours",
                 variant:"outlined",
@@ -192,7 +184,7 @@ export const inputFormAttendence = [
             },
 
             {
-                name:"time_card",
+                name:"timeCard",
                 placeholder:"Enter Time card",
                 label:"Time card",
                 variant:"outlined",
@@ -203,7 +195,7 @@ export const inputFormAttendence = [
             },
 
             {
-                name:"ptax_month",
+                name:"ptaxMonth",
                 placeholder:"Enter Proffessionl Tax Month",
                 label:"ot Hours",
                 variant:"outlined",
@@ -213,7 +205,7 @@ export const inputFormAttendence = [
                 xs:12,sm:12
             },
             {
-                name:"reader_name",
+                name:"  readerName",
                 placeholder:"Enter Reader Name",
                 label:"Reader Name",
                 variant:"outlined",

@@ -1,45 +1,112 @@
 import { Grid,Card,
-    TextField,
-    Button,
-    Typography,
-    Box,
-    CardContent
-  } from '@mui/material';
+  TextField,
+  Button,
+  Typography,
+  Box,
+  CardContent
+} from '@mui/material';
+import { useState } from 'react';
 
-  import {inputpaymCompanyForm} from './paymCompany';
+import {inputpaymCompanyForm} from './paymCompany';
+import { PAYMCOMPANIES } from '../../serverconfiguration/controllers';
+import { postRequest } from '../../serverconfiguration/requestcomp';
+import { ServerConfig } from '../../serverconfiguration/serverconfig';
+import { useNavigate } from 'react-router-dom';
 
+const CompanyForm = () => {
+  const navigate = useNavigate();
+
+  const margin={margin:"0 5px"}
+
+  const[formData, setFormData] = useState({
+    pnCompanyId:0,
+    companyCode:'',
+    companyName:'',
+    addressLine1:'',
+    addressLine2:'',
+    city:'',
+    zipCode:'',
+    country:'',
+    state:'',
+    phoneNo:'',
+    faxNo:'',
+    emailId:'',
+    alternateEmailId:'',
+    pfno:'',
+    esino:'',
+    startDate:'',
+    endDate:''
+
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
   
 
-  export default function CompanyForm() {
-
-    const margin={margin:"0 5px"}
-    return (
-      <div className="App">
-        <Grid style ={{ padding: "80px 5px0 5px" }}>
-        <Card style ={{ maxWidth: 600, margin: "0 auto" ,font:'initial'}}>
-        <CardContent>
-        <Typography sx={{ mt: 3 }} align='center' color='primary' variant="h5">Paym Company</Typography>
-        <form>
-          <Grid container spacing={2} columns={12} >
-            {
-            inputpaymCompanyForm.map(input=> <Grid xs={input.xs} sm={input.sm} item>
-                              <TextField {...input}  InputLabelProps={{shrink:true}}/>
-              </Grid>)
-            }
-             <Grid container spacing={1}>
-             <Grid item xs={12} align="right">
-              <Button type="reset" variant="contained" color="primary"style={{paddingRight:'3'}} >Reset</Button>
-            <Button  type="submit" variant="contained" color="primary">Submit</Button>
-              </Grid>
-            </Grid>
-           
-          </Grid>
-        </form>
-        </CardContent>
-        </Card>
-        </Grid>
-      </div>
-    );
-  }
   
  
+  
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      console.log('Form data:', formData);
+      const response = await postRequest(ServerConfig.url, PAYMCOMPANIES, formData);
+      if (response.status === 200 || response.status === 201) {
+        console.log('Data saved successfully!');
+        navigate('/PaycompanyTable');
+      } else {
+        console.error('Error saving data:', response.statusText);
+        console.error('Server validation errors:', response);
+      }
+  
+      
+    } catch (error) {
+      console.error('Error saving data:', error);
+    }
+  };
+
+  return (
+    <Grid container justifyContent="center">
+      <Grid item xs={12} sm={8} md={6}>
+        <Card style={{ padding: 20 }}>
+          <CardContent>
+            <Typography variant='h5' color='textPrimary' align='center' gutterBottom>
+              PAYMCOMPANY Form
+            </Typography>
+            <form onSubmit={handleSubmit}>
+              <Grid container spacing={2}>
+             
+                {inputpaymCompanyForm.map(input =>
+                  <Grid item xs={12} key={input.name}>
+                    
+                      <TextField
+                        fullWidth
+                        {...input}
+                        value={formData[input.name]} 
+                        onChange={handleChange}
+                        InputLabelProps={{ shrink: true }}
+                      />
+                    
+                  </Grid>
+                )}
+                </Grid>
+            
+              <Grid container justifyContent="flex-end" style={{ marginTop: 20 }}>
+                <Button style={margin} type="reset" variant='outlined' color='primary' >RESET</Button>
+                <Button type="submit" variant='contained' color='primary'>Save</Button>
+              </Grid>
+            </form>
+          </CardContent>
+        </Card>
+      </Grid>
+    </Grid>
+  );
+};
+
+export default CompanyForm;

@@ -26,7 +26,7 @@ export default function LoginForm(props){
          setPassword(event.target.value);
        };
     
-      const handleSubmit = (event) => {
+       const handleSubmit = (event) => {
         event.preventDefault();
     
         console.log('Username:', username);
