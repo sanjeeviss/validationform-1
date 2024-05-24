@@ -42,7 +42,7 @@ const [totInterestAmt,setTotInterestAmt]=useState("")
 const [loanStatus,setLoanStatus]=useState("")
 const [lasttransactionFrom,setLastTransactionFrom]=useState("")
 const [lasttransactionTo,setLastTransactionTo]=useState("")
-
+const[LoanAutoID,setLoanAutoId]=useState("")
 
 
 
@@ -55,7 +55,27 @@ async function getData() {
     setPaymLoan(paymleave.data)
 }
 getData();
-}, []);
+}, []);  // Function to format the time in HH:mm:ss format
+const formatTime = (date) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  return `${year}-${month}-${day}T${hours}:${minutes}:00`;
+};
+
+
+// Handler for changing the date in the time picker
+const handleDateChange = (date, setter) => {
+  const formattedTime = formatTime(date);
+   console.log(formattedTime)
+   console.log(date)
+  setter(formattedTime);
+};
+
+
+
 
 const handleSubmit = async (e) => {
 e.preventDefault();
@@ -63,11 +83,10 @@ const formData = {
   pnCompanyId: company,
   pnBranchId: branch,
   pnEmployeeId: pnEmployeeId,
-  empcode: employeeCode,
-  empName: employeeName,
+  loanAutoId:LoanAutoID,
   fnLoanId: pnLoanId,
-  sanDate: sanDate,
-  dEffdate: dEffdate,
+  sanDate:null, //sanDate,
+  dEffdate: null,//dEffdate,
   loanAmt: loanAmt,
   instalmentAmt: instalmentAmt,
   instalmentcount: instalmentcount,
@@ -79,16 +98,25 @@ const formData = {
   comments: comments,
   loanAppid: loanAppid,
   interest: interest,
+  
   totInterestAmt: totInterestAmt,
+  empName:employeeName,
   loanStatus: loanStatus,
-  lasttransactionFrom: lasttransactionFrom,
-  lasttransactionTo: lasttransactionTo
-
+  lasttransactionFrom:null, lasttransactionFrom,
+  lasttransactionTo:null ,lasttransactionTo,
+  pnCompany:{
+    "pnCompanyId":company
+  },
+  pnBranch:{
+    "pnBranchId": branch
+  }
+  
 };
 console.log(formData)
 };
 
   const margin={margin:"0 5px"}
+  
   return (
     <div>
       <Grid style ={{ padding: "80px 5px0 5px" }}>
@@ -202,6 +230,22 @@ console.log(formData)
                 required  /> 
                 </FormControl>
                 </Grid>
+
+                {/* <Grid  xs={12}  sm={6} item>
+                  <FormControl fullWidth> 
+                <TextField
+              name= "loanAutoId"
+                 
+                  label="loanAutoId"
+                  variant="outlined"
+                  
+                  fullWidth
+                  required
+                  onChange={(e) =>setLoanAutoId(e.target.value)} 
+
+                />
+                </FormControl>
+                </Grid> */}
          
                 <Grid item xs={12} sm={6} >
             <FormControl fullWidth>
@@ -248,40 +292,32 @@ console.log(formData)
 
 
                
-
-                <Grid  xs={12}  sm={6} item>
-                  <FormControl fullWidth> 
-                <TextField
-              name="sanDate"
-                 
-                  label="sanDate"
-                  variant="outlined"
-                  type= "datetime-local"
-                  fullWidth
-                  required
-                  onChange={(e) => setSanDate(e.target.value)} 
-                  InputLabelProps={{ shrink: true }} 
-                />
-                </FormControl>
-                </Grid>
-
-
-<Grid  xs={12}  sm={6} item>
-                  <FormControl fullWidth> 
-                <TextField
-              name="dEffdate"
-              type= "datetime-local"
-                  label="dEffdate"
-                  variant="outlined"
-                  
-                  fullWidth
-                  required
-                  onChange={(e) => setDeffDate(e.target.value)} 
-                  InputLabelProps={{ shrink: true }} 
-                />
-                </FormControl>
-                </Grid>
-
+                <Grid item xs={12} sm={6}>
+                                    <FormControl fullWidth>
+                                        <TextField
+                                            label="San Date"
+                                            type="datetime-local"
+                                            fullWidth
+                                            required
+                                            value={sanDate}
+                                            onChange={(e) => handleDateChange(new Date(e.target.value), setSanDate)}
+                                            InputLabelProps={{ shrink: true }}
+                                        />
+                                    </FormControl>
+                                </Grid>
+                <Grid item xs={12} sm={6}>
+                                    <FormControl fullWidth>
+                                        <TextField
+                                            label="Effective Date"
+                                            type="datetime-local"
+                                            fullWidth
+                                            required
+                                            value={dEffdate}
+                                            onChange={(e) => handleDateChange(new Date(e.target.value), setDeffDate)}
+                                            InputLabelProps={{ shrink: true }}
+                                        />
+                                    </FormControl>
+                                </Grid>
 
 
                 <Grid  xs={12}  sm={6} item>
@@ -490,24 +526,19 @@ console.log(formData)
                 </Grid>
 
                 
-                <Grid  xs={12}  sm={6} item>
-                  <FormControl fullWidth> 
-                <TextField
-              name= "lasttransactionFrom"
-                 
-                  label="lasttransactionFrom"
-                  variant="outlined"
-                  type='datetime-local'
-                  fullWidth
-                  required
-                  onChange={(e) =>setLastTransactionFrom(e.target.value)} 
-                  InputLabelProps={{ shrink: true }} 
-
-                />
-                </FormControl>
-                </Grid>
-
-                <Grid  xs={12}  sm={6} item>
+                <Grid item xs={12} sm={6}>
+                                    <FormControl fullWidth>
+                                        <TextField
+                                            label="Last Transaction From"
+                                            type="datetime-local"
+                                            fullWidth
+                                            required
+                                            value={lasttransactionFrom}
+                                            onChange={(e) => handleDateChange(new Date(e.target.value), setLastTransactionFrom)}
+                                            InputLabelProps={{ shrink: true }}
+                                        />
+                                    </FormControl>
+                                </Grid>      <Grid  xs={12}  sm={6} item>
                   <FormControl fullWidth> 
                 <TextField
               name= "lasttransactionTo"
@@ -537,9 +568,11 @@ const formData = {
   pnEmployeeId: pnEmployeeId,
   empcode: employeeCode,
   empName: employeeName,
+  loanAutoId:'223AAA33434',
   fnLoanId: pnLoanId,
-  sanDate: sanDate,
-  dEffdate: dEffdate,
+  
+  sanDate: sanDate+":00.000",
+  dEffdate: dEffdate+":00.000",
   loanAmt: loanAmt,
   instalmentAmt: instalmentAmt,
   instalmentcount: instalmentcount,
@@ -553,11 +586,58 @@ const formData = {
   interest: interest,
   totInterestAmt: totInterestAmt,
   loanStatus: loanStatus,
-  lasttransactionFrom: lasttransactionFrom,
-  lasttransactionTo: lasttransactionTo
+  lasttransactionFrom: lasttransactionFrom+":00.000",
+  lasttransactionTo: lasttransactionTo+":00.000",
+ PaymLoan:{
+    "PnCompany": {
+      pnCompanyId:company
+    }
+  },
+  PaymBranch:{
+    "PnCompany":{
+      pnCompanyId:company
+    } 
+  }
+  
 };
-console.log(formData)
-postRequest(ServerConfig.url,LOANENTRY,formData).then((e)=>{
+var sampleobj={
+  "pnCompanyId": 1,
+  "pnBranchId": 1,
+  "pnEmployeeId": 17,
+  "loanAutoId": "",
+  "fnLoanId": 1,
+  "sanDate": sanDate,
+  "dEffdate": "2024-10-05T13:33:00",
+  "loanAmt": 10000,
+  "instalmentAmt": 1000,
+  "instalmentcount": 10,
+  "balanceAmt": 0,
+  "cStatus": "A",
+  "loanName": "Personal Loan",
+  "loanProcess": "online",
+  "loanCalculation": "simple",
+  "comments": "ok",
+  "loanAppid": "APPO100",
+  "interest": 7.5,
+  "totInterestAmt": 45.5,
+  "empName": "John Doe Smith",
+  "loanStatus": "active              ",
+  "lasttransactionFrom": "2024-09-05T13:35:00",
+  "lasttransactionTo": "2024-08-05T13:35:00",
+  PaymLoan:{
+    "PnCompany": {
+      pnCompanyId:1
+    }
+  },
+  PaymBranch:{
+    "PnCompany":{
+      pnCompanyId:1
+    } 
+  }
+ 
+}
+console.log(sampleobj)
+postRequest(ServerConfig.url,LOANENTRY,sampleobj).then((e)=>{
 console.log(e)
 navigate('/LoanEntryTable')
 }).catch((e)=>console.log(e));
