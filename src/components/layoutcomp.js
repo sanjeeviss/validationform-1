@@ -121,6 +121,8 @@ function Layoutcomp() {
     {title: 'Paym Computation', icon: <img src={PaymComputation}  width={40} height={40}/>, onClick: () => navigate("/PaymComputationtables")},
     {title: 'Paym Department', icon: <img src={PaymDep}  width={40} height={40}/>, onClick: () => navigate("/PaymDeductionTable")},
     {title: 'Paym Designation', icon: <img src={PaymDesig}  width={40} height={40}/>, onClick: () => navigate("/PaymDesignationTable")},
+    {title: 'Paym Deduction', icon: <img src={PaymDesig}  width={40} height={40}/>, onClick: () => navigate("/PaymDeductionTable")},
+
     {title: 'Paym Division', icon: <img src={PaymDiv}  width={40} height={40}/>, onClick: () => navigate("/PaymDIvisionTable")},
     {title: 'Paym Earning', icon: <img src={PaymEarn}  width={40} height={40}/>, onClick: () => navigate("/PaymEarnTable")},
     {title: 'Paym Emp Deduction', icon: <img src={PaymEmpEarn}  width={40} height={40}/>, onClick: () => navigate("/PaymEmpDeductionTable")},

@@ -170,19 +170,16 @@ export default function Sample19() {
                   <Grid xs={12} sm={6} item  >
                         <FormControl fullWidth>
                         <InputLabel shrink>dob</InputLabel>
-                <select name="salary"
-                
-                 style={{height:'50px'}}>
-                  
-                  <option>
-                    select...
-                    
-                  </option>
-                  
-                  <option>
-                    {dateofbirth}
-                  </option>
-                  </select>              
+                       
+               <TextField 
+                     name= "dob"
+                         label= "dob" 
+                         variant= "outlined"
+                         fullWidth
+                         required 
+                   value={dob}
+                   onChange={(e) => setDob(e.target.value)}
+                />             
                
                </FormControl>
                </Grid>
