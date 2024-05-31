@@ -113,13 +113,13 @@ function Layoutcomp() {
     {title: 'Pay Input', icon: <img src={PayInput}  width={40} height={40}/>, onClick: () => navigate("/payInputTable")},
     {title: 'Paym Att Bonus', icon: <img src={PayAttBonus}  width={40} height={40}/>, onClick: () => navigate("/PaymAttBonusTable")},
     {title: 'Paym Bank', icon: <img src={PaymBank}  width={40} height={40}/>, onClick: () => navigate("/PaymBankTable")},
-    {title: 'Paym Branch', icon: <img src={PaymBranch}  width={40} height={40}/>, onClick: () => navigate("/PaymBranchtablenew")},
+    {title: 'Paym Branch', icon: <img src={PaymBranch}  width={40} height={40}/>, onClick: () => navigate("/PaymBranchtable")},
     {title: 'Paym Carry Forward', icon: <img src={PaymCarryForward}  width={40} height={40}/>, onClick: () => navigate("/PaymcarryForwardTable")},
 
     {title: 'Paym Category', icon: <img src={PaymCategory}  width={40} height={40}/>, onClick: () => navigate("/PaymCategoryTable")},
     {title: 'Paym Company', icon: <img src={PaymCompany}  width={40} height={40}/>, onClick: () => navigate("/PaycompanyTable")},
     {title: 'Paym Computation', icon: <img src={PaymComputation}  width={40} height={40}/>, onClick: () => navigate("/PaymComputationtables")},
-    {title: 'Paym Department', icon: <img src={PaymDep}  width={40} height={40}/>, onClick: () => navigate("/PaymDeductionTable")},
+    {title: 'Paym Department', icon: <img src={PaymDep}  width={40} height={40}/>, onClick: () => navigate("/PaymDepartmentTable")},
     {title: 'Paym Designation', icon: <img src={PaymDesig}  width={40} height={40}/>, onClick: () => navigate("/PaymDesignationTable")},
     {title: 'Paym Deduction', icon: <img src={PaymDesig}  width={40} height={40}/>, onClick: () => navigate("/PaymDeductionTable")},
 

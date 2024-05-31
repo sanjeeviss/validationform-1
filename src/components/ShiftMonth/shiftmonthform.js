@@ -16,7 +16,7 @@ const [shiftdetails,setShiftDetails]=useState([])
 
 const [employeeCode,setPnEmployeeCode]=useState("")
 const [employeeName,setPnEmployeeName]=useState("")
-const [shiftCode,setShiftCode]=useState("")
+const [shiftCode,setShiftCode]=useState("") 
 const [monthyear,setMonthyear]=useState("")
 const [date,setDate]=useState("")
 

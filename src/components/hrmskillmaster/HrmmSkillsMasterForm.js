@@ -151,7 +151,7 @@ const formData = {
       vSkillName:vSkillName ,
       status: status,
       pnCompany:{
-        "pnCompanyId":PnCompanyId
+        "pnCompanyId":PnCompanyId 
       }
    
 };

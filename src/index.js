@@ -53,7 +53,6 @@ import PaymattbonusForm from './components/PaymAttBonus/PaymAttBonusForm';
 import PaymBankTable from './components/PaymBank/paymbankTables';
 import PaybankForm from './components/PaymBank/paymbankForm';
 import PayBranchForm from './components/PaymBranch/PaymBranchForm';
-import PaymBranchtablenew from './components/PaymBranch/PaymBranchtablenew';
 import PaymcarryForwardTable from './components/paymcarryForward/PaymcarryForwardTable';
 import PaymCarrForwardForm from './components/paymcarryForward/paymCarryForwardForm';
 import Paymcategoryform from './components/PaymCategory/PaymCategoryForm';
@@ -145,6 +144,20 @@ import LoginForm from './components/Authentication/Login';
 import Paycalc from './components/payslips/Payslips';
 import TimesheetManage from './components/Timesheet/TimeSheetManger';
 import TimesheetManager from './components/Timesheet/TimeSheetManger';
+import PaymDepartmentTable from './components/paymDepartment/paymDepartmentTable';
+import DepartmentForm from './components/paymDepartment/paymDepartmentForm';
+import PaymBranchtable from './components/PaymBranch/PaymBranchTablenew';
+import Mrgabs from './components/ReportFormates/AttendanceD2';
+import ButtonEsi from './components/ReportFormates/AttendanceD2Button';
+import ButtonEsi2 from './components/ReportFormates/OTHoursReportsButtonPrint';
+import ButtonEsi3 from './components/ReportFormates/OTSummaryButton';
+import ButtonEsi4 from './components/ReportFormates/WorkDetailsButtonPrint';
+import ButtonEsi5 from './components/ReportFormates/AttedanceDetailsButton';
+import ButtonEsi6 from './components/ReportFormates/AbsentDetailsButton';
+import ButtonEsi7 from './components/ReportFormates/AdvanceReportButton';
+import ButtonEsi8 from './components/ReportFormates/TAandDButton';
+import MasterrollButton from './components/ReportFormates/masterrollButton';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   
@@ -229,7 +242,7 @@ root.render(
      <Route path='/PaymBankTable' element={<PaymBankTable/>}></Route>
      <Route path='/PaybankForm' element={<PaybankForm/>}></Route> 
 
-     <Route path='/PaymBranchtablenew' element={<PaymBranchtablenew/>}></Route>
+     <Route path='/PaymBranchtable' element={<PaymBranchtable/>}></Route>
      <Route path='/PayBranchForm' element={<PayBranchForm/>}></Route> 
 
      <Route path='/PaymcarryForwardTable' element={<PaymcarryForwardTable/>}></Route>
@@ -251,6 +264,9 @@ root.render(
 
      <Route path='/PaymDeductionTable' element={<PaymDeductionTable/>}></Route>
      <Route path='/DeductionForm' element={<DeductionForm/>}></Route> 
+     
+     <Route path='/PaymDepartmentTable' element={<PaymDepartmentTable/>}></Route>
+     <Route path='/DepartmentForm' element={<DepartmentForm/>}></Route> 
 
      <Route path='/PaymDesignationTable' element={<PaymDesignationTable/>}></Route>
      <Route path='/DesignationForm' element={<DesignationForm/>}></Route> 
@@ -355,10 +371,35 @@ root.render(
      <Route path='/Paycalc' element={<Paycalc/>}></Route>
 
   <Route path='/TimesheetManager' element={<TimesheetManager/>}></Route>
+
+  <Route path='/daysheet' element={<ButtonEsi/>}></Route>
+
+  <Route path='/OTSheet' element={<ButtonEsi2/>}></Route>
+
+  <Route path='/OTSummary' element={<ButtonEsi3/>}></Route>
+
+  <Route path='/WorkDetails' element={<ButtonEsi4/>}></Route>
+
+  <Route path='/AttedanceDetails' element={<ButtonEsi5/>}></Route>
+
+  <Route path='/AbsentDetails' element={<ButtonEsi6/>}></Route>
+
+  <Route path='/AdvanceReports' element={<ButtonEsi7/>}></Route>
+
+  <Route path='/TAandDReports' element={<ButtonEsi8/>}></Route>
+
+
+<Route path='/Masterroll' element={<MasterrollButton/>}></Route>
+
+
+
+
+
   </Route>
    </Routes> 
     </BrowserRouter>
 );
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

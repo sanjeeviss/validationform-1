@@ -5,12 +5,10 @@ import Secondcomponent from './component/secondcomponent';
 import PaymEmployeeForm from './components/paymEmployee/paymEmployeeForm';
 import CustomizedTables from './components/paymEmployee/CustomizedTables';
 import { BrowserRouter as Router, Route, Routes, Outlet } from 'react-router-dom';
-import PaymBranchTable from './components/PaymBranch/PaymBranchTable';
+
 import PaymBranchForm from './components/PaymBranch/PaymBranchForm'
 import SampleTable from './components/SampleTable';
 import PaymEmpTable from './components/paymEmployee/PaymEmpTable';
-import PaymBranchtablenew from './components/PaymBranch/PaymBranchtablenew';
-import PaycompanyTable from './components/paymCompany/PaycompanyTable';
 import PaymCompanyForm from './components/paymCompany/paymCompanyForm'
 import AssetsTable from './components/Assets/AssetsTable';
 import Sampleform from './components/Assets/sampleform';
