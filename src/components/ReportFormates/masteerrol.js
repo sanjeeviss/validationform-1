@@ -12,7 +12,7 @@ function Masterroll() {
         async function getData()
          {
         return await postRequest(ServerConfig.url,REPORTS,{
-          "query": "SELECT emp_code,emp_name,(select dateofbirth from paym_employee where employeecode=emp_code)as dob,(select father_name from paym_employee_profile1 where pn_employeeid=(select pn_employeeid from paym_employee where employeecode=emp_code)) as father_name,(select v_DesignationName from paym_designation where pn_designationid=(select pn_DesingnationId from paym_employee_profile1 where pn_employeeid=(select pn_employeeid from paym_employee where employeecode=emp_code))) as designation, (SELECT   CONCAT(Address_Line1, ', ', Address_Line2, ', ', City)  from paym_branch where pn_branchid = (select pn_branchid from paym_employee where employeecode=emp_code )) as FullAddress,COUNT(CASE WHEN status = 'P' THEN 1 END) AS total_P,COUNT(CASE WHEN status = 'A' THEN 1 END) AS total_A, COUNT(CASE WHEN status = 'L' THEN 1 END) AS total_L, COUNT (CASE WHEN status='H' THEN 1 END) AS total_H,MAX(CASE WHEN DAY(dates) = 1 THEN status END) AS day_1,MAX(CASE WHEN DAY(dates) = 2 THEN status END) AS day_2,MAX(CASE WHEN DAY(dates) = 3 THEN status END) AS day_3,MAX(CASE WHEN DAY(dates) = 4 THEN status END) AS day_4, MAX(CASE WHEN DAY(dates) = 5 THEN status END) AS day_5, MAX(CASE WHEN DAY(dates) = 6 THEN status END) AS day_6,MAX(CASE WHEN DAY(dates) = 7 THEN status END) AS day_7,MAX(CASE WHEN DAY(dates) = 8 THEN status END) AS day_8,  MAX(CASE WHEN DAY(dates) = 9 THEN status END) AS day_9,MAX(CASE WHEN DAY(dates) = 10 THEN status END) AS day_10,MAX(CASE WHEN DAY(dates) = 11 THEN status END) AS day_11,MAX(CASE WHEN DAY(dates) = 12 THEN status END) AS day_12,MAX(CASE WHEN DAY(dates) = 13 THEN status END) AS day_13,MAX(CASE WHEN DAY(dates) = 14 THEN status END) AS day_14, MAX(CASE WHEN DAY(dates) = 15 THEN status END) AS day_15,MAX(CASE WHEN DAY(dates) = 16 THEN status END) AS day_16,MAX(CASE WHEN DAY(dates) = 17 THEN status END) AS day_17,MAX(CASE WHEN DAY(dates) = 18 THEN status END) AS day_18,MAX(CASE WHEN DAY(dates) = 19 THEN status END) AS day_19, MAX(CASE WHEN DAY(dates) = 20 THEN status END) AS day_20, MAX(CASE WHEN DAY(dates) = 21 THEN status END) AS day_21, MAX(CASE WHEN DAY(dates) = 22 THEN status END) AS day_22, MAX(CASE WHEN DAY(dates) = 23 THEN status END) AS day_23,MAX(CASE WHEN DAY(dates) = 24 THEN status END) AS day_24,MAX(CASE WHEN DAY(dates) = 25 THEN status END) AS day_25,MAX(CASE WHEN DAY(dates) = 26 THEN status END) AS day_26,MAX(CASE WHEN DAY(dates) = 27 THEN status END) AS day_27,MAX(CASE WHEN DAY(dates) = 28 THEN status END) AS day_28,MAX(CASE WHEN DAY(dates) = 29 THEN status END) AS day_29,MAX(CASE WHEN DAY(dates) = 30 THEN status END) AS day_30,MAX(CASE WHEN DAY(dates) = 31 THEN status END) AS day_31 FROM time_card where MONTH(dates)=MONTH(GetDate()) GROUP BY emp_code,emp_name"})
+          "query": "SELECT emp_code,emp_name,(select dateofbirth from paym_employee where employeecode=emp_code)as dob,(select father_name from paym_employee_profile1 where pn_employeeid=(select pn_employeeid from paym_employee where employeecode=emp_code)) as father_name,(select v_DesignationName from paym_designation where pn_designationid=(select pn_DesingnationId from paym_employee_profile1 where pn_employeeid=(select pn_employeeid from paym_employee where employeecode=emp_code))) as designation, (SELECT   CONCAT(Address_Line1, ', ', Address_Line2, ', ', City)  from paym_branch where pn_branchid = (select pn_branchid from paym_employee where employeecode=emp_code )) as FullAddress,COUNT(CASE WHEN status = 'P' THEN 1 END) AS total_P,COUNT(CASE WHEN status = 'A' THEN 1 END) AS total_A, COUNT(CASE WHEN status = 'L' THEN 1 END) AS total_L, COUNT (CASE WHEN status='H' THEN 1 END) AS total_H,MAX(CASE WHEN DAY(dates) = 1 THEN status END) AS day_1,MAX(CASE WHEN DAY(dates) = 2 THEN status END) AS day_2,MAX(CASE WHEN DAY(dates) = 3 THEN status END) AS day_3,MAX(CASE WHEN DAY(dates) = 4 THEN status END) AS day_4, MAX(CASE WHEN DAY(dates) = 5 THEN status END) AS day_5, MAX(CASE WHEN DAY(dates) = 6 THEN status END) AS day_6,MAX(CASE WHEN DAY(dates) = 7 THEN status END) AS day_7,MAX(CASE WHEN DAY(dates) = 8 THEN status END) AS day_8,  MAX(CASE WHEN DAY(dates) = 9 THEN status END) AS day_9,MAX(CASE WHEN DAY(dates) = 10 THEN status END) AS day_10,MAX(CASE WHEN DAY(dates) = 11 THEN status END) AS day_11,MAX(CASE WHEN DAY(dates) = 12 THEN status END) AS day_12,MAX(CASE WHEN DAY(dates) = 13 THEN status END) AS day_13,MAX(CASE WHEN DAY(dates) = 14 THEN status END) AS day_14, MAX(CASE WHEN DAY(dates) = 15 THEN status END) AS day_15,MAX(CASE WHEN DAY(dates) = 16 THEN status END) AS day_16,MAX(CASE WHEN DAY(dates) = 17 THEN status END) AS day_17,MAX(CASE WHEN DAY(dates) = 18 THEN status END) AS day_18,MAX(CASE WHEN DAY(dates) = 19 THEN status END) AS day_19, MAX(CASE WHEN DAY(dates) = 20 THEN status END) AS day_20, MAX(CASE WHEN DAY(dates) = 21 THEN status END) AS day_21, MAX(CASE WHEN DAY(dates) = 22 THEN status END) AS day_22, MAX(CASE WHEN DAY(dates) = 23 THEN status END) AS day_23,MAX(CASE WHEN DAY(dates) = 24 THEN status END) AS day_24,MAX(CASE WHEN DAY(dates) = 25 THEN status END) AS day_25,MAX(CASE WHEN DAY(dates) = 26 THEN status END) AS day_26,MAX(CASE WHEN DAY(dates) = 27 THEN status END) AS day_27,MAX(CASE WHEN DAY(dates) = 28 THEN status END) AS day_28,MAX(CASE WHEN DAY(dates) = 29 THEN status END) AS day_29,MAX(CASE WHEN DAY(dates) = 30 THEN status END) AS day_30 FROM time_card where MONTH(dates)=MONTH(GetDate()) GROUP BY emp_code,emp_name"})
          }
          
 
@@ -125,39 +125,39 @@ function Masterroll() {
                 </TableRow>
                 <TableRow>
                   <TableCell sx={{ border: 1,textAlign:'center', borderColor: 'black.300', padding: '5px',}}>
-                {
-                rolldata.map((e)=><TableRow sx={{fontSize:5}}><TableCell>{1}</TableCell></TableRow>)
-                }
+                  {
+  rolldata.map((e, index) =>  <TableRow key={index}> <TableCell key={index}>{1}</TableCell> </TableRow>)
+}
                 </TableCell>
              <TableCell sx={{ border: 1,textAlign:'center', borderColor: 'black.300', padding: '5px',}}>
                
                 {
-                rolldata.map((e)=><TableRow><TableCell>{e.emp_name}</TableCell></TableRow>)
-                }
-                
+                rolldata.map((e)=><TableRow sx={{ border: 1, borderColor: 'black.300', fontSize:5}}><TableCell>{e.emp_name}</TableCell></TableRow>)
+                } 
+            
                 </TableCell>
-                <TableCell TableCell sx={{ border: 1, borderColor: 'black.300', fontSize:5}}>
+                <TableCell sx={{ border: 1, borderColor: 'black.300', fontSize:5}}>
                 {
-                rolldata.map((e)=><TableRow sx={{fontSize:5}}><TableCell>{JSON.stringify(e.father_name).replace(/"/g,'')}</TableCell></TableRow>)
+                rolldata.map((e)=><TableRow sx={{ border: 1, borderColor: 'black.300', fontSize:5}}><TableCell>{JSON.stringify(e.father_name).replace(/"/g,'')}</TableCell></TableRow>)
                 }
                   </TableCell>  
                   <TableCell sx={{ border: 1, borderColor: 'black.300',fontSize:5}}>
                
                {
-               rolldata.map((e)=><TableRow><TableCell sx={{fontSize:5}} >{JSON.stringify(e.designation).replace(/"/g,'')}</TableCell></TableRow>)
+               rolldata.map((e)=><TableRow><TableCell >{JSON.stringify(e.designation).replace(/"/g,'')}</TableCell></TableRow>)
                }
                
                </TableCell>
                <TableCell sx={{ border: 1, borderColor: 'black.300', }}>
-               
+              
                {
-               rolldata.map((e)=><TableRow><TableCell >{e.dob}</TableCell></TableRow>)
-               }
+               rolldata.map((e)=><TableRow><TableCell >{JSON.stringify(e.dob).replace(/"/g,'')}</TableCell></TableRow>)
+               } 
                </TableCell>
                <TableCell sx={{ border: 1,borderTop:'2px solid black',borderBottom:'2px solid black', borderColor: 'black.600', fontSize:3 }}>
                
                {
-               rolldata.map((e)=><TableRow><TableCell sx={{borderBottom:'2px solid black',fontSize:5}} >{e.FullAddress}</TableCell></TableRow>)
+               rolldata.map((e)=><TableRow sx={{ border: 1, borderColor: 'black.300', fontSize:5}}><TableCell>{JSON.stringify(e.FullAddress).replace(/"/g,'')}</TableCell></TableRow>)
                }
                </TableCell>
                <TableCell></TableCell>
@@ -168,48 +168,48 @@ function Masterroll() {
                 rolldata.map((e)=><TableRow><TableCell >{renderStatus(JSON.stringify(e.day_1).replace(/"/g,''))}</TableCell></TableRow>)
               }
              </TableCell>
-             <TableCell sx={{ border: 1, borderColor: 'black.300',fontSize:8 ,padding:'8px'}}>
+             <TableCell>
                 {
-                rolldata.map((e)=><TableRow><TableCell >{renderStatus(JSON.stringify(e.day_2).replace(/"/g,''))}</TableCell></TableRow>)
+                rolldata.map((e)=><TableRow sx={{ border: 1, borderColor: 'black.300',fontSize:8}}><TableCell >{renderStatus(JSON.stringify(e.day_2).replace(/"/g,''))}</TableCell></TableRow>)
               }
              </TableCell>
              <TableCell sx={{ border: 1, borderColor: 'black.300',fontSize:8 }}>
                 {
-                rolldata.map((e)=><TableRow><TableCell >{renderStatus(JSON.stringify(e.day_3).replace(/"/g,''))}</TableCell></TableRow>)
+                rolldata.map((e)=><TableRow sx={{ border: 1, borderColor: 'black.300', fontSize:5}}><TableCell >{renderStatus(JSON.stringify(e.day_3).replace(/"/g,''))}</TableCell></TableRow>)
               }
              </TableCell>
              <TableCell sx={{ border: 1, borderColor: 'black.300',fontSize:8 }}>
                 {
-                rolldata.map((e)=><TableRow><TableCell >{renderStatus(JSON.stringify(e.day_4).replace(/"/g,''))}</TableCell></TableRow>)
+                rolldata.map((e)=><TableRow sx={{ border: 1, borderColor: 'black.300', fontSize:5}}><TableCell >{renderStatus(JSON.stringify(e.day_4).replace(/"/g,''))}</TableCell></TableRow>)
               }
              </TableCell>
              <TableCell sx={{ border: 1, borderColor: 'black.300',fontSize:8 }}>
                 {
-                rolldata.map((e)=><TableRow><TableCell >{renderStatus(JSON.stringify(e.day_5).replace(/"/g,''))}</TableCell></TableRow>)
+                rolldata.map((e)=><TableRow sx={{ border: 1, borderColor: 'black.300', fontSize:5}}><TableCell >{renderStatus(JSON.stringify(e.day_5).replace(/"/g,''))}</TableCell></TableRow>)
               }
              </TableCell>
-             <TableCell sx={{ border: 1, borderColor: 'black.300',fontSize:8 }}>
+             <TableCell sx={{  borderColor: 'black.300',fontSize:8 }}>
                 {
-                rolldata.map((e)=><TableRow><TableCell >{renderStatus(JSON.stringify(e.day_6).replace(/"/g,''))}</TableCell></TableRow>)
+                rolldata.map((e)=><TableRow sx={{ border: 1, borderColor: 'black.300', fontSize:5}}><TableCell >{renderStatus(JSON.stringify(e.day_6).replace(/"/g,''))}</TableCell></TableRow>)
               }
              </TableCell>
-             <TableCell sx={{ border: 1, borderColor: 'black.300',fontSize:8 }}>
+             <TableCell sx={{ borderColor: 'black.300',fontSize:8 }}>
                 {
                 rolldata.map((e)=><TableRow><TableCell >{renderStatus(JSON.stringify(e.day_7).replace(/"/g,''))}</TableCell></TableRow>)
               }
              </TableCell>
-             <TableCell sx={{ border: 2, borderColor: 'black.300',fontSize:8 }}>
+             <TableCell sx={{ borderColor: 'black.300',fontSize:8 }}>
                 {
-                rolldata.map((e)=><TableRow><TableCell >{renderStatus(JSON.stringify(e.day_8).replace(/"/g,''))}</TableCell></TableRow>)
+                rolldata.map((e)=><TableRow sx={{  borderColor: 'black.300', fontSize:5}}><TableCell >{renderStatus(JSON.stringify(e.day_8).replace(/"/g,''))}</TableCell></TableRow>)
               }
              </TableCell>
 
-             <TableCell sx={{ border: 1, borderColor: 'black.300',fontSize:8 }}>
+             <TableCell sx={{borderColor: 'black.300',fontSize:8 }}>
                 {
-                rolldata.map((e)=><TableRow><TableCell >{renderStatus(JSON.stringify(e.day_9).replace(/"/g,''))}</TableCell></TableRow>)
+                rolldata.map((e)=><TableRow sx={{  borderColor: 'black.300', fontSize:5}}><TableCell >{renderStatus(JSON.stringify(e.day_9).replace(/"/g,''))}</TableCell></TableRow>)
               }
              </TableCell>
-             <TableCell sx={{ border: 2, borderColor: 'black.300',fontSize:8 }}>
+             <TableCell sx={{ borderColor: 'black.300',fontSize:8 }}>
                 {
                 rolldata.map((e)=><TableRow><TableCell >{renderStatus(JSON.stringify(e.day_10).replace(/"/g,''))}</TableCell></TableRow>)
               }
@@ -315,13 +315,14 @@ function Masterroll() {
                 rolldata.map((e)=><TableRow><TableCell >{renderStatus(JSON.stringify(e.day_30).replace(/"/g,''))}</TableCell></TableRow>)
               }
              </TableCell>
-             <TableCell sx={{ border: 2, borderColor: 'black.300',fontSize:8 }}>
+             {/* <TableCell sx={{ border: 2, borderColor: 'black.300',fontSize:8 }}>
                 {
                 rolldata.map((e)=><TableRow><TableCell >{renderStatus(JSON.stringify(e.day_31).replace(/"/g,''))}</TableCell></TableRow>)
               }
-             </TableCell>
+             </TableCell> */}
              
                 </TableRow>
+              
               </TableBody>
             </Table>
          

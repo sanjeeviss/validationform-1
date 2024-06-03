@@ -45,7 +45,7 @@ Absent Details For the Period of 01/02/2010 to 28/02/2010
 
 </TableRow>
 
-{[...Array(2).keys()].map(row => (
+{[...Array(2  ).keys()].map(row => (
           <React.Fragment key={row + 1}>
             <TableRow sx={{ padding: '4px'}}>
                   <TableCell sx={{borderBottom: '4px solid black', padding: '5px', fontWeight: 'bold'  }}>Employee Code :   e002</TableCell>
