@@ -85,7 +85,7 @@ function Layoutcomp() {
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);
   };
-
+  
   // Sample data for cards
   const cardsData = [
     { title: 'Daily Timecard', icon: <img src={daily} width={40} height={40} /> , onClick: () => navigate("/dailytimecardtable") },

@@ -157,6 +157,12 @@ import ButtonEsi6 from './components/ReportFormates/AbsentDetailsButton';
 import ButtonEsi7 from './components/ReportFormates/AdvanceReportButton';
 import ButtonEsi8 from './components/ReportFormates/TAandDButton';
 import MasterrollButton from './components/ReportFormates/masterrollButton';
+import ButtonEsi18 from './components/ReportFormates/AttendanceD2Button';
+import MasterrollButton360 from './components/ReportFormates/OTHoursReportsButtonPrint';
+import Masterroll07 from './components/ViewEmployeeProfile';
+import Sanjeevi from './components/ViewEmployeeProfile';
+import EmployeeProfileForm from './components/ViewEmployeeProfile';
+import EmployeeImageForm from './components/EmployeeImage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -374,8 +380,6 @@ root.render(
 
   <Route path='/daysheet' element={<ButtonEsi/>}></Route>
 
-  <Route path='/OTSheet' element={<ButtonEsi2/>}></Route>
-
   <Route path='/OTSummary' element={<ButtonEsi3/>}></Route>
 
   <Route path='/WorkDetails' element={<ButtonEsi4/>}></Route>
@@ -388,9 +392,16 @@ root.render(
 
   <Route path='/TAandDReports' element={<ButtonEsi8/>}></Route>
 
+  <Route path='/AttendanceD2' element={<ButtonEsi18/>}></Route>
+  <Route path='/OTHoursReports' element={<MasterrollButton360/>}></Route>
+
 
 <Route path='/Masterroll' element={<MasterrollButton/>}></Route>
 
+<Route path='/sanjeevi' element={<EmployeeProfileForm/>}></Route>
+
+
+<Route path='/employeeimage' element={<EmployeeImageForm/>}></Route>
 
 
 

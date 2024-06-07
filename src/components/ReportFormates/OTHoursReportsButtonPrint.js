@@ -3,9 +3,10 @@ import { Grid, Button } from '@mui/material';
 import generatePDF from 'react-to-pdf';
 import { useRef } from 'react';
 
-import Mrgabs from './OTHoursReports';
+import Mrgabs from './OTHoursReports'
 
-function ButtonEsi2() {
+
+function MasterrollButton360() {
     const targetRef = useRef();
     return (
       <div className="App">
@@ -21,4 +22,4 @@ function ButtonEsi2() {
     );
 }
 
-export default ButtonEsi2
+export default MasterrollButton360

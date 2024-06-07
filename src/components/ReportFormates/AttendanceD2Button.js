@@ -5,7 +5,7 @@ import { useRef } from 'react';
 
 import Mrgabs from './AttendanceD2';
 
-function ButtonEsi() {
+function ButtonEsi18() {
     const targetRef = useRef();
     return (
       <div className="App">
@@ -21,4 +21,4 @@ function ButtonEsi() {
     );
 }
 
-export default ButtonEsi
+export default ButtonEsi18

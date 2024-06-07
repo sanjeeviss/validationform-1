@@ -12,7 +12,6 @@ import PaymEmpTable from './components/paymEmployee/PaymEmpTable';
 import PaymCompanyForm from './components/paymCompany/paymCompanyForm'
 import AssetsTable from './components/Assets/AssetsTable';
 import Sampleform from './components/Assets/sampleform';
-import AttendenceTable from './components/AttendeceCeiling/AttendenceTable';
 import AttendenceForm from './components/AttendeceCeiling/attendenceform';
 import EarnDeductTable from './components/Earn Deduct/EarnDeductTable';
 import EarnDeductForm from './components/Earn Deduct/EarnDeductForm'

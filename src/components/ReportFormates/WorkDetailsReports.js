@@ -2,8 +2,21 @@ import React from 'react'
 import { Typography, Table, TableBody, TableCell, TableContainer, TableRow, Paper, Grid, Button } from '@mui/material';
 import generatePDF from 'react-to-pdf';
 import { useRef } from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { TIMECARD } from '../../serverconfiguration/controllers';
+import { ServerConfig } from '../../serverconfiguration/serverconfig';
+import { postRequest,getRequest } from '../../serverconfiguration/requestcomp';
 function Mrgabs() {
-   
+    const [timecard,setTimecard]=useState([]);
+    useEffect(()=>{
+  async function getData(){
+   const data = await getRequest(ServerConfig.url,TIMECARD);
+   setTimecard(data.data);
+  }
+  console.log(timecard)
+  getData()
+    }, []);
   return (
    
 <div style={{ textAlign: 'center', margin: '20px' }}>
@@ -24,15 +37,16 @@ Worked Hours Details For the Period of 01/01/2010 to 31/01/2010
             <Table>
               <TableBody sx={{borderBottom:'4px solid black'}}>
 
+                
+<TableRow sx={{ borderBottom: '4px solid black' }}>
+<TableRow sx={{fontSize:'20px'}}>
                   <TableCell sx={{borderBottom:'4px solid black',   padding: '5px' ,}}>S.No</TableCell>
                   <TableCell sx={{ borderBottom:'4px solid black', padding: '5px' }}>Date</TableCell>
                   <TableCell sx={{ borderBottom:'4px solid black',  padding: '5px' }}>Shift</TableCell>
                   <TableCell sx={{borderBottom:'4px solid black',   padding: '5px' }}>In Time</TableCell>
                   <TableCell sx={{borderBottom:'4px solid black', padding: '5px' }}>Out Time</TableCell>
                   <TableCell sx={{  borderBottom:'4px solid black', padding: '5px' }}>Break in </TableCell>
-                 <TableCell sx={{borderBottom:'4px solid black', padding: '5px' }}>Break out</TableCell>
-
-
+                  <TableCell sx={{borderBottom:'4px solid black', padding: '5px' }}>Break out</TableCell>
                   <TableCell sx={{ borderBottom:'4px solid black', padding: '5px' }}>Early In</TableCell>
                   <TableCell sx={{ borderBottom:'4px solid black',  padding: '5px' }}>Late In</TableCell>
                   <TableCell sx={{ borderBottom:'4px solid black',  padding: '5px' }}>Late out</TableCell>
@@ -42,64 +56,40 @@ Worked Hours Details For the Period of 01/01/2010 to 31/01/2010
                   <TableCell sx={{  borderBottom:'4px solid black', padding: '5px' }}>Leave name</TableCell>
 
 
-                <TableRow sx={{ padding: '4px'}}>
-                  <TableCell sx={{borderBottom: '4px solid black', padding: '5px', fontWeight: 'bold'  }}>Employee Code :   e002</TableCell>
-                  <TableCell sx={{ borderBottom: '4px solid black', padding: '5px' }}>Employee Name :   V P Lalli</TableCell>
-                  <TableCell colSpan={12} sx={{ borderBottom: '4px solid black', padding: '5px' }}></TableCell> {/* Placeholder for empty cells */}
-                </TableRow>
-
-               
-                <TableRow >
-                  <TableCell sx={{ borderBottom: '2px dotted black', padding: '5px' }}>1</TableCell>
-                  <TableCell sx={{ borderBottom: '2px dotted black', padding: '5px' }}>22-04-05</TableCell>
-                  <TableCell sx={{ borderBottom: '2px dotted black', padding: '5px' }}>G</TableCell>
-                  <TableCell sx={{  borderBottom: '2px dotted black', padding: '5px' }}>08:00</TableCell>
-                  <TableCell sx={{ borderBottom: '2px dotted black',  padding: '5px' }}>18:00</TableCell>
-                  <TableCell sx={{  borderBottom: '2px dotted black', padding: '5px' }}>14:00</TableCell>
-
-
-                  <TableCell sx={{  borderBottom: '2px dotted black',  padding: '5px' }}>07:30</TableCell>
-                  <TableCell sx={{  borderBottom: '2px dotted black',  padding: '5px' }}>8:15</TableCell>
-                  <TableCell sx={{ borderBottom: '2px dotted black',  padding: '5px' }}>18:20</TableCell>
-                  <TableCell sx={{  borderBottom: '2px dotted black',  padding: '5px' }}>17:30</TableCell>
-                  <TableCell sx={{  borderBottom: '2px dotted black',  padding: '5px' }}>08:00</TableCell>
-                  <TableCell sx={{  borderBottom: '2px dotted black',  padding: '5px' }}>2</TableCell>
-                  <TableCell sx={{  borderBottom: '2px dotted black',  padding: '5px' }}>2</TableCell>
-
-                  <TableCell sx={{  borderBottom: '2px dotted black',  padding: '5px' }}>sick leave</TableCell>
-                  
 </TableRow>
-
-<TableRow >
-                  <TableCell sx={{ borderBottom: '2px dotted black', padding: '5px' }}>2</TableCell>
-                  <TableCell sx={{ borderBottom: '2px dotted black', padding: '5px' }}>22-04-05</TableCell>
-                  <TableCell sx={{ borderBottom: '2px dotted black', padding: '5px' }}>G</TableCell>
-                  <TableCell sx={{  borderBottom: '2px dotted black', padding: '5px' }}>08:00</TableCell>
-                  <TableCell sx={{ borderBottom: '2px dotted black',  padding: '5px' }}>18:00</TableCell>
-                  <TableCell sx={{  borderBottom: '2px dotted black', padding: '5px' }}>14:00</TableCell>
-
-
-                  <TableCell sx={{  borderBottom: '2px dotted black',  padding: '5px' }}>07:30</TableCell>
-                  <TableCell sx={{  borderBottom: '2px dotted black',  padding: '5px' }}>8:15</TableCell>
-                  <TableCell sx={{ borderBottom: '2px dotted black',  padding: '5px' }}>18:20</TableCell>
-                  <TableCell sx={{  borderBottom: '2px dotted black',  padding: '5px' }}>17:30</TableCell>
-                  <TableCell sx={{  borderBottom: '2px dotted black',  padding: '5px' }}>08:00</TableCell>
-                  <TableCell sx={{  borderBottom: '2px dotted black',  padding: '5px' }}>2</TableCell>
-                  <TableCell sx={{  borderBottom: '2px dotted black',  padding: '5px' }}>2</TableCell>
-
-                  <TableCell sx={{  borderBottom: '2px dotted black',  padding: '5px' }}>sick leave</TableCell>
-                  
-</TableRow>
-<TableRow>
-<TableCell sx={{ padding: '3px' }}></TableCell>
-                  
-                  </TableRow>
-                  
-                  
+                        {timecard.map((entry, index) => (
+                           <React.Fragment key={index}>
+                              <TableRow sx={{ borderBottom: '3px solid black' }}>
+                                 <TableCell>{entry.empCode}</TableCell>
+                                 <TableCell>{entry.empName}</TableCell>
+                                 {/* Add more cells for other details if needed */}
+                              </TableRow>
+                              {/* Other details for the employee */}
+                              <TableRow sx={{ borderBottom: '3px dotted black' }}>
+                              <TableCell>{index + 1}</TableCell>
+                                 <TableCell>{entry.dates}</TableCell>
+                                 <TableCell>{entry.shiftCode}</TableCell>
+                                 <TableCell>{entry.intime}</TableCell>
+                                 <TableCell>{entry.outtime}</TableCell>
+                                 <TableCell>{entry.breakIn}</TableCell>
+                                 <TableCell>{entry.breakOut}</TableCell>
+                                 <TableCell>{}</TableCell>
+                                 <TableCell>{entry.lateIn}</TableCell>
+                                 <TableCell>{entry.lateOut}</TableCell>
+                                 <TableCell>{entry.earlyOut}</TableCell>
+                                 <TableCell>{}</TableCell>
+                                 <TableCell>{entry.otHrs}</TableCell>
+                                 <TableCell>{entry.leaveCode}</TableCell>
 
 
+                                 {/* Add more cells for other details if needed */}
+                              </TableRow>
+                           </React.Fragment>
+                        ))}
+                     </TableRow>
 
-                 
+
+                
               </TableBody>
             </Table>
           </TableContainer>

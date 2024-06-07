@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-export default function DesignationForm() {
+export default function LoanForm() {
   const navigate = useNavigate();
 
   const [PaymLoan,setPaymLoan]=useState([])

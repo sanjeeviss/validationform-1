@@ -13,13 +13,13 @@ function Masterroll() {
          {
         return await postRequest(ServerConfig.url,REPORTS,{
           "query": "SELECT emp_code,emp_name,(select dateofbirth from paym_employee where employeecode=emp_code)as dob,(select father_name from paym_employee_profile1 where pn_employeeid=(select pn_employeeid from paym_employee where employeecode=emp_code)) as father_name,(select v_DesignationName from paym_designation where pn_designationid=(select pn_DesingnationId from paym_employee_profile1 where pn_employeeid=(select pn_employeeid from paym_employee where employeecode=emp_code))) as designation, (SELECT   CONCAT(Address_Line1, ', ', Address_Line2, ', ', City)  from paym_branch where pn_branchid = (select pn_branchid from paym_employee where employeecode=emp_code )) as FullAddress,COUNT(CASE WHEN status = 'P' THEN 1 END) AS total_P,COUNT(CASE WHEN status = 'A' THEN 1 END) AS total_A, COUNT(CASE WHEN status = 'L' THEN 1 END) AS total_L, COUNT (CASE WHEN status='H' THEN 1 END) AS total_H,MAX(CASE WHEN DAY(dates) = 1 THEN status END) AS day_1,MAX(CASE WHEN DAY(dates) = 2 THEN status END) AS day_2,MAX(CASE WHEN DAY(dates) = 3 THEN status END) AS day_3,MAX(CASE WHEN DAY(dates) = 4 THEN status END) AS day_4, MAX(CASE WHEN DAY(dates) = 5 THEN status END) AS day_5, MAX(CASE WHEN DAY(dates) = 6 THEN status END) AS day_6,MAX(CASE WHEN DAY(dates) = 7 THEN status END) AS day_7,MAX(CASE WHEN DAY(dates) = 8 THEN status END) AS day_8,  MAX(CASE WHEN DAY(dates) = 9 THEN status END) AS day_9,MAX(CASE WHEN DAY(dates) = 10 THEN status END) AS day_10,MAX(CASE WHEN DAY(dates) = 11 THEN status END) AS day_11,MAX(CASE WHEN DAY(dates) = 12 THEN status END) AS day_12,MAX(CASE WHEN DAY(dates) = 13 THEN status END) AS day_13,MAX(CASE WHEN DAY(dates) = 14 THEN status END) AS day_14, MAX(CASE WHEN DAY(dates) = 15 THEN status END) AS day_15,MAX(CASE WHEN DAY(dates) = 16 THEN status END) AS day_16,MAX(CASE WHEN DAY(dates) = 17 THEN status END) AS day_17,MAX(CASE WHEN DAY(dates) = 18 THEN status END) AS day_18,MAX(CASE WHEN DAY(dates) = 19 THEN status END) AS day_19, MAX(CASE WHEN DAY(dates) = 20 THEN status END) AS day_20, MAX(CASE WHEN DAY(dates) = 21 THEN status END) AS day_21, MAX(CASE WHEN DAY(dates) = 22 THEN status END) AS day_22, MAX(CASE WHEN DAY(dates) = 23 THEN status END) AS day_23,MAX(CASE WHEN DAY(dates) = 24 THEN status END) AS day_24,MAX(CASE WHEN DAY(dates) = 25 THEN status END) AS day_25,MAX(CASE WHEN DAY(dates) = 26 THEN status END) AS day_26,MAX(CASE WHEN DAY(dates) = 27 THEN status END) AS day_27,MAX(CASE WHEN DAY(dates) = 28 THEN status END) AS day_28,MAX(CASE WHEN DAY(dates) = 29 THEN status END) AS day_29,MAX(CASE WHEN DAY(dates) = 30 THEN status END) AS day_30 FROM time_card where MONTH(dates)=MONTH(GetDate()) GROUP BY emp_code,emp_name"})
-         }
-         
-
-         getData().then((e)=>setRolldata(e.data))
+      
+}
+console.log(rolldata)
+getData().then((e)=>setRolldata(e.data))
 
     },[])
-    console.log(rolldata)
+   
 
 
     const renderStatus = (status) => {
