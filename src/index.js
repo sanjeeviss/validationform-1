@@ -163,6 +163,7 @@ import Masterroll07 from './components/ViewEmployeeProfile';
 import Sanjeevi from './components/ViewEmployeeProfile';
 import EmployeeProfileForm from './components/ViewEmployeeProfile';
 import EmployeeImageForm from './components/EmployeeImage';
+import ProfileCard008 from './components/ViewBranchDetails';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -403,6 +404,7 @@ root.render(
 
 <Route path='/employeeimage' element={<EmployeeImageForm/>}></Route>
 
+<Route path='/branch07' element={<ProfileCard008/>}></Route>
 
 
 

@@ -25,6 +25,7 @@ const PlusIcon = createSvgIcon(
 const EarnDeductTable = () => {
     const navigate = useNavigate();
     const [data,setData] = useState([])
+    const [showFullData, setShowFullData] = useState(false);
     useEffect(()=>{
         getRequest(ServerConfig.url, EARNDEDUCT).then((e)=> {
             setData(e.data)
@@ -36,7 +37,10 @@ const EarnDeductTable = () => {
     }
   return (
     <div>
-        <JsonToTable json={data}/>
+        <JsonToTable json={showFullData ? data : data.slice(0, 15)} />
+      {!showFullData && data.length > 15 && (
+        <Button onClick={() => setShowFullData(true)}>Read More</Button>
+      )}
     <Grid margin={5}><Button variant='outlined' color='success' onClick={handonClick}>Add<PlusIcon/></Button></Grid>
 
     </div>

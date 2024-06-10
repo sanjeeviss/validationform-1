@@ -115,12 +115,12 @@ export default function MainPage() {
   return (
     <div>
       <AppBar>
-        <Toolbar style={{ justifyContent: 'flex-end', backgroundColor: "#482880" }}>
+        <Toolbar style={{ justifyContent: 'flex-end', backgroundColor: "#482880",cursor:"pointer" }}>
           <IconButton color="primary" aria-label="Log out" onClick={handleLogout}>
             <LogoutIcon />
           </IconButton>
 
-          <IconButton color="primary" aria-label="Settings">
+          <IconButton color="primary" aria-label="Settings ">
             <SettingsApplicationsSharpIcon />
           </IconButton>
           <AppsIcon onClick={handlePopoverOpen} />
@@ -136,15 +136,16 @@ export default function MainPage() {
             anchorOrigin={{
               vertical: 'bottom',
               horizontal: 'left',
+
             }}
             transformOrigin={{
               vertical: 'top',
               horizontal: 'left',
             }}
           >
-            <div style={{ padding: '20px', alignItems: 'center', height: '200px', maxWidth: '200px' }}>
+            <div style={{ padding: '20px', alignItems: 'center', height: '300px', maxWidth: '300px',cursor:'pointer' }}>
               <Container>
-              <Grid container direction="column"  rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+              <Grid container direction="column"  rowSpacing={3} columnSpacing={3}>
           <Grid item>
             <Typography align='center'>sanjeevi HI</Typography>
           </Grid>
@@ -185,51 +186,51 @@ export default function MainPage() {
           <Grid item>
             <Grid container justifyContent="center" spacing={1}>
               <Grid item xs={3}>
-              <img src={HrmmSpecilalization}  width={40} height={40} onClick={ () => navigate("/HrmmSpecializationtable")}/>  
+              <img src={HrmmSpecilalization}  width={30} height={30} onClick={ () => navigate("/HrmmSpecializationtable")}/>  
                       </Grid>
             <Grid item xs={3}>
-              <img src={att} width={25} height={25} onClick={() => navigate("/AttendenceTable")} />
+              <img src={Jobstatus} width={25} height={25} onClick={() => navigate("/PaymJobStatusTable")} />
 
               </Grid>
               <Grid item xs={3}>
-              <img src={ass} width={30} height={30} onClick={ () => navigate("/AssetsTable")}/>
+              <img src={LeaveAllocation} width={30}  height={30} onClick={ () => navigate("/LeaveAllocationMasterTable")}/>
               </Grid>
               <Grid item xs={3}>
-              <img src={ear} width={30} height={30} onClick ={() => navigate("/EarnDeductTable")}/>
+              <img src={LeaveApprove} width={30} height={30} onClick ={() => navigate("/LeaveApplyTable")}/>
               </Grid>
             </Grid>
           </Grid>
           <Grid item>
             <Grid container justifyContent="center" spacing={1}>
               <Grid item xs={3}>
-              <img src={daily} width={30} height={30}  onClick={()=> navigate("/dailytimecardtable")}/>
+              <img src={LeaveAppHr} width={30} height={30}  onClick={()=> navigate("/LeaveApproveHrTable")}/>
             </Grid>
             <Grid item xs={3}>
-              <img src={att} width={25} height={25} onClick={() => navigate("/AttendenceTable")} />
+              <img src={LeaAppMan} width={25} height={25} onClick={() => navigate("/LeaveApproveHrTable")} />
 
               </Grid>
               <Grid item xs={3}>
-              <img src={ass} width={30} height={30} onClick={ () => navigate("/AssetsTable")}/>
+              <img src={LeaSettlement} width={30} height={30} onClick={ () => navigate("/LeaveSettlementTable")}/>
               </Grid>
               <Grid item xs={3}>
-              <img src={ear} width={30} height={30} onClick ={() => navigate("/EarnDeductTable")}/>
+              <img src={LoanEntry} width={30} height={30} onClick ={() => navigate("/LoanEntryTable")}/>
               </Grid>
             </Grid>
           </Grid>
           <Grid item>
             <Grid container justifyContent="center" spacing={1}>
               <Grid item xs={3}>
-              <img src={daily} width={30} height={30}  onClick={()=> navigate("/dailytimecardtable")}/>
+              <img src={LoanPost} width={30} height={30}  onClick={()=> navigate("/LoanPostTable")}/>
             </Grid>
             <Grid item xs={3}>
-              <img src={att} width={25} height={25} onClick={() => navigate("/AttendenceTable")} />
+              <img src={LoanPrecloser} width={25} height={25} onClick={() => navigate("/LoanPreCloserTable")} />
 
               </Grid>
               <Grid item xs={3}>
-              <img src={ass} width={30} height={30} onClick={ () => navigate("/AssetsTable")}/>
+              <img src={OnDuty} width={30} height={30} onClick={ () => navigate("/OnDutyTable")}/>
               </Grid>
               <Grid item xs={3}>
-              <img src={ear} width={30} height={30} onClick ={() => navigate("/EarnDeductTable")}/>
+              <img src={OTSLab} width={30} height={30} onClick ={() => navigate("/OtsLabTable")}/>
               </Grid>
             </Grid>
           </Grid>
@@ -238,17 +239,17 @@ export default function MainPage() {
           <Grid item>
             <Grid container justifyContent="center" spacing={1}>
               <Grid item xs={3}>
-              <img src={Form} width={30} height={30} onClick={ () => navigate("/Form7table")}/>
+              <img src={PayInput} width={30} height={30} onClick={ () => navigate("/payInputTable")}/>
               </Grid>
               <Grid item xs={3}>
-              <img src={Form} width={30} height={30} onClick={ () => navigate("/Form7table")}/>
+              <img src={PayAttBonus} width={30} height={30} onClick={ () => navigate("/PaymAttBonusTable")}/>
               </Grid>
               <Grid item xs={3}>
-              <img src={Form} width={30} height={30} onClick={ () => navigate("/Form7table")}/>
+              <img src={PaymBank} width={30} height={30} onClick={ () => navigate("/PaymBankTable")}/>
 
               </Grid>
               <Grid item xs={3}>
-              <img src={Form} width={30} height={30} onClick={ () => navigate("/Form7table")}/>
+              <img src={PaymBranch} width={30} height={30} onClick={ () => navigate("/PaymBranchtable")}/>
               </Grid>
             </Grid>
           </Grid>
@@ -256,27 +257,201 @@ export default function MainPage() {
           <Grid item>
             <Grid container justifyContent="center" spacing={1}>
               <Grid item xs={3}>
-              <img src={Form} width={30} height={30} onClick={ () => navigate("/Form7table")}/>
+              <img src={PaymCarryForward} width={30} height={30} onClick={ () => navigate("/PaymcarryForwardTable")}/>
               </Grid>
               <Grid item xs={3}>
-              <img src={Form} width={30} height={30} onClick={ () => navigate("/Form7table")}/>
+              <img src={PaymCategory} width={30} height={30} onClick={ () => navigate("/PaymCategoryTable")}/>
               </Grid>
               <Grid item xs={3}>
-              <img src={Form} width={30} height={30} onClick={ () => navigate("/Form7table")}/>
+              <img src={PaymCompany} width={30} height={30} onClick={ () => navigate("/PaycompanyTable")}/>
 
               </Grid>
               <Grid item xs={3}>
-              <img src={Form} width={30} height={30} onClick={ () => navigate("/Form7table")}/>
+              <img src={PaymComputation} width={30} height={30} onClick={ () => navigate("/PaymComputationtables")}/>
 
               </Grid>
-              
-              <Grid>
-                <button onClick={ handlePopoverClose}>close</button>
+              </Grid>
+              </Grid>
+              <Grid item>
+            <Grid container justifyContent="center" spacing={1}>
+              <Grid item xs={3}>
+              <img src={PaymDep} width={30} height={30} onClick={ () => navigate("/PaymDepartmentTable")}/>
+              </Grid>
+              <Grid item xs={3}>
+              <img src={PaymDesig} width={30} height={30} onClick={ () => navigate("/PaymDesignationTable")}/>
+              </Grid>
+              <Grid item xs={3}>
+              <img src={PaymDesig} width={30} height={30} onClick={ () => navigate("/PaymDeductionTable")}/>
+
+              </Grid>
+              <Grid item xs={3}>
+              <img src={PaymDiv} width={30} height={30} onClick={ () => navigate("/PaymDIvisionTable")}/>
               </Grid>
             </Grid>
           </Grid>
+          <Grid item>
+            <Grid container justifyContent="center" spacing={1}>
+              <Grid item xs={3}>
+              <img src={PaymEarn} width={30} height={30} onClick={ () => navigate("/PaymEarnTable")}/>
+              </Grid>
+              <Grid item xs={3}>
+              <img src={PaymEmpEarn} width={30} height={30} onClick={ () => navigate("/PaymEmpDeductionTable")}/>
+              </Grid>
+              <Grid item xs={3}>
+              <img src={PaymEmpDeduc} width={30} height={30} onClick={ () => navigate("/PaymEmpEarningsTable")}/>
+
+              </Grid>
+              <Grid item xs={3}>
+              <img src={PaymEmplo} width={30} height={30} onClick={ () => navigate("/PaymEmpTable")}/>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Grid container justifyContent="center" spacing={1}>
+              <Grid item xs={3}>
+              <img src={PaymEmpLeave} width={30} height={30} onClick={ () => navigate("/PaymEmpLeaveTable")}/>
+              </Grid>
+              <Grid item xs={3}>
+              <img src={PaymEmpProfile} width={30} height={30} onClick={ () => navigate("/PaymEmployeeProfile1Tables")}/>
+              </Grid>
+              <Grid item xs={3}>
+              <img src={PaymEmpWorkDeta} width={30} height={30} onClick={ () => navigate("/PaymEmployeeWorkDetailTables")}/>
+
+              </Grid>
+              <Grid item xs={3}>
+              <img src={PaymEncashDeta} width={30} height={30} onClick={ () => navigate("/PaymEncashmentDetailsTables")}/>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Grid container justifyContent="center" spacing={1}>
+              <Grid item xs={3}>
+              <img src={PaymGrade} width={30} height={30} onClick={ () => navigate("/PaymgradeTables")}/>
+              </Grid>
+              <Grid item xs={3}>
+              <img src={PaymHoliday} width={30} height={30} onClick={ () => navigate("/PaymHolidayTables")}/>
+              </Grid>
+              <Grid item xs={3}>
+              <img src={PaymLeave} width={30} height={30} onClick={ () => navigate("/PaymleaveTables")}/>
+
+              </Grid>
+              <Grid item xs={3}>
+              <img src={PaymLeaveAlloc} width={30} height={30} onClick={ () => navigate("/Paymleaveallocation1Tables")}/>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Grid container justifyContent="center" spacing={1}>
+              <Grid item xs={3}>
+              <img src={PaymLevel} width={30} height={30} onClick={ () => navigate("/PaymlevelTables")}/>
+              </Grid>
+              <Grid item xs={3}>
+              <img src={PaymLoan} width={30} height={30} onClick={ () => navigate("/PaymLoanTable")}/>
+              </Grid>
+              <Grid item xs={3}>
+              <img src={PaymLoanDiminishing} width={30} height={30} onClick={ () => navigate("/PaymLoanDiminishingTable")}/>
+
+              </Grid>
+              <Grid item xs={3}>
+              <img src={PaymOverHeadCost} width={30} height={30} onClick={ () => navigate("/PaymOverHeadingcostTable")}/>
+              </Grid>
+            </Grid>
+          </Grid>
+
+
+          <Grid item>
+            <Grid container justifyContent="center" spacing={1}>
+              <Grid item xs={3}>
+              <img src={PaymPf} width={30} height={30} onClick={ () => navigate("/PaympfTable")}/>
+              </Grid>
+              <Grid item xs={3}>
+              <img src={PaymPayBill} width={30} height={30} onClick={ () => navigate("/PaymPaybillTable")}/>
+              </Grid>
+              <Grid item xs={3}>
+              <img src={PaymShift} width={30} height={30} onClick={ () => navigate("/PaymshiftTable")}/>
+
+              </Grid>
+              <Grid item xs={3}>
+              <img src={PaymOutputLoan} width={30} height={30} onClick={ () => navigate("/PaympayoutputloanTable")}/>
+              </Grid>
+            </Grid>
+          </Grid>
+
+ <Grid item>
+            <Grid container justifyContent="center" spacing={1}>
+              <Grid item xs={3}>
+              <img src={PaymFinalSettlement} width={30} height={30} onClick={ () => navigate("/PayrollFinalSettlemetTable")}/>
+              </Grid>
+              <Grid item xs={3}>
+              <img src={Pfep} width={30} height={30} onClick={ () => navigate("/PfepTable")}/>
+              </Grid>
+              <Grid item xs={3}>
+              <img src={PfEpf} width={30} height={30} onClick={ () => navigate("/PfepfTable")}/>
+
+              </Grid>
+              <Grid item xs={3}>
+              <img src={PunchDetails} width={30} height={30} onClick={ () => navigate("/PunchdetailsTable")}/>
+              </Grid>
+            </Grid>
+          </Grid>
+
+          <Grid item>
+            <Grid container justifyContent="center" spacing={1}>
+              <Grid item xs={3}>
+              <img src={SalaryPeriod} width={30} height={30} onClick={ () => navigate("/SalaryPeriodTable")}/>
+              </Grid>
+              <Grid item xs={3}>
+              <img src={SalaryStructure} width={30} height={30} onClick={ () => navigate("/SalaryStructureTable")}/>
+              </Grid>
+              <Grid item xs={3}>
+              <img src={ShiftBalance} width={30} height={30} onClick={ () => navigate("/ShiftBalanceTable")}/>
+
+              </Grid>
+              <Grid item xs={3}>
+              <img src={ShiftDetails} width={30} height={30} onClick={ () => navigate("/ShiftDetailsTable")}/>
+              </Grid>
+            </Grid>
+          </Grid>
+
+          <Grid item>
+            <Grid container justifyContent="center" spacing={1}>
+              <Grid item xs={3}>
+              <img src={ShiftMonth} width={30} height={30} onClick={ () => navigate("/ShiftMonthTable")}/>
+              </Grid>
+              <Grid item xs={3}>
+              <img src={ShiftPattern} width={30} height={30} onClick={ () => navigate("/ShiftPatternTable")}/>
+              </Grid>
+              <Grid item xs={3}>
+              <img src={TempShiftDetails} width={30} height={30} onClick={ () => navigate("/TempshiftdetailsTables")}/>
+
+              </Grid>
+              <Grid item xs={3}>
+              <img src={YearEnd} width={30} height={30} onClick={ () => navigate("/YearEndTable")}/>
+              </Grid>
+            </Grid>
+          </Grid>
+
+
+          <Grid item>
+            <Grid container justifyContent="center" spacing={1}>
+              <Grid item xs={3}>
+              <img src={SalaryPeriod} width={30} height={30} onClick={ () => navigate("/Paycalc")}/>
+              </Grid>
+              <Grid item xs={3}>
+              <img src={daily} width={30} height={30} onClick={ () => navigate("/TimesheetManager")}/>
+              </Grid>
+             
+             
+            </Grid>
+          </Grid>
+
+
+                   
+            
+            </Grid>
+        
           
-        </Grid>
+       
               </Container>
             </div>
           </Popover>

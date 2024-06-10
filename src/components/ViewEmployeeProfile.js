@@ -28,8 +28,7 @@ const ProfileCard = ({ selectedEmployeeId }) => {
     async function fetchData() {
       try {
         const response = await postRequest(ServerConfig.url, REPORTS, {
-         "query": "SELECT   p.pn_employeeId,  p.pn_branchid, (SELECT TOP 1 BranchName FROM paym_Branch WHERE pn_BranchID = p.pn_branchid) AS BranchName,(SELECT TOP 1 v_divisionname  FROM paym_division  WHERE branchid = p.pn_branchid) AS division, (SELECT TOP 1 v_departmentname  FROM paym_department  WHERE pn_branchid = p.pn_branchid) AS department,(SELECT TOP 1 v_DesignationName FROM paym_designation WHERE pn_BranchID = p.pn_branchid) AS designation, (SELECT TOP 1 v_GradeName FROM paym_Grade WHERE BranchID = p.pn_branchid) AS grade, (SELECT TOP 1 v_ShiftName FROM paym_Shift WHERE pn_BranchID = p.pn_BranchID) AS shift, (SELECT TOP 1 v_CategoryName FROM paym_Category WHERE pn_BranchID = p.pn_BranchID) AS category, (SELECT TOP 1 v_JobStatusName FROM paym_JobStatus WHERE BranchID  = p.pn_BranchID) AS jobstatus, (SELECT TOP 1 father_name FROM paym_employee_profile1  WHERE pn_BranchID = p.pn_branchid) AS FatherName,(SELECT TOP 1 v_LevelName FROM paym_Level WHERE BranchID = p.pn_BranchID) AS level,  (SELECT TOP 1 employee_full_name  FROM paym_Employee WHERE pn_EmployeeID = p.pn_EmployeeID) AS employee_name,  (SELECT TOP 1 EmployeeCode  FROM paym_Employee  WHERE pn_EmployeeID = p.pn_EmployeeID) AS employee_code FROM paym_employee_profile1 p"
-        });
+       "query":  " SELECT   p.pn_employeeId,  p.pn_branchid, (SELECT TOP 1 BranchName FROM paym_Branch WHERE pn_BranchID = p.pn_branchid) AS BranchName,(SELECT TOP 1 v_divisionname  FROM paym_division  WHERE branchid = p.pn_branchid) AS division, (SELECT TOP 1 v_departmentname  FROM paym_department  WHERE pn_branchid = p.pn_branchid) AS department,(SELECT TOP 1 v_DesignationName FROM paym_designation WHERE pn_BranchID = p.pn_branchid) AS designation, (SELECT TOP 1 v_GradeName FROM paym_Grade WHERE BranchID = p.pn_branchid) AS grade, (SELECT TOP 1 v_ShiftName FROM paym_Shift WHERE pn_BranchID = p.pn_BranchID) AS shift, (SELECT TOP 1 v_CategoryName FROM paym_Category WHERE pn_BranchID = p.pn_BranchID) AS category, (SELECT TOP 1 v_JobStatusName FROM paym_JobStatus WHERE BranchID  = p.pn_BranchID) AS jobstatus, (SELECT TOP 1 father_name FROM paym_employee_profile1  WHERE pn_BranchID = p.pn_branchid) AS FatherName,(SELECT TOP 1 v_LevelName FROM paym_Level WHERE BranchID = p.pn_BranchID) AS level,  (SELECT TOP 1 employee_full_name  FROM paym_Employee WHERE pn_EmployeeID = p.pn_EmployeeID) AS employee_name,( select  Top 1 image from Employeeimage where employeecode=employeeCode ) as image ,(SELECT TOP 1 EmployeeCode  FROM paym_Employee  WHERE pn_EmployeeID = p.pn_EmployeeID) AS employee_code FROM paym_employee_profile1 p " });
         if (response && response.data) {
           setRolldata(response.data);
         }
@@ -66,18 +65,19 @@ const ProfileCard = ({ selectedEmployeeId }) => {
             <label htmlFor="avatar-upload">
               <Avatar
                 alt="Profile Picture"
-                src={profilePicture || san}
+              
+                src={rolldata.length>0 && rolldata[0].image}
                 sx={{ width: 150, height: 150, cursor: 'pointer' }}
-                
+               
               />
-              <input
+              {/* <input
                 id="avatar-upload"
                 type="file"
                 accept="image/*"
                 style={{ display: 'none' }}
                 onChange={handleFileChange}
                
-              />
+              /> */}
               <span style={{ position: 'relative', top: -40, left: 60, backgroundColor: '#fff', borderRadius: '50%', padding: 5, cursor: 'pointer' }}>+</span>
             </label>
             <TableContainer component={Paper} sx={{ boxShadow: 'none', marginLeft: 2 }}>
