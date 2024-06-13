@@ -1,5 +1,3 @@
-
-  
   import React, { useState } from 'react';
   import { postRequest,getRequest } from '../../serverconfiguration/requestcomp';
   import { ServerConfig } from '../../serverconfiguration/serverconfig';
@@ -19,7 +17,6 @@
     const [branch,setBranch]=useState([])
     const [companyid, setCompanyid]=useState("")
     const [branchid, setBranchid]= useState("")
-    const [pnJobStatusId, setPnJobStatusId]= useState("")
     const [vJobStatusName, setVJobStatusName]= useState("")
     const [status, setStatus]= useState("")
   
@@ -29,7 +26,7 @@
       const formData = {
       pnCompanyId: companyid,
       pnBranchId: branchid,
-      pnJobStatusId: pnJobStatusId,
+  
       vJobStatusName:vJobStatusName ,
       status: status ,
      
@@ -107,21 +104,7 @@
                    </select>
                    </FormControl>
                     </Grid>
-                    <Grid  xs={12}  sm={6} item>
-                      <FormControl fullWidth> 
-                    <TextField
-                  name="pnJobStatusId"
-                     
-                      label="pnJobStatusId"
-                      variant="outlined"
-                      fullWidth
-                      required
-                 
-                      InputLabelProps={{ shrink: true }} 
-                      onChange={(e) => setPnJobStatusId(e.target.value)} 
-                    />
-                    </FormControl>
-                    </Grid>
+                    
                     <Grid  xs={12}  sm={6} item>
                       <FormControl fullWidth> 
                     <TextField
@@ -161,9 +144,12 @@
   const formData = {
     pnCompanyId: companyid,
       pnBranchId: branchid,
-      pnJobStatusId: pnJobStatusId,
+
       vJobStatusName:vJobStatusName ,
       status: status ,
+      pnCompany:{
+        "pnCompanyId":companyid
+      }
   };
   console.log(formData)
   postRequest(ServerConfig.url,JOBSTATUS,formData).then((e)=>{

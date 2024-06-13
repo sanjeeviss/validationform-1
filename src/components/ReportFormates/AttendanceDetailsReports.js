@@ -4,19 +4,26 @@ import generatePDF from 'react-to-pdf';
 import { useRef } from 'react';
 import { useState } from 'react';
 import { getRequest } from '../../serverconfiguration/requestcomp';
+import { postRequest } from '../../serverconfiguration/requestcomp';
 import { ServerConfig } from '../../serverconfiguration/serverconfig';
-import { TIMECARD } from '../../serverconfiguration/controllers';
+import { REPORTS, TIMECARD } from '../../serverconfiguration/controllers';
 import { useEffect } from 'react';
-function Mrgabs() {
+function AttendanceD1() {
   const [timecard,setTimecard]=useState([]);
-  useEffect(()=>{
-async function getData(){
- const data = await getRequest(ServerConfig.url,TIMECARD);
- setTimecard(data.data);
-}
-console.log(timecard)
-getData()
-  }, []);
+ 
+   useEffect(()=>{
+
+      async function getData(){
+      return await postRequest(ServerConfig.url,REPORTS,{
+         "query": "select t.emp_code ,t.emp_name,t.dates,t.break_in,t.break_out,t.late_in,t.intime,t.outtime,t.early_out,t.late_out,t.ot_hrs,t.shift_code,t.leave_code,datepart(hour,t.intime) as intime ,(select datepart(hour,start_time) from shift_details where shift_code=t.shift_code) as start_time,(datepart(hour,t.outtime)-datepart(hour,t.intime)+datepart(hour,t.break_in)-datepart(hour,t.break_out)) as t_whrs  from time_card t"})
+      
+      
+      }
+      getData().then((e)=>setTimecard(e.data))
+      }, [])
+      
+      console.log(timecard)
+         
    
   return (
    
@@ -69,19 +76,19 @@ Attendance Details For the Period of 01/02/2010 to 28/02/2010</Typography>
                               <TableRow sx={{ borderBottom: '3px dotted black' }}>
                               <TableCell>{index + 1}</TableCell>
                                  <TableCell>{entry.dates}</TableCell>
-                                 <TableCell>{entry.shiftCode}</TableCell>
+                                 <TableCell>{entry.shift_Code}</TableCell>
                                  <TableCell>{entry.intime}</TableCell>
-                                 <TableCell>{entry.outtime}</TableCell>
-                                 <TableCell>{entry.breakIn}</TableCell>
-                                 <TableCell>{entry.breakOut}</TableCell>
-                                 <TableCell>{}</TableCell>
-                                 <TableCell>{entry.lateIn}</TableCell>
-                                 <TableCell>{entry.lateOut}</TableCell>
-                                 <TableCell>{entry.earlyOut}</TableCell>
-                                 <TableCell>{}</TableCell>
-                                 <TableCell>{entry.otHrs}</TableCell>
-                                 <TableCell>{entry.leaveCode}</TableCell>
-
+                                 <TableCell>{JSON.stringify(entry.outtime).replace(/"/g,'')}</TableCell>
+                                 <TableCell>{entry.break_in}</TableCell>
+                                 <TableCell>{entry.break_out}</TableCell>
+                                 <TableCell>{JSON.stringify(entry.start_time).replace(/"/g,'')}</TableCell>
+                                 <TableCell>{JSON.stringify(entry.late_in).replace(/"/g,'')}</TableCell>
+                                 <TableCell>{JSON.stringify(entry.late_out).replace(/"/g,'')}</TableCell>
+                                 <TableCell>{JSON.stringify(entry.early_out).replace(/"/g,'')}</TableCell>
+                                 <TableCell>{JSON.stringify(entry.t_whrs).replace(/"/g,'')}</TableCell>
+                                 <TableCell>{JSON.stringify(entry.ot_hrs).replace(/"/g,'')}</TableCell>
+                                 <TableCell>{JSON.stringify(entry.leave_code).replace(/"/g,'')}</TableCell> 
+                                 
 
                                  {/* Add more cells for other details if needed */}
                               </TableRow>
@@ -107,4 +114,4 @@ Attendance Details For the Period of 01/02/2010 to 28/02/2010</Typography>
 
 
 
-export default Mrgabs;
+export default AttendanceD1;

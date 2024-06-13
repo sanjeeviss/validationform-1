@@ -164,6 +164,10 @@ import Sanjeevi from './components/ViewEmployeeProfile';
 import EmployeeProfileForm from './components/ViewEmployeeProfile';
 import EmployeeImageForm from './components/EmployeeImage';
 import ProfileCard008 from './components/ViewBranchDetails';
+import Leaveapprovenew from './components/ApprovalForm';
+import AbsentAtt from './components/ReportFormates/AbsentAttReports';
+import Bankreg from './components/ReportFormates/BankRegButton';
+import BANKREGISTER from './components/ReportFormates/BankRegButton';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -379,13 +383,13 @@ root.render(
 
   <Route path='/TimesheetManager' element={<TimesheetManager/>}></Route>
 
-  <Route path='/daysheet' element={<ButtonEsi/>}></Route>
+  <Route path='/AttendenceDetails' element={<ButtonEsi5/>}></Route>
 
   <Route path='/OTSummary' element={<ButtonEsi3/>}></Route>
 
   <Route path='/WorkDetails' element={<ButtonEsi4/>}></Route>
 
-  <Route path='/AttedanceDetails' element={<ButtonEsi5/>}></Route>
+  
 
   <Route path='/AbsentDetails' element={<ButtonEsi6/>}></Route>
 
@@ -405,6 +409,16 @@ root.render(
 <Route path='/employeeimage' element={<EmployeeImageForm/>}></Route>
 
 <Route path='/branch07' element={<ProfileCard008/>}></Route>
+
+<Route path='/Leaveapprovenew' element={<Leaveapprovenew/>}></Route>
+
+<Route path='/AbsentattReport' element={<AbsentAtt/>}></Route>
+
+
+<Route path='/AttReports' element={<attReports/>}></Route>
+
+<Route path='/BANKREGISTER' element={<BANKREGISTER/>}></Route>
+
 
 
 

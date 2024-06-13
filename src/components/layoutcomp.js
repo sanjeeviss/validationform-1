@@ -140,8 +140,8 @@ function Layoutcomp() {
     {title: 'Paym Loan ', icon: <img src={PaymLoan}  width={40} height={40}/>, onClick: () => navigate("/PaymLoanTable")},
     {title: 'Paym Loan Diminshing', icon: <img src={PaymLoanDiminishing}  width={40} height={40}/>, onClick: () => navigate("/PaymLoanDiminishingTable")},
     {title: 'Paym Over Heading cost', icon: <img src={PaymOverHeadCost}  width={40} height={40}/>, onClick: () => navigate("/PaymOverHeadingcostTable")},
-    {title: 'Paym Pay Bill', icon: <img src={PaymPayBill}  width={40} height={40}/>, onClick: () => navigate("/PaympfTable")},
-    {title: 'Paym Pf', icon: <img src={PaymPf}  width={40} height={40}/>, onClick: () => navigate("/PaymPaybillTable")},
+    {title: 'Paym Pay Bill', icon: <img src={PaymPayBill}  width={40} height={40}/>, onClick: () => navigate("/PaymPaybillTable")},
+    {title: 'Paym Pf', icon: <img src={PaymPf}  width={40} height={40}/>, onClick: () => navigate("/PaympfTable")},
     {title: 'Paym Shift', icon: <img src={PaymShift}  width={40} height={40}/>, onClick: () => navigate("/PaymshiftTable")},
     {title: 'Paym Output Loan', icon: <img src={PaymOutputLoan}  width={40} height={40}/>, onClick: () => navigate("/PaympayoutputloanTable")},
     {title: 'Paym Final Settlement', icon: <img src={PaymFinalSettlement}  width={40} height={40}/>, onClick: () => navigate("/PayrollFinalSettlemetTable")},
@@ -156,7 +156,6 @@ function Layoutcomp() {
     {title: 'Shift Pattern', icon: <img src={ShiftPattern}  width={40} height={40}/>, onClick: () => navigate("/ShiftPatternTable")},
     {title: 'Temp shift Details', icon: <img src={TempShiftDetails}  width={40} height={40}/>, onClick: () => navigate("/TempshiftdetailsTables")},
     {title: 'Year End', icon: <img src={YearEnd}  width={40} height={40}/>, onClick: () => navigate("/YearEndTable")},
-    {title: 'Year Paym job status', icon: <img src={YearEnd}  width={40} height={40}/>, onClick: () => navigate("/YearEndTable")},
     {title: 'payslip', icon: <img src={SalaryPeriod}  width={40} height={40}/>, onClick: () => navigate("/Paycalc")},
     {title: 'timesheet', icon: <img src={daily}  width={40} height={40}/>, onClick: () => navigate("/TimesheetManager")},
 

@@ -11,14 +11,7 @@ function Mrgabs() {
    const [timecard,setTimecard]=useState([]);
    const [rolldata,setRolldata]=useState([])
    useEffect(()=>{
-// async function getData(){
-//   const data = await getRequest(ServerConfig.url,TIMECARD);
-  
-//   setTimecard(data.data);
-  
-// }
-//console.log(timecard)
-//getData()
+
 async function getData(){
 return await postRequest(ServerConfig.url,REPORTS,{
    "query": "select t.emp_code ,t.emp_name,t.break_in,t.break_out,t.late_in,t.intime,t.outtime,t.early_out,t.late_out,t.ot_hrs,t.shift_code,t.leave_code,datepart(hour,t.intime) as intime ,(select datepart(hour,start_time) from shift_details where shift_code=t.shift_code) as start_time,(datepart(hour,t.outtime)-datepart(hour,t.intime)+datepart(hour,t.break_in)-datepart(hour,t.break_out)) as t_whrs  from time_card t"})
@@ -87,8 +80,6 @@ Absent Details For the Period of 01/02/2010 to 28/02/2010
                   <TableCell sx={{borderBottom:'4px solid black', padding: '5px' }}>Out Time</TableCell>
                   <TableCell sx={{  borderBottom:'4px solid black', padding: '5px' }}>Break in </TableCell>
                  <TableCell sx={{borderBottom:'4px solid black', padding: '5px' }}>Break out</TableCell>
-
-
                   <TableCell sx={{ borderBottom:'4px solid black', padding: '5px' }}>Early In</TableCell>
                   <TableCell sx={{ borderBottom:'4px solid black',  padding: '5px' }}>Late In</TableCell>
                   <TableCell sx={{ borderBottom:'4px solid black',  padding: '5px' }}>Late out</TableCell>
