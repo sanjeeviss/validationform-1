@@ -168,6 +168,7 @@ import Leaveapprovenew from './components/ApprovalForm';
 import AbsentAtt from './components/ReportFormates/AbsentAttReports';
 import Bankreg from './components/ReportFormates/BankRegButton';
 import BANKREGISTER from './components/ReportFormates/BankRegButton';
+import DashBoard from './components/dashboared/dashboared';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -181,8 +182,9 @@ root.render(
  
    <Routes>
      <Route path="/" element={<App/>}>
-     <Route path="/layout" element={<Layoutcomp/>}/>
+     <Route path="/layout" element={<Layoutcomp/>}/>  
      <Route path='/home' element={<ServiceCard/>}></Route> 
+     <Route path='/hr' element={<DashBoard/>}></Route>
      <Route path='/AssetsTable' element={<AssetsTable/>}></Route>
      <Route path='/SampleForm' element={<SampleForm/>}></Route>
 
