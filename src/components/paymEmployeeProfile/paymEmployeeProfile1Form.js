@@ -47,6 +47,22 @@ const[fatherName, setFatherName] = useState("")
 
 
 
+const[divisionError,setdivisionError] = useState(false)
+const[departmentError,setdepartmentError] = useState(false)
+const[designationError,setdesignationError] = useState(false)
+const[gradeError,setgradeError] = useState(false)
+const[shiftError,setshiftError] = useState(false)
+const[categoryError,setcategoryError] = useState(false)
+const[jobstatusError,setjobstatusError] = useState(false)
+const[levelError,setlevelError] = useState(false)
+const[employeError,setemployeeError] = useState(false)
+const [dDateError,setdDateError]=useState(false)
+const [vReasonError,setvReasonError]=useState(false)
+const [rDepartmentError,setrDepartmentError]=useState(false)
+const[fatherNameError, setFatherNameError] = useState(false)
+
+
+
 
 useEffect(() => {
 async function getData() {
@@ -77,35 +93,125 @@ async function getData() {
 }
 getData();
 }, []);
+pnCompanyId: pnCompanyId,
+pnBranchId: pnBranchId,
+pnEmployeeId:  pnEmployeeId,
+pnDivisionId: pnDivisionId,
+pnDepartmentId:pnDepartmentId,
+pnDesingnationId: pnDesingnationId,
+pnGradeId: pnGradeId,
+pnShiftId:pnShiftId,
+pnCategoryId: pnCategoryId,
+pnJobStatusId: pnJobStatusId,
+pnLevelId: pnLevelId,
+pnProjectsiteId:  pnProjectsiteId,
+dDate: dDate,
+vReason: vReason,
+rDepartment: rDepartment,
+fatherName: fatherName,
 
-const handleSubmit = async (e) => {
-e.preventDefault();
-const formData = {
-  pnCompanyId: pnCompanyId,
-  pnBranchId: pnBranchId,
-  pnEmployeeId:  pnEmployeeId,
-  pnDivisionId: pnDivisionId,
-  pnDepartmentId:pnDepartmentId,
-  pnDesingnationId: pnDesingnationId,
-  pnGradeId: pnGradeId,
-  pnShiftId:pnShiftId,
-  pnCategoryId: pnCategoryId,
-  pnJobStatusId: pnJobStatusId,
-  pnLevelId: pnLevelId,
-  pnProjectsiteId:  pnProjectsiteId,
-  dDate: dDate,
-  vReason: vReason,
-  rDepartment: rDepartment,
-  fatherName: fatherName,
-  paymCategory:{
-    "pnCategoryId":  pnCategoryId
-  },
-  paymDepartment: {
-    pnDepartmentId: pnDepartmentId
-  }
+const handleChange = (e) => {
+   const { name, value } = e.target;
+
+   switch (name) {
+     case 'pnCompanyId':
+       setPnCompanyId(value);
+       setemployeeError(false);
+       break;
+       case 'pnBranchId':
+     setPnBranchId(value);
+     setemployeeError(false);
+     case 'pnEmployeeId':
+      setPnBranchId(value);
+      setemployeeError(false);
+      case 'pnDivisionId':
+         setDivision(value);
+         setdivisionError(false);
+         case 'pnDepartmentId':
+            setDepartment(value);
+            setdepartmentError(false);
+            case 'pnDesingnationId':
+               setDesignation(value);
+               setdesignationError(false);
+               case 'pnGradeId':
+                  setPnBranchId(value);
+                  setBranchError(false);
+                  case 'pnShiftId':
+                     setPnBranchId(value);
+                     setBranchError(false);
+                     case 'pnCategoryId':
+                        setPnBranchId(value);
+                        setBranchError(false);
+       break;
+       case 'pnJobStatusId':
+         setPnBranchId(value);
+         setBranchError(false);
+break;
+case 'pnLevelId':
+   setPnBranchId(value);
+   setBranchError(false);
+break;
+case 'pnProjectsiteId':
+   setPnBranchId(value);
+   setBranchError(false);
+break;
+     case 'dDate':
+       setVGradeName(value);
+       setGradeNameError(!/^[A-Za-z0-9\s]{1,40}$/.test(value));
+       break;
+    
+     case 'vReason':
+       setStatus(value.toUpperCase());
+       setStatusError(!/^[A-Za-z]{1}$/.test(value));
+       break;
+
+       case 'rDepartment':
+         setStatus(value.toUpperCase());
+         setStatusError(!/^[A-Za-z]{1}$/.test(value));
+         break;
+         case 'fatherName':
+            setStatus(value.toUpperCase());
+            setStatusError(!/^[A-Za-z]{1}$/.test(value));
+            break;
+     default:
+       break;
+   }
+ };
+
+ const handleSubmit = async (e) => {
+   e.preventDefault();
+
+   setCompanyError(!pnCompanyId);
+   setBranchError(!pnBranchId);
+
+   setGradeNameError(!/^[A-Za-z0-9\s]{1,40}$/.test(vGradeName));
+   
+   setStatusError(!/^[A-Za-z]{1}$/.test(status));
+
+   if (
+     companyError ||
+     branchError ||
+     gradeNameError ||
+     statusError
+   ) {
+     return;
+   }
+
+   const formData = {
+     pnCompanyId: pnCompanyId,
+     pnBranchId: pnBranchId,
+     vGradeName: vGradeName,
+ status: status,
+
 };
-console.log(formData)
-};
+try {
+     const response = await postRequest(ServerConfig.url, PAYMGRADE, formData);
+     console.log(response);
+     navigate('/PaymgradeTables');
+   } catch (error) {
+     console.error('Error saving grade:', error);
+   }
+ };
 
   const margin={margin:"0 5px"}
   return (

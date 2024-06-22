@@ -333,7 +333,7 @@ root.render(
      <Route path='/PaymOverHeadingcostTable' element={<PaymOverHeadingcostTable/>}></Route>
      <Route path='/Sample26' element={<Sample26/>}></Route> 
 
-     <Route path='/PaympfTable' element={<PaympfTable/>}></Route>
+     <Route path='/PaymPfTable' element={<PaympfTable/>}></Route>
      <Route path='/Sample25' element={<Sample25/>}></Route> 
 
      <Route path='/PaymPaybillTable' element={<PaymPaybillTable/>}></Route>

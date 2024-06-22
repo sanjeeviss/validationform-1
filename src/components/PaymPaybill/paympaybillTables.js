@@ -5,7 +5,7 @@ import { ServerConfig } from '../../serverconfiguration/serverconfig'
 import { getRequest } from '../../serverconfiguration/requestcomp'
 import { createSvgIcon } from '@mui/material'
 import {Button, Grid} from '@mui/material'
-import {PAYMPF } from '../../serverconfiguration/controllers'
+import {PAYMPAYBILL, PAYMPF } from '../../serverconfiguration/controllers'
 import { useNavigate} from 'react-router-dom'
 
 const PlusIcon = createSvgIcon(
@@ -23,17 +23,17 @@ const PlusIcon = createSvgIcon(
   );
 
 
-const PaympfTable = () => {
+const PaymPaybillTable = () => {
     const navigate = useNavigate();
     const [data, setData] = useState([]);
     useEffect (()=> {
-        getRequest(ServerConfig.url, PAYMPF).then((e) => {
+        getRequest(ServerConfig.url, PAYMPAYBILL).then((e) => {
             setData(e.data)
         })
     },[]);
 
     function handleonclick() {
-        navigate('/Sample25')
+        navigate('/Sample24')
     } 
 
   return (
@@ -42,4 +42,4 @@ const PaympfTable = () => {
   )
 }
 
-export default PaympfTable
+export default PaymPaybillTable

@@ -1,263 +1,362 @@
-import {TextField, Button, Card,  Typography, Box, Grid, CardContent, FormControl} from '@mui/material';
-import {useState,useEffect} from 'react'
-import  {getRequest,postRequest} from '../../serverconfiguration/requestcomp';
-import {InputLabel} from '@mui/material';
-import { Label } from '@mui/icons-material';
+import { useState, useEffect } from 'react';
+import { TextField, Button, Card, Typography, Box, Grid, CardContent, FormControl, InputLabel, MenuItem, Select, FormHelperText } from '@mui/material';
+import { getRequest, postRequest } from '../../serverconfiguration/requestcomp';
 import { ServerConfig } from '../../serverconfiguration/serverconfig';
-import {  PAYMEMPLOYEE  } from '../../serverconfiguration/controllers';
+import { PAYMEMPLOYEE, PAYMEMPLOYEELEAVE } from '../../serverconfiguration/controllers';
 import { useNavigate } from 'react-router-dom';
-  import {inputpaymEmployeeLeaveForm} from './paymEmployeeLeave';
-import { PAYMEMPLOYEELEAVE } from '../../serverconfiguration/controllers';
-
-  
 
 export default function PaymEmpLeaveForm() {
   const navigate = useNavigate();
-    const [employee,setEmployee]=useState([])
-const [company,setCompany]=useState([])
-const [branch,setBranch]=useState([])
-const [pnEmployeeId,setPnEmployeeID]=useState("")
-const [fromDate, setFromDate] = useState(""); // Declare status state
-const [toDate, setToDate] = useState(""); // Declare status state
-const [fromStatus, setFromStatus] = useState(""); // Declare status state
-const [toStatus, setToStatus] = useState(""); // Declare status state
-const [leaveCount, setLeaveCount] = useState(""); // Declare status state
-const [pnLeaveId, setPnLeaveID] = useState(""); 
+  const [employee, setEmployee] = useState([]);
+  const [company, setCompany] = useState([]);
+  const [branch, setBranch] = useState([]);
+  const [pnCompanyId, setPnCompanyId] = useState("");
+  const [pnBranchId, setPnBranchId] = useState("");
+  const [pnEmployeeId, setPnEmployeeID] = useState("");
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
+  const [fromStatus, setFromStatus] = useState("");
+  const [toStatus, setToStatus] = useState("");
+  const [leaveCount, setLeaveCount] = useState("");
+  const [pnLeaveId, setPnLeaveID] = useState("");
+  const [leaveError, setLeaveError] = useState([]); // Change here
+  const [employeeError, setEmployeeError] = useState(false);
+  const [companyError, setCompanyError] = useState(false);
+  const [branchError, setBranchError] = useState(false);
+  const [fromDateError, setFromDateError] = useState(false);
+  const [toDateError, setToDateError] = useState(false);
+  const [fromStatusError, setFromStatusError] = useState(false);
+  const [toStatusError, setToStatusError] = useState(false);
+  const [leaveCountError, setLeaveCountError] = useState(false);
+  const [pnLeaveIdError, setPnLeaveIDError] = useState(false);
 
-useEffect(()=>{
-  async function getData()
-  {
-    const data=await getRequest(ServerConfig.url,PAYMEMPLOYEE)
-    setEmployee(data.data)
-   
-}
-  getData()
+  useEffect(() => {
+    async function getData() {
+      const data = await getRequest(ServerConfig.url, PAYMEMPLOYEE);
+      setEmployee(data.data);
+    }
+    getData();
+  }, []);
 
-},[])
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
-
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  const formData = {
-    "pnCompanyId":company,
-    pnBranchId:branch,
-    pnEmployeeId:pnEmployeeId,
-    fromDate:fromDate,
-    toDate:toDate,
-    fromStatus:fromStatus,
-    toStatus:toStatus,
-    leaveCount:leaveCount,
-    pnLeaveId:pnLeaveId,
-  
+    switch (name) {
+      case 'pnCompanyId':
+        setPnCompanyId(value);
+        setCompanyError(false);
+        break;
+      case 'pnBranchId':
+        setPnBranchId(value);
+        setBranchError(false);
+        break;
+      case 'pnEmployeeId':
+        setPnEmployeeID(value);
+        setEmployeeError(false);
+        break;
+      case 'pnLeaveId':
+        setPnLeaveID(value);
+        setLeaveError(false);
+        break;
+      case 'fromDate':
+        setFromDate(value);
+        setFromDateError(!value);
+        break;
+      case 'toDate':
+        setToDate(value);
+        setToDateError(!value);
+        break;
+      case 'fromStatus':
+        setFromStatus(value);
+        setFromStatusError(!/^[A-Za-z0-9\s]{1,5}$/.test(value));
+        break;
+      case 'toStatus':
+        setToStatus(value);
+        setToStatusError(!/^[A-Za-z0-9\s]{1,5}$/.test(value));
+        break;
+      case 'leaveCount':
+        setLeaveCount(value);
+        setLeaveCountError(!/^\d+(\.\d+)?$/.test(value) || !value);
+        break;
+      default:
+        break;
+    }
   };
-console.log(formData)
-};
-    const margin={margin:"0 5px"}
-    return (
-      <div className="App">
-          <Card style ={{ maxWidth: 600, margin: "0 auto" ,font:'initial'}}>
-        <CardContent>
-        <Typography sx={{ mt: 3 }} align='center' color='primary' variant="h5">Paym Employee Leave</Typography>
-   
-             <form>
-             <Grid container spacing={2} columns={12} >
-     
-        <Grid item xs={12} sm={6} >
-              <FormControl fullWidth>
-             
-              <InputLabel shrink>CompanyID</InputLabel>
-                 <select name = "pnCompanyId" 
-                 onChange={(e)=>{
-                  setCompany(e.target.value)
-                  
 
-                  
-                 }}
-                 style={{ height: '50px' }}
-                
-                 >
-                  <option value="">Select</option>
-                     {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-                        employee.map((e)=><option>{e.pnCompanyId}</option>)
-                        
-                     }
-                 </select>
-              </FormControl >
-                  </Grid>
-                  <Grid xs={12} sm={6} item>
-                    <FormControl fullWidth >
+    setCompanyError(!pnCompanyId);
+    setBranchError(!pnBranchId);
+    setEmployeeError(!pnEmployeeId);
+    setPnLeaveIDError(!pnLeaveId);
+    setFromDateError(!fromDate);
+    setToDateError(!toDate);
+    setFromStatusError(!/^[A-Za-z0-9\s]{1,5}$/.test(fromStatus));
+    setToStatusError(!/^[A-Za-z0-9\s]{1,5}$/.test(toStatus));
+    setLeaveCountError(!/^\d+(\.\d+)?$/.test(leaveCount) || !leaveCount);
+
+    if (
+      companyError ||
+      branchError ||
+      employeeError ||
+      pnLeaveIdError ||
+      fromDateError ||
+      toDateError ||
+      fromStatusError ||
+      toStatusError ||
+      leaveCountError
+    ) {
+      return;
+    }
+
+    const formData = {
+      pnCompanyId,
+      pnBranchId,
+      pnEmployeeId,
+      fromDate,
+      toDate,
+      fromStatus,
+      toStatus,
+      leaveCount,
+      pnLeaveId
+    };
+
+    try {
+      const response = await postRequest(ServerConfig.url, PAYMEMPLOYEELEAVE, formData);
+      console.log(response);
+      navigate('/PaymEmpLeaveTable');
+    } catch (error) {
+      console.error('Error saving Emp Leave:', error);
+    }
+  };
+
+  const margin = { margin: "0 5px" };
+  return (
+    <div>
+      <Grid style={{ padding: "80px 5px 0 5px" }}>
+        <Card style={{ maxWidth: 600, margin: "0 auto" }}>
+          <CardContent>
+            <Typography variant='h5' color='S- Light' align='center'>Paym Employee Leave</Typography>
+            <Typography variant='subtitle1' color="textSecondary" paddingBottom={'20px'}>
+              Fill all the Mandatory fields
+            </Typography>
+            <form onSubmit={handleSubmit}>
+              <Grid container spacing={2} inputlabelprops={{ shrink: true }}>
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth>
+                    <InputLabel shrink>CompanyId</InputLabel>
+                    <Select
+                      value={pnCompanyId}
+                      onChange={handleChange}
+                      name="pnCompanyId"
+                      displayEmpty
+                      style={{ height: '50px' }}
+                    >
+                      <MenuItem value="">
+                        <em>Select</em>
+                      </MenuItem>
+                      {employee.map((e) => (
+                        <MenuItem key={e.pnCompanyId} value={e.pnCompanyId}>
+                          {e.pnCompanyId}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    {companyError && (
+                      <FormHelperText sx={{ color: 'red' }}>
+                        Please select a CompanyId
+                      </FormHelperText>
+                    )}
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth>
                     <InputLabel shrink>BranchId</InputLabel>
-                 <select 
-                 name="pnBranchId"
-                 onChange={(e)=>{
-                  setBranch(e.target.value)
-                //  setShiftDetails(shiftdetails.filter((e)=>(e.pnBranchid==1 && e.pnCompanyid==1)))
-                //  console.log(shiftdetails)
-               
-                
-                 }}
-                 style={{ height: '50px' }}
-                 inputlabelprops={{ shrink: true }}
-                 >
-                  <option value="">Select</option>
-                     {
-                       
-                          employee.filter((e)=>(e.pnCompanyId==company)).map((e)=><option>{e.pnBranchId}</option>)
-                     }
-                 </select>
-                 </FormControl>
-                  </Grid>
-
-                  <Grid xs={12} sm={6} item>
-                 
-                    <FormControl fullWidth>
-                    <InputLabel shrink>empId</InputLabel>
-                 <select 
-                 name = "pnEmployeeId"
-                 onChange={(e)=>{
-                    
-                     var v=e.currentTarget.value
-                  var empname=employee.filter((e)=>e.employeeCode==v)
-                  setPnEmployeeID(v)
-                  // setEmployeeName(empname[0].employeeFullName)
-                  // setCardNo(empname[0].cardNo)
-               
-                 }}
-                 style={{ height: '50px' }}
-                 >
-                        <option value="">Select</option>
-                 
-                     {
-                        
-                        employee.filter((e)=>(e.pnCompanyId==company && e.pnBranchId==branch)).map((e)=><option>{e.pnEmployeeId}</option>)
-                      
-                     }
-                 </select>
-                 </FormControl>
-                  </Grid>
-                  <Grid  xs={12}  sm={6} item>
-                    <FormControl fullWidth> 
-                  <TextField
-                name="pnLeaveId"
-                   
-                    label="pnLeaveId"
-                    variant="outlined"
-                    fullWidth
-                    required
-                    onChange={(e) => setPnLeaveID(e.target.value)} 
-                  />
+                    <Select
+                      value={pnBranchId}
+                      onChange={handleChange}
+                      name="pnBranchId"
+                      displayEmpty
+                      style={{ height: '50px' }}
+                    >
+                      <MenuItem value="">
+                        <em>Select</em>
+                      </MenuItem>
+                      {employee.map((e) => (
+                        <MenuItem key={e.pnBranchId} value={e.pnBranchId}>
+                          {e.pnBranchId}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    {branchError && (
+                      <FormHelperText sx={{ color: 'red' }}>
+                        Please select a BranchId
+                      </FormHelperText>
+                    )}
                   </FormControl>
-                  </Grid>
-
-                  <Grid  xs={12}  sm={6} item>
-                    <FormControl fullWidth> 
-                  <TextField
-                name="fromDate"
-                   
-                    label="fromDate"
-                    variant="outlined"
-                    fullWidth
-                    required
-                    type='datetime-local'
-
-                    onChange={(e) => setFromDate(e.target.value)} 
-                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth error={employeeError}>
+                    <InputLabel shrink>EmployeeId</InputLabel>
+                    <Select
+                      value={pnEmployeeId}
+                      onChange={handleChange}
+                      name="pnEmployeeId"
+                      displayEmpty
+                      style={{ height: '50px' }}
+                    >
+                      <MenuItem value="">
+                        <em>Select</em>
+                      </MenuItem>
+                      {employee.map((e) => (
+                        <MenuItem key={e.pnEmployeeId} value={e.pnEmployeeId}>
+                          {e.pnEmployeeId}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    {employeeError && (
+                      <FormHelperText sx={{ color: 'red' }}>
+                        Please select an EmployeeId
+                      </FormHelperText>
+                    )}
                   </FormControl>
-                  </Grid>
-                  <Grid  xs={12}  sm={6} item>
-                    <FormControl fullWidth> 
-                  <TextField
-                name="toDate"
-                   
-                    label="toDate"
-                    variant="outlined"
-                    fullWidth
-                    required
-                    type='datetime-local'
-                    onChange={(e) => setToDate(e.target.value)} 
-                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth error={employeeError}>
+                    <InputLabel shrink>LeaveId</InputLabel>
+                    <Select
+                      value={pnLeaveId}
+                      onChange={handleChange}
+                      name="pnLeaveId"
+                      displayEmpty
+                      style={{ height: '50px' }}
+                    >
+                      <MenuItem value="">
+                        <em>Select</em>
+                      </MenuItem>
+                      {leaveError.map((e) => ( // Corrected here
+                        <MenuItem key={e.pnLeaveId} value={e.pnLeaveId}>
+                          {e.pnLeaveId}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    {leaveError && (
+                      <FormHelperText sx={{ color: 'red' }}>
+                        Please select an LeaveId
+                      </FormHelperText>
+                    )}
                   </FormControl>
-                  </Grid>
-                  <Grid  xs={12}  sm={6} item>
-                    <FormControl fullWidth> 
-                  <TextField
-                name="fromStatus"
-                   
-                    label="fromStatus"
-                    variant="outlined"
-                    fullWidth
-                    required
-                    onChange={(e) => setFromStatus(e.target.value)} 
-                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth error={fromDateError}>
+                    <TextField
+                      name="fromDate"
+                      label="From Date"
+                      type="date"
+                      variant="outlined"
+                      fullWidth
+                      required
+                      value={fromDate}
+                      onChange={handleChange}
+                      InputLabelProps={{ shrink: true }}
+                    />
+                    {fromDateError && (
+                      <FormHelperText sx={{ color: 'red' }}>
+                        Please select a From Date
+                      </FormHelperText>
+                    )}
                   </FormControl>
-                  </Grid>
-                  <Grid  xs={12}  sm={6} item>
-                    <FormControl fullWidth> 
-                  <TextField
-                name="toStatus"
-                   
-                    label="toStatus"
-                    variant="outlined"
-                    fullWidth
-                    required
-                    onChange={(e) => setToStatus(e.target.value)} 
-                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth error={toDateError}>
+                    <TextField
+                      name="toDate"
+                      label="To Date"
+                      type="date"
+                      variant="outlined"
+                      fullWidth
+                      required
+                      value={toDate}
+                      onChange={handleChange}
+                      InputLabelProps={{ shrink: true }}
+                    />
+                    {toDateError && (
+                      <FormHelperText sx={{ color: 'red' }}>
+                        Please select a To Date
+                      </FormHelperText>
+                    )}
                   </FormControl>
-                  </Grid>
-                  <Grid  xs={12}  sm={6} item>
-                    <FormControl fullWidth> 
-                  <TextField
-                name="leaveCount"
-                   
-                    label="leaveCount"
-                    variant="outlined"
-                    fullWidth
-                    required
-                    onChange={(e) => setLeaveCount(e.target.value)} 
-                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth error={fromStatusError}>
+                    <TextField
+                      name="fromStatus"
+                      label="From Status"
+                      variant="outlined"
+                      fullWidth
+                      required
+                      value={fromStatus}
+                      onChange={handleChange}
+                      InputLabelProps={{ shrink: true }}
+                    />
+                    {fromStatusError && (
+                      <FormHelperText sx={{ color: 'red' }}>
+                        Please enter a valid From Status (alphanumeric characters, max length 5)
+                      </FormHelperText>
+                    )}
                   </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth error={toStatusError}>
+                    <TextField
+                      name="toStatus"
+                      label="To Status"
+                      variant="outlined"
+                      fullWidth
+                      required
+                      value={toStatus}
+                      onChange={handleChange}
+                      InputLabelProps={{ shrink: true }}
+                    />
+                    {toStatusError && (
+                      <FormHelperText sx={{ color: 'red' }}>
+                        Please enter a valid To Status (alphanumeric characters, max length 5)
+                      </FormHelperText>
+                    )}
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth error={leaveCountError}>
+                    <TextField
+                      name="leaveCount"
+                      label="Leave Count"
+                      variant="outlined"
+                      fullWidth
+                      required
+                      value={leaveCount}
+                      onChange={handleChange}
+                      InputLabelProps={{ shrink: true }}
+                    />
+                    {leaveCountError && (
+                      <FormHelperText sx={{ color: 'red' }}>
+                        Please enter a valid Leave Count (numeric)
+                      </FormHelperText>
+                    )}
+                  </FormControl>
+                </Grid>
+                <Grid container spacing={1} paddingTop={'10px'}>
+                  <Grid item xs={12} align="right">
+                    <Button style={margin} type="reset" variant='outlined' color='primary'>RESET</Button>
+                    <Button type="submit" variant="contained" color="primary">
+                      SAVE
+                    </Button>
                   </Grid>
-
-      
-      
-            {
-            inputpaymEmployeeLeaveForm.map(input=> <Grid xs={input.xs} sm={input.sm} item>
-                              {/* <TextField {...input}  InputLabelProps={{shrink:true}}/> */}
-              </Grid>)
-            }
-            
-             <Grid item xs={12} align="right">
-              <Button type="reset" variant="contained" color="primary"style={{paddingRight:'3'}} >Reset</Button>
-              <Button onClick={()=>{
-  const formData = {
-    "pnCompanyId":company,
-    pnBranchId:branch,
-    pnEmployeeId:pnEmployeeId,
-    fromDate:fromDate,
-    toDate:toDate,
-    fromStatus:fromStatus,
-    toStatus:toStatus,
-    leaveCount:leaveCount,
-    pnLeaveId:pnLeaveId,
- 
-  };
-console.log(formData)
-postRequest(ServerConfig.url,PAYMEMPLOYEELEAVE,formData).then((e)=>{
-  console.log(e)
-  navigate('/PaymEmpLeaveTable')
-}).catch((e)=>console.log(e));
-
-                  
-                }}  
-        variant='contained' color='primary' >SAVE</Button>              </Grid>
-            </Grid>
-           
-       
-       </form>
-       </CardContent>
-       </Card>
-       </div>
-    ) 
-  }
-  
+                </Grid>
+              </Grid>
+            </form>
+          </CardContent>
+        </Card>
+      </Grid>
+    </div>
+  );
+}
