@@ -169,6 +169,7 @@ import AbsentAtt from './components/ReportFormates/AbsentAttReports';
 import Bankreg from './components/ReportFormates/BankRegButton';
 import BANKREGISTER from './components/ReportFormates/BankRegButton';
 import DashBoard from './components/dashboared/dashboared';
+import PaymPfTable from './components/PaymPf/paympfTable';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -333,10 +334,10 @@ root.render(
      <Route path='/PaymOverHeadingcostTable' element={<PaymOverHeadingcostTable/>}></Route>
      <Route path='/Sample26' element={<Sample26/>}></Route> 
 
-     <Route path='/PaymPfTable' element={<PaympfTable/>}></Route>
+     <Route path='/paympfTable' element={<PaymPfTable/>}></Route>
      <Route path='/Sample25' element={<Sample25/>}></Route> 
 
-     <Route path='/PaymPaybillTable' element={<PaymPaybillTable/>}></Route>
+     <Route path='/paympaybillTable' element={<PaymPaybillTable/>}></Route>
      <Route path='/Sample24' element={<Sample24/>}></Route> 
 
      <Route path='/PaymshiftTable' element={<PaymshiftTable/>}></Route>

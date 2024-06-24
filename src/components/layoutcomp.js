@@ -101,7 +101,7 @@ function Layoutcomp() {
     {title: 'Leave Allocation', icon: <img src={LeaveAllocation}  width={40} height={40}/>, onClick: () => navigate("/LeaveAllocationMasterTable")},
     {title: 'Leave Apply', icon: <img src={LeaveApprove}  width={40} height={40}/>, onClick: () => navigate("/LeaveApplyTable")},
     {title: 'Leave Approve Hr', icon: <img src={LeaveAppHr}  width={40} height={40}/>, onClick: () => navigate("/LeaveApproveHrTable")},
-    {title: 'Leave Approve Manager', icon: <img src={LeaAppMan}  width={40} height={40}/>, onClick: () => navigate("/LeaveApproveHrTable")},
+    {title: 'Leave Approve Manager', icon: <img src={LeaAppMan}  width={40} height={40}/>, onClick: () => navigate("/LeaveApproveManagerTable")},
     {title: 'Leave Settlement', icon: <img src={LeaSettlement}  width={40} height={40}/>, onClick: () => navigate("/LeaveSettlementTable")},
     {title: 'Loan Entry', icon: <img src={LoanEntry}  width={40} height={40}/>, onClick: () => navigate("/LoanEntryTable")},
     {title: 'Loan Post', icon: <img src={LoanPost}  width={40} height={40}/>, onClick: () => navigate("/LoanPostTable")},

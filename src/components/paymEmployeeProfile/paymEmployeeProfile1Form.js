@@ -1,607 +1,594 @@
-import { Grid,Card,
+import { useState, useEffect } from 'react';
+import {
+  Grid,
+  Card,
   TextField,
   Button,
   Typography,
   Box,
   CardContent,
-  FormControl
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  FormHelperText
 } from '@mui/material';
-import { useState, useEffect } from 'react';
 import { PAYMBRANCHES, PAYMCOMPANIES, PAYMEMPLOYEE, PAYMDIVISION, PAYMDEPARTMENT, PAYMDESIGNATION, PAYMGRADE, PAYMSHIFT, PAYMCATEGORY, JOBSTATUS, PAYMLEVEL, PAYMEMPLOYEEPROFILE1 } from '../../serverconfiguration/controllers';
 import { getRequest, postRequest } from '../../serverconfiguration/requestcomp';
-import {InputLabel} from '@mui/material';
 import { ServerConfig } from '../../serverconfiguration/serverconfig';
 import { useNavigate } from 'react-router-dom';
 
-
-
 export default function EmployeeProfile1Form() {
-const navigate= useNavigate();
-const [company,setCompany]=useState([])
-const [branch,setBranch]=useState([])
-const [employee,setEmployee]=useState([])
-const [division,setDivision]=useState([])
-const [department,setDepartment]=useState([])
-const [designation,setDesignation]=useState([])
-const [grade,setGrade]=useState([])
-const [shift,setShift]=useState([])
-const [category,setCategory]=useState([])
-const [jobstatus,setJobStatus]=useState([])
-const [level,setLevel]=useState([])
-const [pnCompanyId,setpnCompanyId]=useState("")
-const [pnBranchId,setpnBranchId]=useState("")
-const [pnEmployeeId,setpnEmployeeId]=useState("")
-const [pnDivisionId,setpnDivisionId]=useState("")
-const [pnDepartmentId,setpnDepartmentId]=useState("")
-const [pnDesingnationId,setpnDesingnationId]=useState("")
-const [pnGradeId,setpnGradeId]=useState("")
-const [pnShiftId,setpnShiftId]=useState("")
-const [pnCategoryId,setpnCategoryId]=useState("")
-const [pnJobStatusId,setpnJobStatusId]=useState("")
-const [pnLevelId,setpnLevelId]=useState("")
-const [pnProjectsiteId,setpnProjectsiteId]=useState("")
-const [dDate,setdDate]=useState("")
-const [vReason,setvReason]=useState("")
-const [rDepartment,setrDepartment]=useState("")
-const[fatherName, setFatherName] = useState("")
+  const navigate = useNavigate();
+  const [company, setCompany] = useState([]);
+  const [branch, setBranch] = useState([]);
+  const [employee, setEmployee] = useState([]);
+  const [division, setDivision] = useState([]);
+  const [department, setDepartment] = useState([]);
+  const [designation, setDesignation] = useState([]);
+  const [grade, setGrade] = useState([]);
+  const [shift, setShift] = useState([]);
+  const [category, setCategory] = useState([]);
+  const [jobstatus, setJobStatus] = useState([]);
+  const [level, setLevel] = useState([]);
 
+  const [pnCompanyId, setpnCompanyId] = useState("");
+  const [pnBranchId, setpnBranchId] = useState("");
+  const [pnEmployeeId, setpnEmployeeId] = useState("");
+  const [pnDivisionId, setpnDivisionId] = useState("");
+  const [pnDepartmentId, setpnDepartmentId] = useState("");
+  const [pnDesingnationId, setpnDesingnationId] = useState("");
+  const [pnGradeId, setpnGradeId] = useState("");
+  const [pnShiftId, setpnShiftId] = useState("");
+  const [pnCategoryId, setpnCategoryId] = useState("");
+  const [pnJobStatusId, setpnJobStatusId] = useState("");
+  const [pnLevelId, setpnLevelId] = useState("");
+  const [pnProjectsiteId, setpnProjectsiteId] = useState("");
+  const [dDate, setdDate] = useState("");
+  const [vReason, setvReason] = useState("");
+  const [rDepartment, setrDepartment] = useState("");
+  const [fatherName, setFatherName] = useState("");
 
+  const [companyError, setCompanyError] = useState(false);
+  const [branchError, setBranchError] = useState(false);
+  const [employeeError, setEmployeeError] = useState(false);
+  const [divisionError, setDivisionError] = useState(false);
+  const [departmentError, setDepartmentError] = useState(false);
+  const [designationError, setDesignationError] = useState(false);
+  const [gradeError, setGradeError] = useState(false);
+  const [shiftError, setShiftError] = useState(false);
+  const [categoryError, setCategoryError] = useState(false);
+  const [jobstatusError, setJobstatusError] = useState(false);
+  const [levelError, setLevelError] = useState(false);
+  const [ProjectsiteError, setProjectsiteError] = useState(false);
+  const [dDateError, setdDateError] = useState(false);
+  const [vReasonError, setvReasonError] = useState(false);
+  const [rDepartmentError, setrDepartmentError] = useState(false);
 
-const[divisionError,setdivisionError] = useState(false)
-const[departmentError,setdepartmentError] = useState(false)
-const[designationError,setdesignationError] = useState(false)
-const[gradeError,setgradeError] = useState(false)
-const[shiftError,setshiftError] = useState(false)
-const[categoryError,setcategoryError] = useState(false)
-const[jobstatusError,setjobstatusError] = useState(false)
-const[levelError,setlevelError] = useState(false)
-const[employeError,setemployeeError] = useState(false)
-const [dDateError,setdDateError]=useState(false)
-const [vReasonError,setvReasonError]=useState(false)
-const [rDepartmentError,setrDepartmentError]=useState(false)
-const[fatherNameError, setFatherNameError] = useState(false)
+  useEffect(() => {
+    async function getData() {
+      const data = await getRequest(ServerConfig.url, PAYMCOMPANIES);
+      setCompany(data.data);
+      const data1 = await getRequest(ServerConfig.url, PAYMBRANCHES);
+      setBranch(data1.data);
+      const data2 = await getRequest(ServerConfig.url, PAYMEMPLOYEE);
+      setEmployee(data2.data);
+      const data3 = await getRequest(ServerConfig.url, PAYMDIVISION);
+      setDivision(data3.data);
+      const data4 = await getRequest(ServerConfig.url, PAYMDEPARTMENT);
+      setDepartment(data4.data);
+      const data5 = await getRequest(ServerConfig.url, PAYMDESIGNATION);
+      setDesignation(data5.data);
+      const data6 = await getRequest(ServerConfig.url, PAYMGRADE);
+      setGrade(data6.data);
+      const data7 = await getRequest(ServerConfig.url, PAYMSHIFT);
+      setShift(data7.data);
+      const data8 = await getRequest(ServerConfig.url, PAYMCATEGORY);
+      setCategory(data8.data);
+      const data9 = await getRequest(ServerConfig.url, JOBSTATUS);
+      setJobStatus(data9.data);
+      const data10 = await getRequest(ServerConfig.url, PAYMLEVEL);
+      setLevel(data10.data);
+    }
+    getData();
+  }, []);
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
-
-
-useEffect(() => {
-async function getData() {
-  const data = await getRequest(ServerConfig.url, PAYMCOMPANIES);
-  setCompany(data.data);
-  const data1 = await getRequest(ServerConfig.url, PAYMBRANCHES);
-    setBranch(data1.data)
-  const data2 = await getRequest(ServerConfig.url, PAYMEMPLOYEE);
-  setEmployee(data2.data)
-  const data3 = await getRequest(ServerConfig.url, PAYMDIVISION);
-  setDivision(data3.data)
-  const data4 = await getRequest(ServerConfig.url, PAYMDEPARTMENT);
-  setDepartment(data4.data)
-  const data5 = await getRequest(ServerConfig.url, PAYMDESIGNATION);
-  setDesignation(data5.data)
-  const data6 = await getRequest(ServerConfig.url, PAYMGRADE);
-  setGrade(data6.data)
-  const data7 = await getRequest(ServerConfig.url, PAYMSHIFT);
-  setShift(data7.data)
-  const data8 = await getRequest(ServerConfig.url, PAYMCATEGORY);
-  setCategory(data8.data)
-  const data9 = await getRequest(ServerConfig.url, JOBSTATUS);
-  setJobStatus(data9.data)
-  const data10 = await getRequest(ServerConfig.url, PAYMLEVEL);
-  setLevel(data10.data)
-
-  
-}
-getData();
-}, []);
-pnCompanyId: pnCompanyId,
-pnBranchId: pnBranchId,
-pnEmployeeId:  pnEmployeeId,
-pnDivisionId: pnDivisionId,
-pnDepartmentId:pnDepartmentId,
-pnDesingnationId: pnDesingnationId,
-pnGradeId: pnGradeId,
-pnShiftId:pnShiftId,
-pnCategoryId: pnCategoryId,
-pnJobStatusId: pnJobStatusId,
-pnLevelId: pnLevelId,
-pnProjectsiteId:  pnProjectsiteId,
-dDate: dDate,
-vReason: vReason,
-rDepartment: rDepartment,
-fatherName: fatherName,
-
-const handleChange = (e) => {
-   const { name, value } = e.target;
-
-   switch (name) {
-     case 'pnCompanyId':
-       setPnCompanyId(value);
-       setemployeeError(false);
-       break;
-       case 'pnBranchId':
-     setPnBranchId(value);
-     setemployeeError(false);
-     case 'pnEmployeeId':
-      setPnBranchId(value);
-      setemployeeError(false);
+    switch (name) {
+      case 'pnCompanyId':
+        setpnCompanyId(value);
+        setCompanyError(false);
+        break;
+      case 'pnBranchId':
+        setpnBranchId(value);
+        setBranchError(false);
+        break;
+      case 'pnEmployeeId':
+        setpnEmployeeId(value);
+        setEmployeeError(false);
+        break;
       case 'pnDivisionId':
-         setDivision(value);
-         setdivisionError(false);
-         case 'pnDepartmentId':
-            setDepartment(value);
-            setdepartmentError(false);
-            case 'pnDesingnationId':
-               setDesignation(value);
-               setdesignationError(false);
-               case 'pnGradeId':
-                  setPnBranchId(value);
-                  setBranchError(false);
-                  case 'pnShiftId':
-                     setPnBranchId(value);
-                     setBranchError(false);
-                     case 'pnCategoryId':
-                        setPnBranchId(value);
-                        setBranchError(false);
-       break;
-       case 'pnJobStatusId':
-         setPnBranchId(value);
-         setBranchError(false);
-break;
-case 'pnLevelId':
-   setPnBranchId(value);
-   setBranchError(false);
-break;
-case 'pnProjectsiteId':
-   setPnBranchId(value);
-   setBranchError(false);
-break;
-     case 'dDate':
-       setVGradeName(value);
-       setGradeNameError(!/^[A-Za-z0-9\s]{1,40}$/.test(value));
-       break;
-    
-     case 'vReason':
-       setStatus(value.toUpperCase());
-       setStatusError(!/^[A-Za-z]{1}$/.test(value));
-       break;
+        setpnDivisionId(value);
+        setDivisionError(false);
+        break;
+      case 'pnDepartmentId':
+        setpnDepartmentId(value);
+        setDepartmentError(false);
+        break;
+      case 'pnDesingnationId':
+        setpnDesingnationId(value);
+        setDesignationError(false);
+        break;
+      case 'pnGradeId':
+        setpnGradeId(value);
+        setGradeError(false);
+        break;
+      case 'pnShiftId':
+        setpnShiftId(value);
+        setShiftError(false);
+        break;
+      case 'pnCategoryId':
+        setpnCategoryId(value);
+        setCategoryError(false);
+        break;
+      case 'pnJobStatusId':
+        setpnJobStatusId(value);
+        setJobstatusError(false);
+        break;
+      case 'pnLevelId':
+        setpnLevelId(value);
+        setLevelError(false);
+        break;
+      case 'pnProjectsiteId':
+        setpnProjectsiteId(value);
+        setProjectsiteError(false);
+        break;
+      case 'dDate':
+        setdDate(value);
+        setdDateError(!value);
+        break;
+      case 'vReason':
+        setvReason(value);
+        setvReasonError(!/^[A-Za-z0-9\s]{1,500}$/.test(value));
+        break;
+      case 'rDepartment':
+        setrDepartment(value);
+        setrDepartmentError(!/^\d+$/.test(value));
+        break;
+      default:
+        break;
+    }
+  };
 
-       case 'rDepartment':
-         setStatus(value.toUpperCase());
-         setStatusError(!/^[A-Za-z]{1}$/.test(value));
-         break;
-         case 'fatherName':
-            setStatus(value.toUpperCase());
-            setStatusError(!/^[A-Za-z]{1}$/.test(value));
-            break;
-     default:
-       break;
-   }
- };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
- const handleSubmit = async (e) => {
-   e.preventDefault();
+    setCompanyError(!pnCompanyId);
+    setBranchError(!pnBranchId);
+    setEmployeeError(!pnEmployeeId);
+    setDivisionError(!pnDivisionId);
+    setDepartmentError(!pnDepartmentId);
+    setGradeError(!pnGradeId);
+    setJobstatusError(!pnJobStatusId);
+    setDesignationError(!pnDesingnationId);
+    setLevelError(!pnLevelId);
+    setShiftError(!pnShiftId);
+    setProjectsiteError(!pnProjectsiteId);
+    setCategoryError(!pnCategoryId);
+    setdDateError(!dDate);
+    setvReasonError(!/^[A-Za-z0-9\s]{1,500}$/.test(vReason));
+    setrDepartmentError(!/^\d+$/.test(rDepartment));
 
-   setCompanyError(!pnCompanyId);
-   setBranchError(!pnBranchId);
+    if (
+      companyError ||
+      branchError ||
+      employeeError ||
+      divisionError ||
+      departmentError ||
+      designationError ||
+      gradeError ||
+      jobstatusError ||
+      levelError ||
+      shiftError ||
+      categoryError ||
+      ProjectsiteError ||
+      dDateError ||
+      vReasonError ||
+      rDepartmentError
+    ) {
+      return;
+    }
 
-   setGradeNameError(!/^[A-Za-z0-9\s]{1,40}$/.test(vGradeName));
-   
-   setStatusError(!/^[A-Za-z]{1}$/.test(status));
+    const formData = {
+      pnCompanyId,
+      pnBranchId,
+      pnEmployeeId,
+      pnDivisionId,
+      pnDepartmentId,
+      pnDesingnationId,
+      pnGradeId,
+      pnShiftId,
+      pnCategoryId,
+      pnJobStatusId,
+      pnLevelId,
+      pnProjectsiteId,
+      dDate,
+      vReason,
+      rDepartment
+    };
 
-   if (
-     companyError ||
-     branchError ||
-     gradeNameError ||
-     statusError
-   ) {
-     return;
-   }
+    try {
+      const response = await postRequest(ServerConfig.url, PAYMEMPLOYEEPROFILE1, formData);
+      console.log(response);
+      navigate('/PaymEmployeeProfile1Tables');
+    } catch (error) {
+      console.error('Error saving Employee profile:', error);
+    }
+  };
 
-   const formData = {
-     pnCompanyId: pnCompanyId,
-     pnBranchId: pnBranchId,
-     vGradeName: vGradeName,
- status: status,
-
-};
-try {
-     const response = await postRequest(ServerConfig.url, PAYMGRADE, formData);
-     console.log(response);
-     navigate('/PaymgradeTables');
-   } catch (error) {
-     console.error('Error saving grade:', error);
-   }
- };
-
-  const margin={margin:"0 5px"}
+  const margin = { margin: "0 5px" };
   return (
     <div>
-      <Grid style ={{ padding: "80px 5px0 5px" }}>
-      <Card style = {{maxWidth: 600, margin: "0 auto"}}>
-      <CardContent>
-      <Typography variant='h5' color='S- Light' align='center'>Paym Employee Profile</Typography>
-      <form>
-     
-      <Grid container spacing={2} inputlabelprops={{shrink:true}}>
-          <Grid item xs={12} sm={6} >
-            <FormControl fullWidth>
-           
-            <InputLabel shrink>Company</InputLabel>
-               <select name = "pnCompanyId" 
-               onChange={(e)=>{
-                setpnCompanyId(e.target.value)
-                
-               }}
-               style={{ height: '50px' }}
-              
-               >
-                <option value="">Select</option>
-                   {
-
-                      company.map((e)=><option>{e.pnCompanyId}</option>)
-                      
-                   }
-               </select>
-            </FormControl >
+      <Grid style={{ padding: "80px 5px 0 5px" }}>
+        <Card style={{ maxWidth: 600, margin: "0 auto" }}>
+          <CardContent>
+            <Typography variant='h5' color='S- Light' align='center'>Paym Employee Profile</Typography>
+            <Typography variant='subtitle1' color="textSecondary" paddingBottom={'20px'}>
+              Fill all the Mandatory fields
+            </Typography>
+            <form onSubmit={handleSubmit}>
+              <Grid container spacing={2} inputlabelprops={{ shrink: true }}>
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth>
+                    <InputLabel shrink>CompanyId</InputLabel>
+                    <Select
+                      value={pnCompanyId}
+                      onChange={handleChange}
+                      name="pnCompanyId"
+                      displayEmpty
+                      style={{ height: '50px' }}
+                    >
+                      <MenuItem value="">
+                        <em>Select</em>
+                      </MenuItem>
+                      {company.map((e) => (
+                        <MenuItem key={e.pnCompanyId} value={e.pnCompanyId}>
+                          {e.pnCompanyId}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    {companyError && (
+                      <FormHelperText sx={{ color: 'red' }}>
+                        Please select a CompanyId
+                      </FormHelperText>
+                    )}
+                  </FormControl>
                 </Grid>
-
-                <Grid item xs={12} sm={6} >
-            <FormControl fullWidth>
-           
-            <InputLabel shrink>BranchId</InputLabel>
-               <select name = "pnBranchId" 
-               onChange={(e)=>{
-                setpnBranchId(e.target.value)
-                
-               }}
-               style={{ height: '50px' }}
-              
-               >
-                <option value="">Select</option>
-                   {
-
-                      branch.map((e)=><option>{e.pnBranchId}</option>)
-                      
-                   }
-               </select>
-            </FormControl >
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth>
+                    <InputLabel shrink>BranchId</InputLabel>
+                    <Select
+                      value={pnBranchId}
+                      onChange={handleChange}
+                      name="pnBranchId"
+                      displayEmpty
+                      style={{ height: '50px' }}
+                    >
+                      <MenuItem value="">
+                        <em>Select</em>
+                      </MenuItem>
+                      {branch.map((e) => (
+                        <MenuItem key={e.pnBranchId} value={e.pnBranchId}>
+                          {e.pnBranchId}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    {branchError && <FormHelperText sx={{ color: 'red' }}>Please Select a BranchId</FormHelperText>}
+                  </FormControl>
                 </Grid>
-
-                <Grid item xs={12} sm={6} >
-            <FormControl fullWidth>
-           
-            <InputLabel shrink>EmployeeId</InputLabel>
-               <select name = "pnEmployeeId" 
-               onChange={(e)=>{
-                setpnEmployeeId(e.target.value)
-                
-               }}
-               style={{ height: '50px' }}
-              
-               >
-                <option value="">Select</option>
-                   {
-
-                      employee.map((e)=><option>{e.pnEmployeeId}</option>)
-                      
-                   }
-               </select>
-            </FormControl >
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth error={divisionError}>
+                    <InputLabel shrink>DivisionId</InputLabel>
+                    <Select
+                      value={pnDivisionId}
+                      onChange={handleChange}
+                      name="pnDivisionId"
+                      displayEmpty
+                      style={{ height: '50px' }}
+                    >
+                      <MenuItem value="">
+                        <em>Select</em>
+                      </MenuItem>
+                      {division.map((e) => (
+                        <MenuItem key={e.pnDivisionId} value={e.pnDivisionId}>
+                          {e.pnDivisionId}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    {divisionError && (
+                      <FormHelperText sx={{ color: 'red' }}>
+                        Please select a DivisionId
+                      </FormHelperText>
+                    )}
+                  </FormControl>
                 </Grid>
-
-
-                <Grid item xs={12} sm={6} >
-            <FormControl fullWidth>
-           
-            <InputLabel shrink>DivisionId</InputLabel>
-               <select name = "pnDivisionId" 
-               onChange={(e)=>{
-                setpnDivisionId(e.target.value)
-                
-               }}
-               style={{ height: '50px' }}
-              
-               >
-                <option value="">Select</option>
-                   {
-
-                      division.map((e)=><option>{e.pnDivisionId}</option>)
-                      
-                   }
-               </select>
-            </FormControl >
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth error={departmentError}>
+                    <InputLabel shrink>DepartmentId</InputLabel>
+                    <Select
+                      value={pnDepartmentId}
+                      onChange={handleChange}
+                      name="pnDepartmentId"
+                      displayEmpty
+                      style={{ height: '50px' }}
+                    >
+                      <MenuItem value="">
+                        <em>Select</em>
+                      </MenuItem>
+                      {department.map((e) => (
+                        <MenuItem key={e.pnDepartmentId} value={e.pnDepartmentId}>
+                          {e.pnDepartmentId}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    {departmentError && (
+                      <FormHelperText sx={{ color: 'red' }}>
+                        Please select a DepartmentId
+                      </FormHelperText>
+                    )}
+                  </FormControl>
                 </Grid>
-
-                <Grid item xs={12} sm={6} >
-                <FormControl fullWidth>
-           
-            <InputLabel shrink>DepartmentId</InputLabel>
-               <select name = "pnDepartmentId" 
-               onChange={(e)=>{
-                setpnDepartmentId(e.target.value)
-                
-               }}
-               style={{ height: '50px' }}
-              
-               >
-                <option value="">Select</option>
-                   {
-
-                      department.map((e)=><option>{e.pnDepartmentId}</option>)
-                      
-                   }
-               </select>
-            </FormControl >
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth error={designationError}>
+                    <InputLabel shrink>DesignationId</InputLabel>
+                    <Select
+                      value={pnDesingnationId}
+                      onChange={handleChange}
+                      name="pnDesingnationId"
+                      displayEmpty
+                      style={{ height: '50px' }}
+                    >
+                      <MenuItem value="">
+                        <em>Select</em>
+                      </MenuItem>
+                      {designation.map((e) => (
+                        <MenuItem key={e.pnDesingnationId} value={e.pnDesingnationId}>
+                          {e.pnDesingnationId}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    {designationError && (
+                      <FormHelperText sx={{ color: 'red' }}>
+                        Please select a DesignationId
+                      </FormHelperText>
+                    )}
+                  </FormControl>
                 </Grid>
-
-                <Grid item xs={12} sm={6} >
-                <FormControl fullWidth>
-           
-            <InputLabel shrink>DesignationId</InputLabel>
-               <select name = " pnDesingnationId" 
-               onChange={(e)=>{
-                setpnDesingnationId(e.target.value)
-                
-               }}
-               style={{ height: '50px' }}
-              
-               >
-                <option value="">Select</option>
-                   {
-
-                      designation.map((e)=><option>{e.pnDesignationId}</option>)
-                      
-                   }
-               </select>
-            </FormControl >
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth error={gradeError}>
+                    <InputLabel shrink>GradeId</InputLabel>
+                    <Select
+                      value={pnGradeId}
+                      onChange={handleChange}
+                      name="pnGradeId"
+                      displayEmpty
+                      style={{ height: '50px' }}
+                    >
+                      <MenuItem value="">
+                        <em>Select</em>
+                      </MenuItem>
+                      {grade.map((e) => (
+                        <MenuItem key={e.pnGradeId} value={e.pnGradeId}>
+                          {e.pnGradeId}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    {gradeError && (
+                      <FormHelperText sx={{ color: 'red' }}>
+                        Please select a GradeId
+                      </FormHelperText>
+                    )}
+                  </FormControl>
                 </Grid>
-
-                <Grid item xs={12} sm={6} >
-                <FormControl fullWidth>
-           
-            <InputLabel shrink>GradeId</InputLabel>
-               <select name = "pnGradeId" 
-               onChange={(e)=>{
-                setpnGradeId(e.target.value)
-                
-               }}
-               style={{ height: '50px' }}
-              
-               >
-                <option value="">Select</option>
-                   {
-
-                      grade.map((e)=><option>{e.pnGradeId}</option>)
-                      
-                   }
-               </select>
-            </FormControl >
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth error={shiftError}>
+                    <InputLabel shrink>ShiftId</InputLabel>
+                    <Select
+                      value={pnShiftId}
+                      onChange={handleChange}
+                      name="pnShiftId"
+                      displayEmpty
+                      style={{ height: '50px' }}
+                    >
+                      <MenuItem value="">
+                        <em>Select</em>
+                      </MenuItem>
+                      {shift.map((e) => (
+                        <MenuItem key={e.pnShiftId} value={e.pnShiftId}>
+                          {e.pnShiftId}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    {shiftError && (
+                      <FormHelperText sx={{ color: 'red' }}>
+                        Please select a ShiftId
+                      </FormHelperText>
+                    )}
+                  </FormControl>
                 </Grid>
-
-                <Grid item xs={12} sm={6} >
-                <FormControl fullWidth>
-           
-            <InputLabel shrink>ShiftId</InputLabel>
-               <select name = "pnShiftId" 
-               onChange={(e)=>{
-                setpnShiftId(e.target.value)
-                
-               }}
-               style={{ height: '50px' }}
-              
-               >
-                <option value="">Select</option>
-                   {
-
-                      shift.map((e)=><option>{e.pnShiftId}</option>)
-                      
-                   }
-               </select>
-            </FormControl >
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth error={categoryError}>
+                    <InputLabel shrink>CategoryId</InputLabel>
+                    <Select
+                      value={pnCategoryId}
+                      onChange={handleChange}
+                      name="pnCategoryId"
+                      displayEmpty
+                      style={{ height: '50px' }}
+                    >
+                      <MenuItem value="">
+                        <em>Select</em>
+                      </MenuItem>
+                      {category.map((e) => (
+                        <MenuItem key={e.pnCategoryId} value={e.pnCategoryId}>
+                          {e.pnCategoryId}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    {categoryError && (
+                      <FormHelperText sx={{ color: 'red' }}>
+                        Please select a CategoryId
+                      </FormHelperText>
+                    )}
+                  </FormControl>
                 </Grid>
-
-
-                
-                <Grid item xs={12} sm={6} >
-                <FormControl fullWidth>
-           
-            <InputLabel shrink>CategoryId</InputLabel>
-               <select name = "pnCategoryId" 
-               onChange={(e)=>{
-                setpnCategoryId(e.target.value)
-                
-               }}
-               style={{ height: '50px' }}
-              
-               >
-                <option value="">Select</option>
-                   {
-
-                      category.map((e)=><option>{e.pnCategoryId}</option>)
-                      
-                   }
-               </select>
-            </FormControl >
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth error={jobstatusError}>
+                    <InputLabel shrink>JobStatusId</InputLabel>
+                    <Select
+                      value={pnJobStatusId}
+                      onChange={handleChange}
+                      name="pnJobStatusId"
+                      displayEmpty
+                      style={{ height: '50px' }}
+                    >
+                      <MenuItem value="">
+                        <em>Select</em>
+                      </MenuItem>
+                      {jobstatus.map((e) => (
+                        <MenuItem key={e.pnJobStatusId} value={e.pnJobStatusId}>
+                          {e.pnJobStatusId}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    {jobstatusError && (
+                      <FormHelperText sx={{ color: 'red' }}>
+                        Please select a JobStatusId
+                      </FormHelperText>
+                    )}
+                  </FormControl>
                 </Grid>
-
-                <Grid item xs={12} sm={6} >
-                <FormControl fullWidth>
-           
-            <InputLabel shrink>Job Status Id</InputLabel>
-               <select name = "pnJobStatusId" 
-               onChange={(e)=>{
-                setpnJobStatusId(e.target.value)
-                
-               }}
-               style={{ height: '50px' }}
-              
-               >
-                <option value="">Select</option>
-                   {
-
-                      jobstatus.map((e)=><option>{e.pnJobStatusId}</option>)
-                      
-                   }
-               </select>
-            </FormControl >
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth error={levelError}>
+                    <InputLabel shrink>LevelId</InputLabel>
+                    <Select
+                      value={pnLevelId}
+                      onChange={handleChange}
+                      name="pnLevelId"
+                      displayEmpty
+                      style={{ height: '50px' }}
+                    >
+                      <MenuItem value="">
+                        <em>Select</em>
+                      </MenuItem>
+                      {level.map((e) => (
+                        <MenuItem key={e.pnLevelId} value={e.pnLevelId}>
+                          {e.pnLevelId}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    {levelError && (
+                      <FormHelperText sx={{ color: 'red' }}>
+                        Please select a LevelId
+                      </FormHelperText>
+                    )}
+                  </FormControl>
                 </Grid>
-
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth error={ProjectsiteError}>
+                    <InputLabel shrink>ProjectSiteId</InputLabel>
+                    <TextField
+                      name="pnProjectsiteId"
+                      value={pnProjectsiteId}
+                      onChange={handleChange}
+                      variant="outlined"
+                      fullWidth
+                      required
+                      InputLabelProps={{ shrink: true }}
+                    />
+                    {ProjectsiteError && (
+                      <FormHelperText sx={{ color: 'red' }}>
+                        Please enter a ProjectSiteId
+                      </FormHelperText>
+                    )}
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth error={dDateError}>
+                    <InputLabel shrink>Date</InputLabel>
+                    <TextField
+                      name="dDate"
+                      value={dDate}
+                      onChange={handleChange}
+                      type="date"
+                      variant="outlined"
+                      fullWidth
+                      required
+                      InputLabelProps={{ shrink: true }}
+                    />
+                    {dDateError && (
+                      <FormHelperText sx={{ color: 'red' }}>
+                        Please select a Date
+                      </FormHelperText>
+                    )}
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth error={vReasonError}>
+                    <InputLabel shrink>Reason</InputLabel>
+                    <TextField
+                      name="vReason"
+                      value={vReason}
+                      onChange={handleChange}
+                      variant="outlined"
+                      fullWidth
+                      required
+                      InputLabelProps={{ shrink: true }}
+                    />
+                    {vReasonError && (
+                      <FormHelperText sx={{ color: 'red' }}>
+                        Please enter a valid Reason (alphanumeric characters, max length 500)
+                      </FormHelperText>
+                    )}
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth error={rDepartmentError}>
+                    <InputLabel shrink>Reporting Department</InputLabel>
+                    <TextField
+                      name="rDepartment"
+                      value={rDepartment}
+                      onChange={handleChange}
+                      variant="outlined"
+                      fullWidth
+                      required
+                      InputLabelProps={{ shrink: true }}
+                    />
+                    {rDepartmentError && (
+                      <FormHelperText sx={{ color: 'red' }}>
+                        Please enter a valid Department (only numeric characters)
+                      </FormHelperText>
+                    )}
+                  </FormControl>
+                </Grid>
                
-                <Grid item xs={12} sm={6} >
-                <FormControl fullWidth>
-           
-            <InputLabel shrink>Level Id</InputLabel>
-               <select name = "pnLevelId" 
-               onChange={(e)=>{
-                setpnLevelId(e.target.value)
-                
-               }}
-               style={{ height: '50px' }}
-              
-               >
-                <option value="">Select</option>
-                   {
-
-                      level.map((e)=><option>{e.pnLevelId}</option>)
-                      
-                   }
-               </select>
-            </FormControl >
+                <Grid container spacing={1} paddingTop={'10px'}>
+                  <Grid item xs={12} align="right">
+                    <Button style={margin} type="reset" variant="outlined" color="primary">
+                      RESET
+                    </Button>
+                    <Button type="submit" variant="contained" color="primary">
+                      SAVE
+                    </Button>
+                  </Grid>
                 </Grid>
-
-                <Grid  xs={12}  sm={6} item>
-                  <FormControl fullWidth> 
-                <TextField
-              name="pnProjectsiteId"
-                 
-                  label="pnProjectsiteId"
-                  variant="outlined"
-                  fullWidth
-                  required
-                  onChange={(e) => setpnProjectsiteId(e.target.value)} 
-                  InputLabelProps={{shrink:true}}
-                  
-                />
-                </FormControl>
-                </Grid>
-
-                <Grid  xs={12}  sm={6} item>
-                  <FormControl fullWidth> 
-                <TextField
-              name="dDate"
-                 
-                  label="dDate"
-                  variant="outlined"
-                  fullWidth
-                  required
-                  onChange={(e) => setdDate(e.target.value)} 
-                  InputLabelProps={{shrink:true}}
-                  type='datetime-local'
-                  
-                />
-                </FormControl>
-                </Grid>
-
-
-
-                <Grid  xs={12}  sm={6} item>
-                  <FormControl fullWidth> 
-                <TextField
-              name="vReason"
-                 
-                  label="vReason"
-                  variant="outlined"
-                  fullWidth
-                  required
-                  onChange={(e) => setvReason(e.target.value)} 
-                  InputLabelProps={{shrink:true}}
-                  
-                />
-                </FormControl>
-                </Grid>
-
-
-                <Grid  xs={12}  sm={6} item>
-                  <FormControl fullWidth> 
-                <TextField
-              name="rDepartment"
-                 
-                  label="rDepartment"
-                  variant="outlined"
-                  fullWidth
-                  required
-                  onChange={(e) => setrDepartment(e.target.value)} 
-                  InputLabelProps={{shrink:true}}
-                  
-                />
-                </FormControl>
-                </Grid>
-
-                <Grid  xs={12}  sm={6} item>
-                  <FormControl fullWidth> 
-                <TextField
-              name="fatherName"
-                 
-                  label="fatherName"
-                  variant="outlined"
-                  fullWidth
-                  required
-                  onChange={(e) => setFatherName(e.target.value)} 
-                  InputLabelProps={{shrink:true}}
-                  
-                />
-                </FormControl>
-                </Grid>
-
-
-              
-        </Grid>
-        <Grid container spacing={1} paddingTop={'10px'}>
-            
-            <Grid item xs ={12} align="right" >
-              <Button style={margin} type="reset" variant='outlined' color='primary' >RESET</Button>
-              <Button onClick={()=>{
-const formData = {
-  pnCompanyId: pnCompanyId,
-  pnBranchId: pnBranchId,
-  pnEmployeeId:  pnEmployeeId,
-  pnDivisionId: pnDivisionId,
-  pnDepartmentId:pnDepartmentId,
-  pnDesingnationId: pnDesingnationId,
-  pnGradeId: pnGradeId,
-  pnShiftId:pnShiftId,
-  pnCategoryId: pnCategoryId,
-  pnJobStatusId: pnJobStatusId,
-  pnLevelId: pnLevelId,
-  pnProjectsiteId:  pnProjectsiteId,
-  dDate: dDate,
-  vReason: vReason,
-  rDepartment: rDepartment,
-  fatherName: fatherName,
-  paymCategory:{
-    "pnCategoryId":  pnCategoryId
-  },
-  paymDepartment: {
-    "pnDepartmentId": pnDepartmentId
-  }
-};
-console.log(formData)
-postRequest(ServerConfig.url,PAYMEMPLOYEEPROFILE1,formData).then((e)=>{
-console.log(e)
-navigate('/OnDutyTable')
-}).catch((e)=>console.log(e));
-
-                
-              }}  
-      variant='contained' color='primary' >SAVE</Button>
-            </Grid>
-            </Grid>
-
-      </form>
-      </CardContent>
-      </Card>
+              </Grid>
+            </form>
+          </CardContent>
+        </Card>
       </Grid>
     </div>
   );
 }
-
