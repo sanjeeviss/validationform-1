@@ -41,7 +41,7 @@ export default function DashBoard() {
       <Grid>
       <Box component="main" sx={{m:5,  p: 3,alignContent:"center", backgroundColor:"pink",borderRadius:"20px",width:130,height:130}}>
     <h1>{data}</h1>
-      </Box>
+      </Box> 
       </Grid>
       <Grid>
     <Box component="main" sx={{ m:5, p: 3, alignContent:"center",backgroundColor:"pink",borderRadius:"20px",width:130,height:130}}>

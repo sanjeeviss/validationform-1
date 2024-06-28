@@ -197,7 +197,7 @@ export default function ApprovehrForm() {
       toStatus: toStatus,
       approve: approve,
       yearEnd: yearEnd,
-      dayss: dayss,
+      dayss: parseInt(dayss),
     };
     try {
       const response = await postRequest(ServerConfig.url, LEAVEAPPROVEMANAGER, formData);

@@ -4,7 +4,9 @@ import { Grid,Card,
   Typography,
   Box,
   CardContent,
-  FormControl
+  FormControl,
+  FormHelperText,
+  Fab
 } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { FORM7, PAYMEMPLOYEE } from '../../serverconfiguration/controllers';
@@ -63,6 +65,49 @@ const [disp,setDisp]=useState("")
 
 
 
+const [companyError,setCompanyError]=useState([])
+const [branchError,setBranchError]=useState([])
+const [pnEmployeeIdError,setEmployeeIdError]=useState(false)
+const [employeeCodeError,setEmployeeCodeError]=useState(false)
+const [employeeNameError,setEmployeeNameError]=useState(false)
+const [form7Error,setForm7Error]=useState(false)
+const [esinoError,setEsiNoError]=useState(false)
+const [m1Error,setM1Error]=useState(false)
+const [m2Error,setM2Error]=useState(false)
+const [m3Error,setM3Error]=useState(false)
+const [m4Error,setM4Error]=useState(false)
+const [m5Error,setM5Error]=useState(false)  
+const [m6Error,setM6Error]=useState(false)
+const [d1Error,setD1Error]=useState(false)
+const [d2Error,setD2Error]=useState(false)
+const [d3Error,setD3Error]=useState(false)
+const [d4Error,setD4Error]=useState(false)
+const [d5Error,setD5Error]=useState(false)
+const [d6Error,setD6Error]=useState(false)
+const [w1Error,setW1Error]=useState(false)
+const [w2Error,setW2Error]=useState(false)
+const [w3Error,setW3Error]=useState(false)
+const [w4Error,setW4Error]=useState(false)
+const [w5Error,setW5Error]=useState(false)
+const [w6Error,setW6Error]=useState(false)
+const [esi1Error,setEsi1Error]=useState(false)
+const [esi2Error,setEsi2Error]=useState(false)
+const [esi3Error,setEsi3Error]=useState(false)
+const [esi4Error,setEsi4Error]=useState(false)
+const [esi5Error,setEsi5Error]=useState(false)
+const [esi6Error,setEsi6Error]=useState(false)
+const [empr1Error,setEmpr1Error]=useState(false)
+const [empr2Error,setEmpr2Error]=useState(false)
+const [empr3Error,setEmpr3Error]=useState(false)
+const [empr4Error,setEmpr4Error]=useState(false)
+const [empr5Error,setEmpr5Error]=useState(false)
+const [empr6Error,setEmpr6Error]=useState(false)
+const [totwageError,setTotwageError]=useState(false)
+const [totEsiError,setTotEsiError]=useState(false)
+const [totEmprError,setTotEmprError]=useState(false)
+const [dispError,setDispError]=useState(false)
+
+
 
 
 useEffect(() => {
@@ -75,52 +120,288 @@ async function getData() {
 getData();
 }, []);
 
+
+
+const handleChange = (e) => {
+  const { name, value } = e.target;
+
+  switch (name) {
+    case 'pnCompanyId':
+      setCompany(value);
+      setCompanyError(false);
+      break;
+    case 'pnBranchId':
+      setBranch(value);
+      setBranchError(false);
+      break;
+    case 'pnEmployeeId':
+      setEmployeeId(value);
+      setEmployeeIdError(!/^[A-Za-z0-9\s]{1,20}$/.test(value) || !value);
+      break;
+      case 'employeeCode':
+        setEmployeeCode(value);
+        var v=e.currentTarget.value
+                var empname=employee.filter((e)=>e.employeeCode==v)
+                setEmployeeCode(v)
+                setEmployeeName(empname[0].employeeFullName)
+        setEmployeeCodeError(!/^[A-Za-z0-9\s]{1,20}$/.test(value) || !value);
+        break;
+        case 'esino':
+          setEsiNo(value);
+          setEsiNoError(!/^\d{10,17}$/.test(value) || !value);
+          break;
+    case 'm1':
+      setM1(value);
+      setM1Error(!/^\d+$/.test(value) || !value);
+      break;
+      case 'm2':
+        setM2(value);
+        setM2Error(!/^\d+$/.test(value) || !value);
+      break;
+      case 'm3':
+        setM3(value);
+        setM3Error(!/^\d+$/.test(value) || !value);
+      break;
+      case 'm4':
+        setM4(value);
+        setM4Error(!/^\d+$/.test(value) || !value);
+      break;
+      case 'm5':
+        setM5(value);
+        setM5Error(!/^\d+$/.test(value) || !value);
+      break;
+      case 'm6':
+        setM6(value);
+        setM6Error(!/^\d+$/.test(value) || !value);
+      break;
+      case 'd1':
+      setD1(value);
+      setD1Error(!/^\d+(\.\d+)?$/.test(value));
+      break;
+      case 'd2':
+      setD2(value);
+      setD2Error(!/^\d+(\.\d+)?$/.test(value));
+      break;
+      case 'd3':
+      setD3(value);
+      setD3Error(!/^\d+(\.\d+)?$/.test(value));
+      break;
+      case 'd4':
+      setD4(value);
+      setD4Error(!/^\d+(\.\d+)?$/.test(value));
+      break;
+      case 'd5':
+      setD5(value);
+      setD5Error(!/^\d+(\.\d+)?$/.test(value));
+      break;
+      case 'd6':
+      setD6(value);
+      setD6Error(!/^\d+(\.\d+)?$/.test(value));
+      break;
+      case 'w1':
+      setW1(value);
+      setW1Error(!/^\d+(\.\d+)?$/.test(value));
+      break;
+      case 'w2':
+      setW2(value);
+      setW2Error(!/^\d+(\.\d+)?$/.test(value));
+      break;
+      case 'w3':
+      setW3(value);
+      setW3Error(!/^\d+(\.\d+)?$/.test(value));
+      break;
+      case 'w4':
+      setW4(value);
+      setW4Error(!/^\d+(\.\d+)?$/.test(value));
+      break;
+      case 'w5':
+      setW5(value);
+      setW5Error(!/^\d+(\.\d+)?$/.test(value));
+      break;
+      case 'w6':
+      setW6(value);
+      setW6Error(!/^\d+(\.\d+)?$/.test(value));
+      break;
+      case 'esi1':
+        setEsi1(value);
+        setEsi1Error(!/^\d{10,17}$/.test(value) || !value);
+      break;
+      case 'esi2':
+        setEsi2(value);
+        setEsi2Error(!/^\d{10,17}$/.test(value) || !value);
+        break;
+      case 'esi3':
+        setEsi3(value);
+        setEsi3Error(!/^\d{10,17}$/.test(value) || !value);
+      break;
+      case 'esi4':
+        setEsi4(value);
+        setEsi4Error(!/^\d{10,17}$/.test(value) || !value);
+      break;
+      case 'esi5':
+        setEsi5(value);
+        setEsi5Error(!/^\d{10,17}$/.test(value) || !value);
+      break;
+      case 'esi6':
+        setEsi6(value);
+        setEsi6Error(!/^\d{10,17}$/.test(value) || !value);
+      break;
+    case 'empr1':
+      setEmpr1(value);
+      setEmpr1Error(!/^\d{10,17}$/.test(value) || !value);
+      break;
+      case 'empr2':
+      setEmpr2(value);
+      setEmpr2Error(!/^\d{10,17}$/.test(value) || !value);
+      break;
+      case 'empr3':
+      setEmpr3(value);
+      setEmpr3Error(!/^\d{10,17}$/.test(value) || !value);
+      break;
+      case 'empr4':
+      setEmpr4(value);
+      setEmpr4Error(!/^\d{10,17}$/.test(value) || !value);
+      break;
+      case 'empr5':
+      setEmpr5(value);
+      setEmpr5Error(!/^\d{10,17}$/.test(value) || !value);
+      break;
+      case 'empr6':
+      setEmpr6(value);
+      setEmpr6Error(!/^\d{10,17}$/.test(value) || !value);
+        break;
+      case 'totwage':
+      seTotwage(value);
+      setTotwageError(!/^\d{10,17}$/.test(value) || !value);
+      break;
+      case 'totEsi':
+      setTotEsi(value);
+      setTotEsiError(!/^\d{10,17}$/.test(value) || !value);
+      break;
+      case 'totEmpr':
+      setTotEmpr(value);
+      setTotEmprError(!/^\d{10,17}$/.test(value) || !value);
+        break;
+        case 'disp':
+      setDisp(value);
+      setDispError(!/^\d{10,17}$/.test(value) || !value);
+      break;
+      
+    default:
+      break;
+  }
+};
+
 const handleSubmit = async (e) => {
-e.preventDefault();
-const formData = {
-  pnCompanyId: company,
-  pnBranchId: branch,
-  pnEmployeeId: pnEmployeeId,
-  employeeCode: employeeCode,
-  empName: employeeName,
-  esino: esino,
-  m1: m1,
-  m2: m2,
-  m3: m3,
-  m4: m4,
-  m5: m5,
-  m6: m6,
-  d1: d1,
-  d2: d2,
-  d3: d3,
-  d4: d4,
-  d5: d5,
-  d6: d6,
-  w1: w1,
-  w2: w2,
-  w3: w3,
-  w4: w4,
-  w5: w5,
-  w6: w6,
-  esi1: esi1,
-  esi2: esi2,
-  esi3: esi3,
-  esi4: esi4,
-  esi5: esi5,
-  esi6: esi6,
-  empr1: empr1,
-  empr2: empr2,
-  empr3: empr3,
-  empr4: empr4,
-  empr5:empr5,
-  empr6: empr6,
-  totwage: totwage,
-  totEsi: totEsi,
-  totEmpr: totEmpr,
-  disp:  disp
+  e.preventDefault();
+
+  setCompanyError(!company);
+  setBranchError(!branch);
+  setEmployeeIdError(!/^[A-Za-z0-9\s]{1,20}$/.test(pnEmployeeId) || !pnEmployeeId);
+  setEmployeeCodeError(!/^[A-Za-z0-9\s]{1,20}$/.test(employeeCode) || !employeeCode);
+  setEsiNoError(!/^\d{10,17}$/.test(esino) || !esino);
+  setM1Error(!/^\d+$/.test(m1) || !m1);
+  setM2Error(!/^\d+$/.test(m2) || !m2);
+  setM3Error(!/^\d+$/.test(m3) || !m3);
+  setM4Error(!/^\d+$/.test(m4) || !m4);
+  setM5Error(!/^\d+$/.test(m5) || !m5);
+  setM6Error(!/^\d+$/.test(m6) || !m6);
+  setD1Error(!/^\d+(\.\d+)?$/.test(!d1));
+  setD2Error(!/^\d+(\.\d+)?$/.test(!d2));
+  setD3Error(!/^\d+(\.\d+)?$/.test(!d3));
+  setD4Error(!/^\d+(\.\d+)?$/.test(!d4));
+  setD5Error(!/^\d+(\.\d+)?$/.test(!d5));
+  setD6Error(!/^\d+(\.\d+)?$/.test(!d6));
+  setW1Error(!/^\d+(\.\d+)?$/.test(!w1));
+  setW2Error(!/^\d+(\.\d+)?$/.test(!w2));
+  setW3Error(!/^\d+(\.\d+)?$/.test(!w3));
+  setW4Error(!/^\d+(\.\d+)?$/.test(!w4));
+  setW5Error(!/^\d+(\.\d+)?$/.test(!w5));
+  setW6Error(!/^\d+(\.\d+)?$/.test(!w6));
+  setEsi1Error(!/^\d{10,17}$/.test(esi1) || !esi1);
+  setEsi2Error(!/^\d{10,17}$/.test(esi2) || !esi2);
+  setEsi3Error(!/^\d{10,17}$/.test(esi3) || !esi3);
+  setEsi4Error(!/^\d{10,17}$/.test(esi4) || !esi4);
+  setEsi5Error(!/^\d{10,17}$/.test(esi5) || !esi5);
+  setEsi6Error(!/^\d{10,17}$/.test(esi6) || !esi6);
+  setEmpr1Error(!/^\d{10,17}$/.test(empr1) || !empr1);
+  setEmpr2Error(!/^\d{10,17}$/.test(empr2) || !empr2);
+  setEmpr3Error(!/^\d{10,17}$/.test(empr3) || !empr3);
+  setEmpr4Error(!/^\d{10,17}$/.test(empr4) || !empr4);
+  setEmpr5Error(!/^\d{10,17}$/.test(empr5) || !empr5);
+  setEmpr6Error(!/^\d{10,17}$/.test(empr6) || !empr6);
+  setTotwageError(!/^\d{10,17}$/.test(totwage) || !totwage);
+  setTotEsiError(!/^\d{10,17}$/.test(totEsi) || !totEsi);
+  setTotEmprError(!/^\d{10,17}$/.test(totEmpr) || !totEmpr);
+  setDispError(!/^\d{10,17}$/.test(disp) || !disp);
+
+
+  if (!company || !branch || !pnEmployeeId || !employeeCode || 
+  
+    ! esino||
+    !m1||
+    ! m2|| ! m3|| ! m4|| ! m5|| ! m6|| ! d1||! d2||! d3||! d4||! d5||! d6|| ! w1|| ! w2|| ! w3|| ! w4|| ! w5|| ! w6||
+  !esi1|| !esi2|| !esi3|| !esi4|| !esi5|| !esi6||
+    ! empr1||  ! empr2||  ! empr3||   ! empr4||   ! empr5||  ! empr6||
+    !totwage||
+    ! totEsi||
+    ! totEmpr||
+  ! disp ) {
+    return;
+  }
+
+  const formData = {
+    pnCompanyId: company,
+    pnBranchId: branch,
+    pnEmployeeId: pnEmployeeId,
+    employeeCode: employeeCode,
+    empName: employeeName,
+    esino: esino,
+    m1: m1,
+    m2: m2,
+    m3: m3,
+    m4: m4,
+    m5: m5,
+    m6: m6,
+    d1: d1,
+    d2: d2,
+    d3: d3,
+    d4: d4,
+    d5: d5,
+    d6: d6,
+    w1: w1,
+    w2: w2,
+    w3: w3,
+    w4: w4,
+    w5: w5,
+    w6: w6,
+    esi1: esi1,
+    esi2: esi2,
+    esi3: esi3,
+    esi4: esi4,
+    esi5: esi5,
+    esi6: esi6,
+    empr1: empr1,
+    empr2: empr2,
+    empr3: empr3,
+    empr4: empr4,
+    empr5:empr5,
+    empr6: empr6,
+    totwage: totwage,
+    totEsi: totEsi,
+    totEmpr: totEmpr,
+    disp:  disp
+  };
+
+  try {
+    await postRequest(ServerConfig.url, FORM7, formData);
+    navigate('/Form7table')
+  } catch (error) {
+    console.error('Error submitting form:', error);
+  }
 };
-console.log(formData)
-};
+
+
 
   const margin={margin:"0 5px"}
   return (
@@ -137,10 +418,7 @@ console.log(formData)
            
             <InputLabel shrink>Company</InputLabel>
                <select name = "pnCompanyId" 
-               onChange={(e)=>{
-                setCompany(e.target.value)
-                
-               }}
+               onChange={handleChange}
                style={{ height: '50px' }}
               
                >
@@ -151,6 +429,8 @@ console.log(formData)
                       
                    }
                </select>
+               {companyError && <FormHelperText  style={{color:"red"}}>Please select a company</FormHelperText>}
+
             </FormControl >
                 </Grid>
                 <Grid xs={12} sm={6} item>
@@ -158,10 +438,7 @@ console.log(formData)
                   <InputLabel shrink>BranchId</InputLabel>
                <select 
                name="pnBranchId"
-               onChange={(e)=>{
-                setBranch(e.target.value)
-              
-               }}
+               onChange={handleChange}
                style={{ height: '50px' }}
                inputlabelprops={{ shrink: true }}
                >
@@ -171,6 +448,8 @@ console.log(formData)
                         employee.filter((e)=>(e.pnCompanyId==company)).map((e)=><option>{e.pnBranchId}</option>)
                    }
                </select>
+               {branchError && <FormHelperText  style={{color:"red"}}>Please select a branch</FormHelperText>}
+
                </FormControl>
                 </Grid>
 
@@ -182,9 +461,11 @@ console.log(formData)
                   variant="outlined"
                   fullWidth
                   required
-                  onChange={(e) => setEmployeeId(e.target.value)} 
-                  InputLabelProps={{ shrink: true }} 
+                  onChange={handleChange}
+                                    InputLabelProps={{ shrink: true }} 
                 />
+                                 {pnEmployeeIdError && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
 
@@ -196,14 +477,7 @@ console.log(formData)
                   <InputLabel shrink>empCode</InputLabel>
                <select 
                name = "empCode"
-               onChange={(e)=>{
-                  
-                   var v=e.currentTarget.value
-                var empname=employee.filter((e)=>e.employeeCode==v)
-                setEmployeeCode(v)
-                setEmployeeName(empname[0].employeeFullName)
-             
-               }}
+               onChange={handleChange}
                style={{ height: '50px' }}
                >
                       <option value="">Select</option>
@@ -214,7 +488,10 @@ console.log(formData)
                     
                    }
                </select>
+               {employeeCodeError && <FormHelperText  style={{color:"red"}}>Please select a employeeCode</FormHelperText>}
+
                </FormControl>
+
                 </Grid>
 
           
@@ -228,6 +505,8 @@ console.log(formData)
                 variant="outlined"
                 fullWidth
                 required  /> 
+                                                 {employeeNameError && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
          
@@ -239,9 +518,11 @@ console.log(formData)
                   variant="outlined"
                   fullWidth
                   required
-                  onChange={(e) => setEsiNo(e.target.value)} 
+                  onChange={handleChange} 
                   InputLabelProps={{ shrink: true }} 
                 />
+                                                 {esinoError && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
 
@@ -256,9 +537,11 @@ console.log(formData)
                   
                   fullWidth
                   required
-                  onChange={(e) => setM1(e.target.value)} 
+                  onChange={handleChange} 
 
                 />
+                                                 {m1Error && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
                
@@ -270,9 +553,11 @@ console.log(formData)
                   variant="outlined"
                   fullWidth
                   required
-                  onChange={(e) => setM2(e.target.value)} 
+                  onChange={handleChange} 
                   InputLabelProps={{ shrink: true }} 
                 />
+                                                 {m2Error && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
 
@@ -287,9 +572,11 @@ console.log(formData)
                   
                   fullWidth
                   required
-                  onChange={(e) => setM3(e.target.value)} 
+                  onChange={handleChange} 
 
                 />
+                                                 {m3Error && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
 
@@ -301,9 +588,11 @@ console.log(formData)
                   variant="outlined"
                   fullWidth
                   required
-                  onChange={(e) => setM4(e.target.value)} 
+                  onChange={handleChange} 
                   InputLabelProps={{ shrink: true }} 
                 />
+                                                 {m4Error && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
 
@@ -318,9 +607,11 @@ console.log(formData)
                   
                   fullWidth
                   required
-                  onChange={(e) => setM5(e.target.value)} 
+                  onChange={handleChange} 
 
                 />
+                                                 {m5Error && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
                 <Grid  xs={12}  sm={6} item>
@@ -331,9 +622,11 @@ console.log(formData)
                   variant="outlined"
                   fullWidth
                   required
-                  onChange={(e) => setM6(e.target.value)} 
+                  onChange={handleChange} 
                   InputLabelProps={{ shrink: true }} 
                 />
+                                                 {m6 && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
 
@@ -348,9 +641,11 @@ console.log(formData)
                   
                   fullWidth
                   required
-                  onChange={(e) => setD1(e.target.value)} 
+                  onChange={handleChange} 
 
                 />
+                                                 {d1Error && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
                 <Grid  xs={12}  sm={6} item>
@@ -361,9 +656,11 @@ console.log(formData)
                   variant="outlined"
                   fullWidth
                   required
-                  onChange={(e) => setD2(e.target.value)} 
+                  onChange={handleChange} 
                   InputLabelProps={{ shrink: true }} 
                 />
+                                                 {d2Error && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
 
@@ -378,9 +675,11 @@ console.log(formData)
                   
                   fullWidth
                   required
-                  onChange={(e) => setD3(e.target.value)} 
+                  onChange={handleChange} 
 
                 />
+                                                 {d3Error && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
                 <Grid  xs={12}  sm={6} item>
@@ -391,9 +690,11 @@ console.log(formData)
                   variant="outlined"
                   fullWidth
                   required
-                  onChange={(e) => setD4(e.target.value)} 
+                  onChange={handleChange} 
                   InputLabelProps={{ shrink: true }} 
                 />
+                                                 {d4Error && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
 
@@ -408,9 +709,11 @@ console.log(formData)
                   
                   fullWidth
                   required
-                  onChange={(e) => setD5(e.target.value)} 
+                  onChange={handleChange} 
 
                 />
+                                                 {d5Error && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
                 <Grid  xs={12}  sm={6} item>
@@ -421,9 +724,11 @@ console.log(formData)
                   variant="outlined"
                   fullWidth
                   required
-                  onChange={(e) => setD6(e.target.value)} 
+                  onChange={handleChange} 
                   InputLabelProps={{ shrink: true }} 
                 />
+                                                 {d6Error && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
 
@@ -438,9 +743,11 @@ console.log(formData)
                   
                   fullWidth
                   required
-                  onChange={(e) => setW1(e.target.value)} 
+                  onChange={handleChange} 
 
                 />
+                                                 {w1 && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
                 <Grid  xs={12}  sm={6} item>
@@ -451,9 +758,11 @@ console.log(formData)
                   variant="outlined"
                   fullWidth
                   required
-                  onChange={(e) => setW2(e.target.value)} 
+                  onChange={handleChange} 
                   InputLabelProps={{ shrink: true }} 
                 />
+                                                 {w2Error && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
 
@@ -468,9 +777,10 @@ console.log(formData)
                   
                   fullWidth
                   required
-                  onChange={(e) => setW3(e.target.value)} 
-
+                  onChange={handleChange} 
                 />
+                                                 {w3Error && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
                 <Grid  xs={12}  sm={6} item>
@@ -481,9 +791,11 @@ console.log(formData)
                   variant="outlined"
                   fullWidth
                   required
-                  onChange={(e) => setW4(e.target.value)} 
+                  onChange={handleChange} 
                   InputLabelProps={{ shrink: true }} 
                 />
+                                                 {w4Error && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
 
@@ -498,9 +810,11 @@ console.log(formData)
                   
                   fullWidth
                   required
-                  onChange={(e) => setW5(e.target.value)} 
+                  onChange={handleChange} 
 
                 />
+                                                 {w5Error && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
                 <Grid  xs={12}  sm={6} item>
@@ -511,9 +825,11 @@ console.log(formData)
                   variant="outlined"
                   fullWidth
                   required
-                  onChange={(e) => setW6(e.target.value)} 
+                  onChange={handleChange} 
                   InputLabelProps={{ shrink: true }} 
                 />
+                                                 {w6Error && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
 
@@ -528,9 +844,11 @@ console.log(formData)
                   
                   fullWidth
                   required
-                  onChange={(e) => setEsi1(e.target.value)} 
+                  onChange={handleChange} 
 
                 />
+                                                 {esi1Error && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
 
@@ -538,13 +856,16 @@ console.log(formData)
                   <FormControl fullWidth> 
                 <TextField
               name="esi2"
-                  label="esi2"
-                  variant="outlined"
-                  fullWidth
-                  required
-                  onChange={(e) => setEsi2(e.target.value)} 
-                  InputLabelProps={{ shrink: true }} 
+              label="esi2"
+              variant="outlined"
+              fullWidth
+              required
+              onChange={handleChange}
+              InputLabelProps={{ shrink: true }}
+              error={esi2Error}
                 />
+              {esi2Error && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
 
@@ -559,9 +880,11 @@ console.log(formData)
                   
                   fullWidth
                   required
-                  onChange={(e) => setEsi3(e.target.value)} 
+                  onChange={handleChange} 
 
                 />
+                                                 {esi3Error && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
 
@@ -573,9 +896,11 @@ console.log(formData)
                   variant="outlined"
                   fullWidth
                   required
-                  onChange={(e) => setEsi4(e.target.value)} 
+                  onChange={handleChange} 
                   InputLabelProps={{ shrink: true }} 
                 />
+                                                 {esi4Error && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
 
@@ -590,9 +915,11 @@ console.log(formData)
                   
                   fullWidth
                   required
-                  onChange={(e) => setEsi5(e.target.value)} 
+                  onChange={handleChange} 
 
                 />
+                                                 {esi5Error && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
 
@@ -604,9 +931,11 @@ console.log(formData)
                   variant="outlined"
                   fullWidth
                   required
-                  onChange={(e) => setEsi6(e.target.value)} 
+                  onChange={handleChange} 
                   InputLabelProps={{ shrink: true }} 
                 />
+                                                 {esi6Error && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
 
@@ -621,9 +950,11 @@ console.log(formData)
                   
                   fullWidth
                   required
-                  onChange={(e) => setEmpr1(e.target.value)} 
+                  onChange={handleChange} 
 
                 />
+                                                 {empr1Error && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
 
@@ -635,9 +966,11 @@ console.log(formData)
                   variant="outlined"
                   fullWidth
                   required
-                  onChange={(e) => setEmpr2(e.target.value)} 
+                  onChange={handleChange} 
                   InputLabelProps={{ shrink: true }} 
                 />
+                                                 {empr2Error && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
 
@@ -652,9 +985,11 @@ console.log(formData)
                   
                   fullWidth
                   required
-                  onChange={(e) => setEmpr3(e.target.value)} 
+                  onChange={handleChange} 
 
                 />
+                                                 {empr3Error && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
 
@@ -666,9 +1001,11 @@ console.log(formData)
                   variant="outlined"
                   fullWidth
                   required
-                  onChange={(e) => setEmpr4(e.target.value)} 
+                  onChange={handleChange} 
                   InputLabelProps={{ shrink: true }} 
                 />
+                                                 {empr4Error && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
 
@@ -683,9 +1020,11 @@ console.log(formData)
                   
                   fullWidth
                   required
-                  onChange={(e) => setEmpr5(e.target.value)} 
+                  onChange={handleChange} 
 
                 />
+                                                 {empr5Error && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
 
@@ -697,9 +1036,11 @@ console.log(formData)
                   variant="outlined"
                   fullWidth
                   required
-                  onChange={(e) => setEmpr6(e.target.value)} 
+                  onChange={handleChange} 
                   InputLabelProps={{ shrink: true }} 
                 />
+                                                 {empr6Error && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
 
@@ -714,9 +1055,11 @@ console.log(formData)
                   
                   fullWidth
                   required
-                  onChange={(e) => seTotwage(e.target.value)} 
+                  onChange={handleChange} 
 
                 />
+                                                 {totwageError && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
 
@@ -728,9 +1071,11 @@ console.log(formData)
                   variant="outlined"
                   fullWidth
                   required
-                  onChange={(e) => setTotEsi(e.target.value)} 
+                  onChange={handleChange} 
                   InputLabelProps={{ shrink: true }} 
                 />
+                                                 {totEsiError && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
 
@@ -745,9 +1090,11 @@ console.log(formData)
                   
                   fullWidth
                   required
-                  onChange={(e) => setTotEmpr(e.target.value)} 
+                  onChange={handleChange} 
 
                 />
+                                                 {totEmprError && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
 
@@ -759,9 +1106,11 @@ console.log(formData)
                   variant="outlined"
                   fullWidth
                   required
-                  onChange={(e) => setDisp(e.target.value)} 
+                  onChange={handleChange} 
                   InputLabelProps={{ shrink: true }} 
                 />
+                                                 {dispError && <FormHelperText  style={{color:"red"}}>Please enter value</FormHelperText>}
+
                 </FormControl>
                 </Grid>
 
@@ -837,5 +1186,4 @@ navigate('/Form7table')
       </Grid>
     </div>
   );
-}
-
+ }

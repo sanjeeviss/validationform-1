@@ -3,7 +3,7 @@ import { Grid,Card,
   Button,
   Typography,
   Box,
-  CardContent,
+  CardContent,FormHelperText,
   FormControl
 } from '@mui/material';
 import { useState, useEffect } from 'react';
@@ -18,12 +18,17 @@ import { useNavigate } from 'react-router-dom';
 export default function OndutyForm() {
 const navigate= useNavigate();
 const [employee,setEmployee]=useState([])
-const [company,setCompany]=useState([])
-const [branch,setBranch]=useState([])
+const [pnCompanyId, setpnCompanyId] = useState("");
+const [company, setCompany] = useState("");
+const [branch, setBranch] = useState("");
+
+
+  const [pnBranchId, setpnBranchId] = useState("");
 const [pnEmployeeId,setEmployeeId]=useState("")
+const [employeeCode,setEmployeeCode]=useState("")
 const [employeeName,setEmployeeName]=useState("")
 const [refNo,setRefNo]=useState("")
-const [ondutyDat,setOnDutyDat]=useState([])
+const[ondutyDat,setOndutyDat ] = useState("")
 const [fstatus,setFstatus]=useState("")
 const [todat,setToDat]=useState("")
 const [tstatus,setTstatus]=useState("")
@@ -38,6 +43,28 @@ const [message3,setMessage3]=useState("")
 const [message4,setMessage4]=useState("")
 
 
+const [pnEmployeeIdError,setEmployeeIdError]=useState(false)
+
+const [pnCompanyIdError, setpnCompanyIdError] = useState(false);
+  const [pnBranchIdError, setpnBranchIdError] = useState(false);
+const [employeeError,setEmployeeError]=useState("")
+const [employeeCodeError,setEmployeeCodeError]=useState("")
+const [employeeNameError,setEmployeeNameError]=useState("")
+const [refNoError,setRefNoError]=useState("")
+const[ondutyDatError,setOndutyDatError ] = useState("")
+
+const [fstatusError,setFstatusError]=useState("")
+const [todatError,setToDatError]=useState("")
+const [tstatusError,setTstatusError]=useState("")
+const [totDaysError,setTotDaysError]=useState("")
+const [subDatError,setSubDatError]=useState("")
+const [reasonError,setReasonError]=useState("")
+const [priorityError,setPriorityError]=useState("")
+const [approvalError,setApprovalError]=useState("")
+const [message1Error,setMessage1Error]=useState("")
+const [message2Error,setMessage2Error]=useState("")
+const [message3Error,setMessage3Error]=useState("")
+const [message4Error,setMessage4Error]=useState("")
 useEffect(() => {
 async function getData() {
   const data = await getRequest(ServerConfig.url, PAYMEMPLOYEE);
@@ -47,30 +74,178 @@ async function getData() {
 getData();
 }, []);
 
+const handleChange = (e) => {
+  const { name, value } = e.target;
+
+  switch (name) {
+    case 'pnCompanyId':
+      setpnCompanyId(value);
+      setpnCompanyIdError(false);
+      break;
+      case 'pnBranchId':
+    setpnBranchId(value);
+    setpnBranchIdError(false);
+      break;
+      case 'empId':
+    setEmployeeId(value);
+    setEmployeeIdError(false);
+      break; 
+      case 'empCode':
+      const selectedEmployee = employee.find(emp => emp.empCode === value);
+      if (selectedEmployee) {
+        setEmployeeId(selectedEmployee.empId);  // Set empId from selected employee
+        setEmployeeCode(selectedEmployee.empCode);
+        setEmployeeName(selectedEmployee.empName); // Set empName here
+        setEmployeeCodeError(false);
+      } else {
+        setEmployeeId("");
+        setEmployeeCode(value);
+        setEmployeeName(""); // Clear empName if no employee found
+        setEmployeeCodeError(true);
+      }
+      break;
+    case 'refNo':
+      setRefNo(value);
+      setRefNoError(!/^[A-Za-z0-9\s]{1,40}$/.test(value));
+      break;
+   
+    case 'ondutyDat':
+      setOndutyDat(value);
+      setOndutyDatError(!value);
+      break;
+
+      case 'fstatus':
+      setFstatus(value);
+      setFstatusError(!/^[A-Za-z0-9\s]{1,40}$/.test(value));
+      break;
+
+      case 'todat':
+        setToDat(value);
+        setToDatError(!value);
+        break;
+
+        case 'tstatus':
+          setTstatus(value);
+          setTstatusError(!/^[A-Za-z0-9\s]{1,40}$/.test(value));
+          break;
+
+          case 'totDays':
+            setTotDays(value);
+            setTotDaysError(!/^\d+(\.\d+)?$/.test(totDays));
+            break;
+
+
+
+            case 'subDat':
+              setSubDat(value);
+              setSubDatError(!value);
+              break;
+
+              case 'reason':
+                setReason(value);
+                setReasonError(!/^[A-Za-z0-9\s]{1,30}$/.test(value));
+                break;
+
+                case 'priority':
+                  setPriority(value);
+                  setPriorityError(!/^[A-Za-z0-9\s]{1,10}$/.test(value));
+                  break;
+                  case 'approval':
+      setApproval(value);
+      setApprovalError(!/^[A-Za-z0-9\s]{1,500}$/.test(value));
+      break; 
+                    case 'message1':
+                      setMessage1(value);
+                      setMessage1Error(!/^[A-Za-z0-9\s]{1,500}$/.test(value));
+                      break;  
+                    case 'message2':
+                    setMessage2(value);
+                    setMessage2Error(!/^[A-Za-z0-9\s]{1,500}$/.test(value));
+                    break;  
+                    case 'message3':
+                    setMessage3(value);
+                    setMessage3Error(!/^[A-Za-z0-9\s]{1,500}$/.test(value));
+                    break;
+                    case 'message4':
+                      setMessage4(value);
+                      setMessage4Error(!/^[A-Za-z0-9\s]{1,500}$/.test(value));
+                      break;
+
+    default:
+      break;
+  }
+};
+
 const handleSubmit = async (e) => {
-e.preventDefault();
-const formData = {
-  pnCompanyId: company,
-  pnBranchId: branch,
-  empId: pnEmployeeId,
-  empName: employeeName,
-  refNo:refNo,
-  ondutyDat: ondutyDat,
-  fstatus: fstatus,
-  todat: todat,
-  tstatus: tstatus,
-  totDays: totDays,
-  subDat:  subDat,
-  reason: reason,
-  priority: priority,
-  approval: approval,
-  message1: message1,
-  message2:message2,
-  message3: message3,
-  message4: message4
+  e.preventDefault();
+
+  setpnCompanyIdError(!pnCompanyId);
+  setpnBranchIdError(!pnBranchId);
+  setEmployeeError(employee);
+  setEmployeeCodeError(employeeCode);
+  setRefNoError(!/^[A-Za-z0-9\s]{1,40}$/.test(refNo));
+  setOndutyDatError(!ondutyDat);
+  setFstatusError(!/^[A-Za-z0-9\s]{1,40}$/.test(fstatus));
+  setToDatError(!todat);
+  setTstatusError(!/^[A-Za-z0-9\s]{1,40}$/.test(tstatus));
+  setSubDatError(!subDat);
+  setReasonError(!/^[A-Za-z0-9\s]{1,30}$/.test(reason));
+  setPriorityError(!/^[A-Za-z0-9\s]{1,10}$/.test(priority));
+  setApprovalError(!/^[A-Za-z0-9\s]{1,10}$/.test(approval));
+  setMessage1Error(!/^[A-Za-z0-9\s]{1,500}$/.test(message1));
+  setMessage2Error(!/^[A-Za-z0-9\s]{1,500}$/.test(message2));
+  setMessage3Error(!/^[A-Za-z0-9\s]{1,500}$/.test(message3));
+  setMessage4Error(!/^[A-Za-z0-9\s]{1,500}$/.test(message4));
+  if (
+    pnCompanyId ||
+    message4 ||
+    message3 ||
+    message2||
+    message1||
+    approval||
+    priority||
+    reason ||
+    subDat ||
+    tstatus ||
+    todat ||
+    ondutyDat ||
+    refNo ||
+    employeeCode ||
+    pnBranchId
+  ) {
+    return;
+  }
+
+  const formData = {
+    pnCompanyId: company,
+    pnBranchId: branch,
+    empId: pnEmployeeId,
+    empName: employeeName,
+    refNo:refNo,
+    ondutyDat: ondutyDat,
+    fstatus: fstatus,
+    todat: todat,
+    tstatus: tstatus,
+    totDays: totDays,
+    subDat:  subDat,
+    reason: reason,
+    priority: priority,
+    approval: approval,
+    message1: message1,
+    message2:message2,
+    message3: message3,
+    message4: message4,
+
 };
-console.log(formData)
+try {
+    const response = await postRequest(ServerConfig.url, ONDUTY, formData);
+    console.log(response);
+    navigate('/OnDutyTable');
+  } catch (error) {
+    console.error('Error saving grade:', error);
+  }
 };
+
 
   const margin={margin:"0 5px"}
   return (
@@ -79,7 +254,7 @@ console.log(formData)
       <Card style = {{maxWidth: 600, margin: "0 auto"}}>
       <CardContent>
       <Typography variant='h5' color='S- Light' align='center'>OnDuty</Typography>
-      <form>
+      <form onSubmit={handleSubmit}>
      
       <Grid container spacing={2} inputlabelprops={{shrink:true}}>
           <Grid item xs={12} sm={6} >
@@ -101,6 +276,8 @@ console.log(formData)
                       
                    }
                </select>
+               {pnCompanyIdError && <FormHelperText sx={{ color: 'red' }}>Please Select a company</FormHelperText>}
+
             </FormControl >
                 </Grid>
                 <Grid xs={12} sm={6} item>
@@ -108,10 +285,7 @@ console.log(formData)
                   <InputLabel shrink>BranchId</InputLabel>
                <select 
                name="pnBranchId"
-               onChange={(e)=>{
-                setBranch(e.target.value)
-              
-               }}
+               onChange={handleChange}
                style={{ height: '50px' }}
                inputlabelprops={{ shrink: true }}
                >
@@ -121,6 +295,8 @@ console.log(formData)
                         employee.filter((e)=>(e.pnCompanyId==company)).map((e)=><option>{e.pnBranchId}</option>)
                    }
                </select>
+               {pnBranchIdError && <FormHelperText sx={{ color: 'red' }}>Please Select a Branch</FormHelperText>}
+
                </FormControl>
                 </Grid>
 
@@ -132,14 +308,11 @@ console.log(formData)
                   <InputLabel shrink>Employeeid</InputLabel>
                <select 
                name = "empId"
-               onChange={(e)=>{
+               onChange={
                   
-                   var v=e.currentTarget.value
-                var empname=employee.filter((e)=>e.pnEmployeeId==v)
-                setEmployeeId(v)
-                setEmployeeName(empname[0].employeeFullName)
+                 handleChange
              
-               }}
+               }
                style={{ height: '50px' }}
                >
                       <option value="">Select</option>
@@ -150,6 +323,8 @@ console.log(formData)
                     
                    }
                </select>
+               {pnEmployeeIdError && <FormHelperText sx={{ color: 'red' }}>Please Select a employeeid</FormHelperText>}
+
                </FormControl>
                 </Grid>
 
@@ -164,6 +339,8 @@ console.log(formData)
                 variant="outlined"
                 fullWidth
                 required  /> 
+               {employeeNameError && <FormHelperText sx={{ color: 'red' }}>select values</FormHelperText>}
+
                 </FormControl>
                 </Grid>
          
@@ -182,9 +359,11 @@ console.log(formData)
                   
                   fullWidth
                   required
-                  onChange={(e) => setRefNo(e.target.value)} 
+                  onChange={handleChange} 
                   
                 />
+             {refNoError && <FormHelperText sx={{ color: 'red' }}>Please enter values</FormHelperText>}
+
                 </FormControl>
                 </Grid>
 
@@ -199,9 +378,10 @@ console.log(formData)
                   
                   fullWidth
                   required
-                  onChange={(e) => setOnDutyDat(e.target.value)} 
+                  onChange={handleChange} 
                   InputLabelProps={{ shrink: true }} 
                 />
+                {ondutyDat && <FormHelperText sx={{ color: 'red' }}>Please select values</FormHelperText>}
                 </FormControl>
                 </Grid>
 
@@ -217,9 +397,10 @@ console.log(formData)
                   
                   fullWidth
                   required
-                  onChange={(e) =>  setFstatus(e.target.value)} 
+                  onChange={handleChange} 
                   
                 />
+                {fstatus && <FormHelperText sx={{ color: 'red' }}>Please enter values</FormHelperText>}
                 </FormControl>
                 </Grid>
 
@@ -234,9 +415,10 @@ console.log(formData)
                   type= "datetime-local"
                   fullWidth
                   required
-                  onChange={(e) => setToDat(e.target.value)} 
+                  onChange={handleChange} 
                   InputLabelProps={{ shrink: true }} 
                 />
+                {todatError && <FormHelperText sx={{ color: 'red' }}>Please enter values</FormHelperText>}
                 </FormControl>
                 </Grid>
 
@@ -251,9 +433,10 @@ console.log(formData)
                   
                   fullWidth
                   required
-                  onChange={(e) => setTstatus(e.target.value)} 
+                  onChange={handleChange} 
 
                 />
+                {tstatusError && <FormHelperText sx={{ color: 'red' }}>Please enter values</FormHelperText>}
                 </FormControl>
                 </Grid>
 
@@ -269,9 +452,10 @@ console.log(formData)
                   
                   fullWidth
                   required
-                  onChange={(e) =>setTotDays(e.target.value)} 
+                  onChange={handleChange} 
 
                 />
+                {totDaysError && <FormHelperText sx={{ color: 'red' }}>Please enter values</FormHelperText>}
                 </FormControl>
                 </Grid>
 
@@ -287,10 +471,11 @@ console.log(formData)
                   type= "datetime-local"
                   fullWidth
                   required
-                  onChange={(e) => setSubDat(e.target.value)} 
+                  onChange={handleChange} 
                   InputLabelProps={{shrink:true}}
                   
                 />
+                {subDatError && <FormHelperText sx={{ color: 'red' }}>Please enter values</FormHelperText>}
                 </FormControl>
                 </Grid>
                
@@ -304,9 +489,10 @@ console.log(formData)
                   
                   fullWidth
                   required
-                  onChange={(e) =>setReason(e.target.value)} 
+                  onChange={handleChange} 
 
                 />
+              {reasonError&& <FormHelperText sx={{ color: 'red' }}>Please enter values</FormHelperText>}
                 </FormControl>
                 </Grid>
 
@@ -321,25 +507,27 @@ console.log(formData)
                   
                   fullWidth
                   required
-                  onChange={(e) => setPriority(e.target.value)} 
+                  onChange={handleChange} 
                   
                 />
+                {priorityError && <FormHelperText sx={{ color: 'red' }}>Please enter values</FormHelperText>}
                 </FormControl>
                 </Grid>
                
                 <Grid  xs={12}  sm={6} item>
                   <FormControl fullWidth> 
                 <TextField
-              name= "approval"
-                 
-                  label="approval"
-                  variant="outlined"
-                  
-                  fullWidth
-                  required
-                  onChange={(e) =>setApproval(e.target.value)} 
+             name="approval"
+             label="approval"
+             variant="outlined"
+             fullWidth
+             required
+             onChange={handleChange}
+            
+             error={approvalError}
 
                 />
+                {approvalError && <FormHelperText sx={{ color: 'red' }}>Please enter values</FormHelperText>}
                 </FormControl>
                 </Grid>
 
@@ -348,15 +536,16 @@ console.log(formData)
                   <FormControl fullWidth> 
                 <TextField
               name="message1"
-                 
-                  label="message1"
-                  variant="outlined"
-                  
-                  fullWidth
-                  required
-                  onChange={(e) => setMessage1(e.target.value)} 
+              label="message1"
+              variant="outlined"
+              fullWidth
+              required
+              onChange={handleChange}
+             
+              error={message1Error}
                   
                 />
+                {message1Error && <FormHelperText sx={{ color: 'red' }}>Please enter values</FormHelperText>}
                 </FormControl>
                 </Grid>
                
@@ -373,6 +562,7 @@ console.log(formData)
                   onChange={(e) =>setMessage2(e.target.value)} 
 
                 />
+                {refNoError && <FormHelperText sx={{ color: 'red' }}>Please enter values</FormHelperText>}  
                 </FormControl>
                 </Grid>
 
@@ -386,9 +576,10 @@ console.log(formData)
                  
                   fullWidth
                   required
-                  onChange={(e) => setMessage3(e.target.value)} 
+                  onChange={handleChange} 
                   
                 />
+                {message3Error && <FormHelperText sx={{ color: 'red' }}>Please enter values</FormHelperText>}
                 </FormControl>
                 </Grid>
                
@@ -402,9 +593,10 @@ console.log(formData)
                   
                   fullWidth
                   required
-                  onChange={(e) =>setMessage4(e.target.value)} 
+                  onChange={handleChange} 
 
                 />
+                {message4Error && <FormHelperText sx={{ color: 'red' }}>Please enter values</FormHelperText>}
                 </FormControl>
                 </Grid>
 
@@ -415,35 +607,7 @@ console.log(formData)
             
             <Grid item xs ={12} align="right" >
               <Button style={margin} type="reset" variant='outlined' color='primary' >RESET</Button>
-              <Button onClick={()=>{
-const formData = {
-  pnCompanyId: company,
-  pnBranchId: branch,
-  empId: pnEmployeeId,
-  empName: employeeName,
-  refNo:refNo,
-  ondutyDat: ondutyDat,
-  fstatus: fstatus,
-  todat: todat,
-  tstatus: tstatus,
-  totDays: totDays,
-  subDat:  subDat,
-  reason: reason,
-  priority: priority,
-  approval: approval,
-  message1: message1,
-  message2:message2,
-  message3: message3,
-  message4: message4
-};
-console.log(formData)
-postRequest(ServerConfig.url,ONDUTY,formData).then((e)=>{
-console.log(e)
-navigate('/OnDutyTable')
-}).catch((e)=>console.log(e));
-
-                
-              }}  
+              <Button 
       variant='contained' color='primary' >SAVE</Button>
             </Grid>
             </Grid>
@@ -453,6 +617,7 @@ navigate('/OnDutyTable')
       </Card>
       </Grid>
     </div>
-  );
+  )
+
 }
 

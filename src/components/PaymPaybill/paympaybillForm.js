@@ -1,7 +1,7 @@
 import {TextField, Button, Card,  Typography, Box, Grid, CardContent} from '@mui/material';
 import { inputFormElements25} from './paympaybill'
 
-export default function Sample25() {
+export default function Sample24() {
     const margin={margin:"0 5px"}
     return (
         <div>

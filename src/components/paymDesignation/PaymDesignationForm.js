@@ -122,6 +122,9 @@ export default function DesignationForm() {
             <Typography variant="h5" color="textPrimary" align="center">
               Designation Form
             </Typography>
+            <Typography variant='subtitle1' color="textSecondary" paddingBottom={'20px'}>
+              Fill all the Mandatory fields
+            </Typography>
             <form onSubmit={handleSubmit}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>

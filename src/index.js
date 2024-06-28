@@ -170,6 +170,10 @@ import Bankreg from './components/ReportFormates/BankRegButton';
 import BANKREGISTER from './components/ReportFormates/BankRegButton';
 import DashBoard from './components/dashboared/dashboared';
 import PaymPfTable from './components/PaymPf/paympfTable';
+import Chatbot from './components/Chatbot/chatbot';
+import SplitButton from './components/Chatbot/chatbots';
+import DropdownButton from './components/Chatbot/chatbots';
+import DrawerExample from './components/Chatbot/chatbots';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -421,11 +425,10 @@ root.render(
 <Route path='/AttReports' element={<attReports/>}></Route>
 
 <Route path='/BANKREGISTER' element={<BANKREGISTER/>}></Route>
-
-
-
-
-  </Route>
+<Route path='/DashBoard' element= {<DashBoard/>}></Route> 
+<Route path='/Chatbot' element={<Chatbot/>}></Route>
+<Route path='/SplitButton' element={<DrawerExample/>}></Route>
+</Route>
    </Routes> 
     </BrowserRouter>
 );
